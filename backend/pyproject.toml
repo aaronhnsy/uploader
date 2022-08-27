@@ -1,0 +1,28 @@
+[tool.poetry]
+name = "cdn-backend"
+version = "0.0.1"
+description = "The backend API for my cdn uploader."
+authors = ["Axel <axelancerr@gmail.com>"]
+
+
+[tool.poetry.dependencies]
+python = "^3.10.0"
+starlite = "^1.14.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+
+[tool.pyright]
+include = ["src"]
+pythonVersion = "3.10"
+typeCheckingMode = "strict"
+useLibraryCodeForTypes = true
+
+reportUnknownMemberType = false
+reportPrivateUsage = false
+reportImportCycles = false
+reportMissingTypeStubs = false
+reportPrivateImportUsage = false
