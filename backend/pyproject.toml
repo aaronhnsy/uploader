@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "cdn-backend"
+name = "uploader-backend"
 version = "0.0.1"
 description = "The backend API for my cdn uploader."
 authors = ["Axel <axelancerr@gmail.com>"]
@@ -16,7 +16,7 @@ build-backend = "poetry.core.masonry.api"
 
 
 [tool.pyright]
-include = ["src"]
+include = ["main.py", "src"]
 pythonVersion = "3.10"
 typeCheckingMode = "strict"
 useLibraryCodeForTypes = true

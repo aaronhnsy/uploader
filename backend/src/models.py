@@ -7,10 +7,14 @@ from pydantic.generics import GenericModel
 T = TypeVar("T")
 
 
-class ExceptionResponse(BaseModel):
+class ErrorData(BaseModel):
     status_code: int
-    message: str
+    reason: str
     detail: str | None
+
+
+class Error(BaseModel):
+    error: ErrorData
 
 
 class PagedResponse(GenericModel, Generic[T]):

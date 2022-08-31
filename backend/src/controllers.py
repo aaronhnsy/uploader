@@ -8,7 +8,6 @@ class FileController(Controller):
 
     @get()
     async def get_files(self) -> PagedResponse[File]:
-        raise ValueError
         return PagedResponse(
             total=2,
             limit=50,

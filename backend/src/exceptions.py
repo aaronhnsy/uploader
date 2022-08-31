@@ -1,24 +1,29 @@
+import traceback
+import http
+
 from starlite import Request, Response, MediaType, HTTPException
 
-from src.models import ExceptionResponse, User, Token
+from src.models import User, Token, Error, ErrorData
 
 
-def exception_formatter(_: Request[User, Token], exception: Exception) -> Response[ExceptionResponse]:
+def exception_formatter(request: Request[User, Token], exception: Exception) -> Response[Error]:
 
     if isinstance(exception, HTTPException):
         status_code = exception.status_code
-        message = exception.detail or "Internal Server Error"
-        detail = exception.extra.get("detail") if isinstance(exception.extra, dict) else None
+        reason = http.HTTPStatus(status_code).phrase
+        detail = exception.detail if exception.detail != reason else None
     else:
         status_code = 500
-        message = "Internal Server Error"
-        detail = None
+        reason = "Internal Server Error"
+        detail = "".join(traceback.format_exception(type(exception), exception, exception.__traceback__))
 
     return Response(
-        content=ExceptionResponse(
-            status_code=status_code,
-            message=message,
-            detail=detail
+        Error(
+            error=ErrorData(
+                status_code=status_code,
+                reason=reason,
+                detail=detail
+            )
         ),
         status_code=status_code,
         media_type=MediaType.JSON,
