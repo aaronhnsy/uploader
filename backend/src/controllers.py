@@ -1,4 +1,4 @@
-from starlite import Controller, get, patch, delete
+from starlite import Controller, get, patch, delete, State
 
 from src.models import PagedResponse, File
 
@@ -19,7 +19,7 @@ class FileController(Controller):
         )
 
     @get("/{file_id:str}")
-    async def get_file(self) -> None:
+    async def get_file(self, state: State) -> None:
         ...
 
     @patch("/{file_id:str}")

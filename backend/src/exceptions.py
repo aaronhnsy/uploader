@@ -1,12 +1,12 @@
-import traceback
 import http
+import traceback
 
 from starlite import Request, Response, MediaType, HTTPException
 
 from src.models import User, Token, Error, ErrorData
 
 
-def exception_formatter(request: Request[User, Token], exception: Exception) -> Response[Error]:
+def exception_handler(request: Request[User, Token], exception: Exception) -> Response[Error]:
 
     if isinstance(exception, HTTPException):
         status_code = exception.status_code
