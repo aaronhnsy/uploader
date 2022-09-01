@@ -1,11 +1,10 @@
 import asyncpg
-from starlite import Starlite, Router
+from starlite import Starlite, Router, State
 
 from src.controllers import FilesController
 from src.exceptions import exception_handler
 # from src.middlewares import AuthenticationMiddleware
 from src.settings import settings
-from src.types import State
 
 
 API = Router(
