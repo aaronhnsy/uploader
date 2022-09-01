@@ -10,9 +10,9 @@ from src.models import User, Token
 
 class AuthenticationMiddleware(AbstractAuthenticationMiddleware):
 
-    async def authenticate_request(self, request: HTTPConnection) -> AuthenticationResult:
+    async def authenticate_request(self, connection: HTTPConnection) -> AuthenticationResult:
 
-        if not (_ := request.headers.get("Authorization")):
+        if not (_ := connection.headers.get("Authorization")):
             raise NotAuthorizedException("No 'Authorization' header was provided.")
 
         return AuthenticationResult(
