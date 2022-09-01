@@ -1,9 +1,15 @@
-from starlite import Controller, get, patch, delete, State
+from starlite import Controller, get, patch, delete
 
 from src.models import PagedResponse, File
+from src.types import State
 
 
-class FileController(Controller):
+__all__ = (
+    "FilesController",
+)
+
+
+class FilesController(Controller):
     path = "/files"
 
     @get()
@@ -20,7 +26,7 @@ class FileController(Controller):
 
     @get("/{file_id:str}")
     async def get_file(self, state: State) -> None:
-        ...
+        print(await state.pool.fetch("SELECT 1"))
 
     @patch("/{file_id:str}")
     async def edit_file(self) -> None:

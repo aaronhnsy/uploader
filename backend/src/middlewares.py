@@ -3,12 +3,9 @@ from starlite import (
     AbstractAuthenticationMiddleware,
     AuthenticationResult,
     NotAuthorizedException,
-    PermissionDeniedException,
-    Response,
 )
 
-from src.exceptions import exception_handler
-from src.models import User, Token, Error
+from src.models import User, Token
 
 
 class AuthenticationMiddleware(AbstractAuthenticationMiddleware):
@@ -22,8 +19,3 @@ class AuthenticationMiddleware(AbstractAuthenticationMiddleware):
             user=User(id=0, username="Axel"),
             auth=Token(token="abcde")
         )
-
-    # TODO: Remove the following method when starlite releases fix for exception handlers
-
-    def create_error_response(self, exc: NotAuthorizedException | PermissionDeniedException) -> Response[Error]:
-        return exception_handler(request=None, exception=exc)  # type: ignore

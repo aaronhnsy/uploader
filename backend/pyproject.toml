@@ -1,3 +1,8 @@
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+
 [tool.poetry]
 name = "uploader-backend"
 version = "0.0.1"
@@ -7,14 +12,9 @@ authors = ["Axel <axelancerr@gmail.com>"]
 
 [tool.poetry.dependencies]
 python = "^3.10.0"
-starlite = "^1.15.0"
+starlite = "^1.16.0"
 asyncpg = "^0.26.0"
 pydantic = { version = "^1.10.0", extras = ["dotenv"] }
-
-
-[build-system]
-requires = ["poetry-core"]
-build-backend = "poetry.core.masonry.api"
 
 
 [tool.pyright]
@@ -24,7 +24,4 @@ typeCheckingMode = "strict"
 useLibraryCodeForTypes = true
 
 reportUnknownMemberType = false
-reportPrivateUsage = false
-reportImportCycles = false
 reportMissingTypeStubs = false
-reportPrivateImportUsage = false

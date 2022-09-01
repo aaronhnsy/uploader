@@ -58,7 +58,7 @@ idna = ">=2.0.0"
 
 [[package]]
 name = "Faker"
-version = "14.1.1"
+version = "14.2.0"
 description = "Faker is a Python package that generates fake data for you."
 category = "main"
 optional = false
@@ -198,7 +198,7 @@ full = ["itsdangerous", "jinja2", "python-multipart", "pyyaml", "requests"]
 
 [[package]]
 name = "starlite"
-version = "1.15.0"
+version = "1.16.0"
 description = "Light-weight and flexible ASGI API Framework"
 category = "main"
 optional = false
@@ -239,7 +239,7 @@ python-versions = "*"
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.10.0"
-content-hash = "1e5c9bdc492186a8525924deaf5be91cdda1b5c20f31b1b603638e0f6a795d3d"
+content-hash = "f2db2ff68a5200e599a32b3af2180ee5009c44ccb4f1fc5b2d33a98914de3e35"
 
 [metadata.files]
 anyio = [
@@ -283,8 +283,8 @@ email-validator = [
     {file = "email_validator-1.2.1.tar.gz", hash = "sha256:6757aea012d40516357c0ac2b1a4c31219ab2f899d26831334c5d069e8b6c3d8"},
 ]
 Faker = [
-    {file = "Faker-14.1.1-py3-none-any.whl", hash = "sha256:15bc9d01b3caf427a459d191d972bbca868f2200fbfc157da6ed09c2a58fbb87"},
-    {file = "Faker-14.1.1.tar.gz", hash = "sha256:2d506c09aeafa87296f834fd15c6efa87182320f8bf4f709bd3d882397c18076"},
+    {file = "Faker-14.2.0-py3-none-any.whl", hash = "sha256:e02c55a5b0586caaf913cc6c254b3de178e08b031c5922e590fd033ebbdbfd02"},
+    {file = "Faker-14.2.0.tar.gz", hash = "sha256:6db56e2c43a2b74250d1c332ef25fef7dc07dcb6c5fab5329dd7b4467b8ed7b9"},
 ]
 idna = [
     {file = "idna-3.3-py3-none-any.whl", hash = "sha256:84d9dd047ffa80596e0f246e2eab0b391788b0503584e8945f2368256d2735ff"},
@@ -439,8 +439,8 @@ starlette = [
     {file = "starlette-0.20.4.tar.gz", hash = "sha256:42fcf3122f998fefce3e2c5ad7e5edbf0f02cf685d646a83a08d404726af5084"},
 ]
 starlite = [
-    {file = "starlite-1.15.0-py3-none-any.whl", hash = "sha256:b318fc8402d2ca986a5a5c59abd44bf1085addb54b80667fec440f7a5124e17e"},
-    {file = "starlite-1.15.0.tar.gz", hash = "sha256:f7468857cf846bd85c235a4700546b969ad7693ca22cd985f198ef68106eac91"},
+    {file = "starlite-1.16.0-py3-none-any.whl", hash = "sha256:4e319798a3ea0bae163f7936c320296756d195358c4b4bfe781d8067c50af2f9"},
+    {file = "starlite-1.16.0.tar.gz", hash = "sha256:f46c5a0cd054a079ab06b9f5ec76568facd160c7ed3f9494a5426128d152e838"},
 ]
 typing-extensions = [
     {file = "typing_extensions-4.3.0-py3-none-any.whl", hash = "sha256:25642c956049920a5aa49edcdd6ab1e06d7e5d467fc00e0506c44ac86fbfca02"},
