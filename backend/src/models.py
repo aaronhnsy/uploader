@@ -2,6 +2,7 @@ from typing import Generic, TypeVar
 
 from pydantic import BaseModel
 from pydantic.generics import GenericModel
+from src.enums import UserLevel
 
 
 T = TypeVar("T")
@@ -27,6 +28,7 @@ class PagedResponse(GenericModel, Generic[T]):
 class User(BaseModel):
     id: int
     username: str
+    level: UserLevel
 
 
 class Token(BaseModel):

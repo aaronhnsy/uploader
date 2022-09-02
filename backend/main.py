@@ -1,7 +1,7 @@
 import asyncpg
 from starlite import Starlite, Router, State
 
-from src.controllers import FilesController
+from src.controllers import FilesController, UsersController
 from src.exceptions import exception_handler
 # from src.middlewares import AuthenticationMiddleware
 from src.settings import settings
@@ -9,7 +9,7 @@ from src.settings import settings
 
 API = Router(
     "/api",
-    route_handlers=[FilesController],
+    route_handlers=[FilesController, UsersController],
     # middleware=[AuthenticationMiddleware],
 )
 

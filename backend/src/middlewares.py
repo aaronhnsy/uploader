@@ -5,6 +5,7 @@ from starlite import (
     NotAuthorizedException,
 )
 
+from src.enums import UserLevel
 from src.models import User, Token
 
 
@@ -16,6 +17,6 @@ class AuthenticationMiddleware(AbstractAuthenticationMiddleware):
             raise NotAuthorizedException("No 'Authorization' header was provided.")
 
         return AuthenticationResult(
-            user=User(id=0, username="Axel"),
+            user=User(id=0, username="Axel", level=UserLevel.Owner),
             auth=Token(token="abcde")
         )
