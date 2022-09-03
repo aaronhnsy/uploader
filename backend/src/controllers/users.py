@@ -1,6 +1,8 @@
-from starlite import Controller, post, State
+from starlite import Controller, post
 
+from src.enums import UserLevel
 from src.models import User
+from src.types import State
 from src.utilities import generate_snowflake
 
 
@@ -14,5 +16,5 @@ class UsersController(Controller):
 
     @post()
     async def create_account(self, state: State) -> User:
-
-        id = generate_snowflake()
+        _ = generate_snowflake()
+        return User(id=0, username="bruh", level=UserLevel.Owner)

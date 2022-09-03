@@ -2,6 +2,7 @@ from typing import Generic, TypeVar
 
 from pydantic import BaseModel
 from pydantic.generics import GenericModel
+
 from src.enums import UserLevel
 
 
