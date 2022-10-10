@@ -1,7 +1,6 @@
-from starlite import Controller, get, patch, delete
+from starlite import Controller, get, patch, delete, State
 
 from src.models import PagedResponse, File
-from src.types import State
 
 
 __all__ = (

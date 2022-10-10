@@ -3,33 +3,31 @@ from typing import Generic, TypeVar
 from pydantic import BaseModel
 from pydantic.generics import GenericModel
 
-from src.enums import UserLevel
+from src import enums
 
 
-T = TypeVar("T")
+__all__ = (
+    "PagedResponse",
+    "User",
+    "Token",
+    "File"
+)
 
 
-class ErrorData(BaseModel):
-    status_code: int
-    reason: str
-    detail: str | None
+PagedItem = TypeVar("PagedItem")
 
 
-class Error(BaseModel):
-    error: ErrorData
-
-
-class PagedResponse(GenericModel, Generic[T]):
+class PagedResponse(GenericModel, Generic[PagedItem]):
     total: int
     limit: int
     offset: int
-    items: list[T]
+    items: list[PagedItem]
 
 
 class User(BaseModel):
     id: int
     username: str
-    level: UserLevel
+    level: enums.UserLevel
 
 
 class Token(BaseModel):

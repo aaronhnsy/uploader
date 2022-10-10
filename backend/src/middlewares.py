@@ -1,22 +1,27 @@
-from starlette.requests import HTTPConnection
+from typing import Any
+
 from starlite import (
     AbstractAuthenticationMiddleware,
     AuthenticationResult,
-    NotAuthorizedException,
+    NotAuthorizedException, ASGIConnection,
 )
 
-from src.enums import UserLevel
-from src.models import User, Token
+from src import enums, models
 
 
 class AuthenticationMiddleware(AbstractAuthenticationMiddleware):
 
-    async def authenticate_request(self, connection: HTTPConnection) -> AuthenticationResult:
+    async def authenticate_request(
+        self,
+        connection: ASGIConnection[Any, models.User, models.Token]
+    ) -> AuthenticationResult:
 
-        if not (_ := connection.headers.get("Authorization")):
+        if not (authorization := connection.headers.get("Authorization")):
             raise NotAuthorizedException("No 'Authorization' header was provided.")
 
+        # return user/token models based on the authorization header provided.
+
         return AuthenticationResult(
-            user=User(id=0, username="Axel", level=UserLevel.Owner),
-            auth=Token(token="abcde")
+            user=models.User(id=0, username="Axel", level=enums.UserLevel.Owner),
+            auth=models.Token(token="abcde")
         )

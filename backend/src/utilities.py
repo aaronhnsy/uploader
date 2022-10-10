@@ -1,7 +1,12 @@
 import snowflake
 
 
-snowflake_generator = snowflake.SnowflakeGenerator(952)
+__all__ = (
+    "generate_snowflake",
+)
+
+
+snowflake_generator = snowflake.SnowflakeGenerator(0)
 
 
 def generate_snowflake() -> int:

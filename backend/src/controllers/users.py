@@ -1,8 +1,7 @@
-from starlite import Controller, post
+from starlite import Controller, post, State
 
 from src.enums import UserLevel
 from src.models import User
-from src.types import State
 from src.utilities import generate_snowflake
 
 
