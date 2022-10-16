@@ -7,7 +7,7 @@ from src.models import User, Error
 
 
 __all__ = (
-    "exception_handler"
+    "exception_handler",
 )
 
 

@@ -36,7 +36,7 @@ def load_config(file: io.TextIOWrapper) -> Config:
         return dacite.from_dict(
             Config,
             toml.load(file),
-            dacite.Config(type_hooks={enums.Environment: enums.Environment.__getitem__})
+            dacite.Config(type_hooks={Environment: Environment.__getitem__})
         )
     except toml.TomlDecodeError as error:
         sys.exit(f"'{file.name}' is not a valid TOML file: {error}")
