@@ -6,7 +6,7 @@ import sys
 import dacite
 import toml
 
-from src import enums
+from src.enums import Environment
 
 
 __all__ = (
@@ -16,7 +16,7 @@ __all__ = (
 
 @dataclasses.dataclass
 class General:
-    environment: enums.Environment
+    environment: Environment
 
 
 @dataclasses.dataclass

@@ -1,25 +1,17 @@
 import http
 import traceback
 
-from pydantic import BaseModel
 from starlite import Request, Response, MediaType, HTTPException
 
-from src import models
+from src.models import User, Error
 
 
 __all__ = (
-    "Error",
     "exception_handler"
 )
 
 
-class Error(BaseModel):
-    status: int
-    reason: str
-    detail: str | None
-
-
-def exception_handler(_: Request[models.User, models.Token], exception: Exception) -> Response[Error]:
+def exception_handler(_: Request[User, str], exception: Exception) -> Response[Error]:
 
     if isinstance(exception, HTTPException):
         status = exception.status_code

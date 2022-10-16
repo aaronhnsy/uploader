@@ -6,22 +6,25 @@ from starlite import (
     NotAuthorizedException, ASGIConnection,
 )
 
-from src import enums, models
+from src.models import User
+from src.utilities import get_asyncpg_pool
 
 
 class AuthenticationMiddleware(AbstractAuthenticationMiddleware):
 
-    async def authenticate_request(
-        self,
-        connection: ASGIConnection[Any, models.User, models.Token]
-    ) -> AuthenticationResult:
+    async def authenticate_request(self, connection: ASGIConnection[Any, User, str]) -> AuthenticationResult:
 
-        if not (authorization := connection.headers.get("Authorization")):
-            raise NotAuthorizedException("No 'Authorization' header was provided.")
+        token = connection.headers.get("Authorization")
+        if not token:
+            raise NotAuthorizedException("'Authorization' header was not found.")
 
-        # return user/token models based on the authorization header provided.
+        pool = await get_asyncpg_pool(connection.state)
 
-        return AuthenticationResult(
-            user=models.User(id=0, username="Axel", level=enums.UserLevel.Owner),
-            auth=models.Token(token="abcde")
+        data: User = await pool.fetchrow(
+            "SELECT id, username, email, bot, permissions FROM users WHERE token = $1",
+            token
         )
+        if not data:
+            raise NotAuthorizedException("Token provided in 'Authorization' header does not exist.")
+
+        return AuthenticationResult(user=User.parse_obj(data), auth=token)
