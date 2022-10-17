@@ -7,4 +7,8 @@ __all__ = (
 
 
 class File(BaseModel):
-    id: str
+    id: int
+    user_id: int
+    name: str
+    format: str
+    private: bool
