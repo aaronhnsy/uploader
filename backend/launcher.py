@@ -8,7 +8,7 @@ utilities.logging.setup()
 
 uploader = aiohttp.web.Application()
 
-uploader.router.add_view("/upload", routes.UploadView)
+uploader.router.add_view("/api/upload", routes.UploadView)
 uploader.middlewares.extend([middlewares.exception_handler_middleware, middlewares.authentication_middleware])
 uploader.cleanup_ctx.append(contexts.postgresql)
 
