@@ -1,15 +1,16 @@
 import aiohttp.web
 
-from uploader import utilities
-from uploader.app import Uploader
-
+from uploader import utilities, contexts, middlewares, routes
 from uploader.config import CONFIG
 
 
 utilities.logging.setup()
 
-uploader = Uploader()
-uploader.setup()
+uploader = aiohttp.web.Application()
+
+uploader.router.add_view("/upload", routes.UploadView)
+uploader.middlewares.extend([middlewares.exception_handler_middleware, middlewares.authentication_middleware])
+uploader.cleanup_ctx.append(contexts.postgresql)
 
 aiohttp.web.run_app(
     uploader,
