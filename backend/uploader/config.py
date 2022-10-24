@@ -2,11 +2,13 @@ import argparse
 import dataclasses
 import io
 import sys
+from typing import Literal
 
+import colorama
 import dacite
 import toml
 
-from src.enums import Environment
+from uploader.enums import Environment
 
 
 __all__ = (
@@ -26,9 +28,48 @@ class Connections:
 
 
 @dataclasses.dataclass
+class LoggingLevels:
+    aiohttp: Literal["NOTSET", "CRITICAL", "ERROR", "WARNING", "INFO", "DEBUG"] = "INFO"
+    uploader: Literal["NOTSET", "CRITICAL", "ERROR", "WARNING", "INFO", "DEBUG"] = "INFO"
+
+
+@dataclasses.dataclass
+class FileHandler:
+    enabled: bool = True
+    path: str = "logs/"
+    backup_count: int = 5
+    max_file_size: str = "5mb"
+
+
+@dataclasses.dataclass
+class StreamHandlerColours:
+    time: str = colorama.Fore.BLUE
+    critical: str = colorama.Fore.WHITE
+    error: str = colorama.Fore.RED
+    warning: str = colorama.Fore.YELLOW
+    info: str = colorama.Fore.GREEN
+    debug: str = colorama.Fore.MAGENTA
+
+
+@dataclasses.dataclass
+class StreamHandler:
+    enabled: bool = True
+    use_colours: bool = True
+    colours: StreamHandlerColours = StreamHandlerColours()
+
+
+@dataclasses.dataclass
+class Logging:
+    levels: LoggingLevels = LoggingLevels()
+    file_handler: FileHandler = FileHandler()
+    stream_handler: StreamHandler = StreamHandler()
+
+
+@dataclasses.dataclass
 class Config:
     general: General
     connections: Connections
+    logging: Logging = Logging()
 
 
 def load_config(file: io.TextIOWrapper) -> Config:
