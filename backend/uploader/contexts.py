@@ -27,9 +27,9 @@ async def postgresql(app: aiohttp.web.Application) -> AsyncIterator[None]:
     except Exception as error:
         LOGGER.critical("Error while connecting to postgresql.")
         raise error
-    else:
-        LOGGER.info("Successfully connected to postgresql.")
-        app.pool = pool
+
+    LOGGER.info("Successfully connected to postgresql.")
+    app["pool"] = pool
 
     yield
 
