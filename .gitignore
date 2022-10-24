@@ -1,5 +1,6 @@
 .idea/
 media/
+logs/
 
 *.pyc
 *config.toml

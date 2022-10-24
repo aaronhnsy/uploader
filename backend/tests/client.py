@@ -8,7 +8,7 @@ async def main() -> None:
     session = aiohttp.ClientSession()
 
     async with session.get(
-        "http://127.0.0.1:8000/api/files/ranbpjgsvlehktfciwmy",
+        "http://127.0.0.1:8000/api/",
         headers={"Authorization": "a"}
     ) as response:
         print(await response.json())
