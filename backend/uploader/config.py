@@ -2,18 +2,23 @@ import argparse
 import dataclasses
 import io
 import sys
+from enum import Enum
 from typing import Literal
 
 import colorama
 import dacite
 import toml
 
-from uploader.enums import Environment
-
 
 __all__ = (
+    "Environment",
     "CONFIG",
 )
+
+
+class Environment(Enum):
+    PRODUCTION = 0
+    DEVELOPMENT = 1
 
 
 @dataclasses.dataclass
