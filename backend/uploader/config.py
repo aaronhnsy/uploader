@@ -28,6 +28,12 @@ class Connections:
 
 
 @dataclasses.dataclass
+class Application:
+    host: str
+    port: int
+
+
+@dataclasses.dataclass
 class LoggingLevels:
     aiohttp: Literal["NOTSET", "CRITICAL", "ERROR", "WARNING", "INFO", "DEBUG"] = "INFO"
     uploader: Literal["NOTSET", "CRITICAL", "ERROR", "WARNING", "INFO", "DEBUG"] = "INFO"
@@ -68,6 +74,7 @@ class Logging:
 @dataclasses.dataclass
 class Config:
     general: General
+    application: Application
     connections: Connections
     logging: Logging = Logging()
 
