@@ -66,14 +66,14 @@ class StreamHandlerColours:
 class StreamHandler:
     enabled: bool = True
     use_colours: bool = True
-    colours: StreamHandlerColours = StreamHandlerColours()
+    colours: StreamHandlerColours = dataclasses.field(default_factory=StreamHandlerColours)
 
 
 @dataclasses.dataclass
 class Logging:
-    levels: LoggingLevels = LoggingLevels()
-    file_handler: FileHandler = FileHandler()
-    stream_handler: StreamHandler = StreamHandler()
+    levels: LoggingLevels = dataclasses.field(default_factory=LoggingLevels)
+    file_handler: FileHandler = dataclasses.field(default_factory=FileHandler)
+    stream_handler: StreamHandler = dataclasses.field(default_factory=StreamHandler)
 
 
 @dataclasses.dataclass
@@ -81,7 +81,7 @@ class Config:
     general: General
     application: Application
     connections: Connections
-    logging: Logging = Logging()
+    logging: Logging = dataclasses.field(default_factory=Logging)
 
 
 def load_config(file: io.TextIOWrapper) -> Config:
