@@ -23,7 +23,7 @@ async def exception_handler_middleware(
         response = await handler(request)
     except aiohttp.web.HTTPException as exception:
         if isinstance(exception, exceptions.JsonException):
-            return exception
+            raise exception
         raise exceptions.JsonException(exception)
 
     return response
