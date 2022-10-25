@@ -2,12 +2,12 @@ import argparse
 import dataclasses
 import io
 import sys
+import tomllib
 from enum import Enum
 from typing import Literal
 
 import colorama
 import dacite
-import toml
 
 
 __all__ = (
@@ -84,29 +84,32 @@ class Config:
     logging: Logging = dataclasses.field(default_factory=Logging)
 
 
-def load_config(file: io.TextIOWrapper) -> Config:
+def load_config(file: io.BufferedReader) -> Config:
     try:
-        return dacite.from_dict(
+        config = dacite.from_dict(
             Config,
-            toml.load(file),
+            tomllib.load(file),
             dacite.Config(type_hooks={Environment: Environment.__getitem__})
         )
-    except toml.TomlDecodeError as error:
-        sys.exit(f"'{file.name}' is not a valid TOML file: {error}")
-    except dacite.DaciteError as error:
-        sys.exit(f"'{file.name}' is invalid: {str(error).capitalize()}.")
+    except (tomllib.TOMLDecodeError, dacite.DaciteError) as error:
+        sys.exit(
+            f"Error while parsing {file.name}:\n"
+            f"  - {str(error).capitalize()}."
+        )
+    else:
+        print(f"Loaded config from {file.name}.")
+        return config
 
 
 parser = argparse.ArgumentParser(
-    prog="main.py",
-    description="CLI options for running uploader-backend."
+    prog="launcher.py",
+    description="CLI options for running uploader-backend.",
 )
 parser.add_argument(
-    "-c", "--config",
-    default="config.toml",
-    type=open,
-    required=False,
-    help="Choose a custom .toml config for the application to run with."
+    "-c", "--config", required=False,
+    default="config.toml", metavar="config.toml",
+    type=argparse.FileType(mode="rb"),
+    help="Provide a path to the config file that uploader-backend should use.",
 )
 namespace = parser.parse_args()
 
