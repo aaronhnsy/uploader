@@ -11,8 +11,10 @@ export default function Layout(
         <html lang="en">
             <head/>
             <body>
-                <NavBar/>
-                {children}
+                <div className="container">
+                    <NavBar/>
+                    {children}
+                </div>
             </body>
         </html>
     );
