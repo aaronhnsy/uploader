@@ -10,8 +10,8 @@ export default function Layout(
     return (
         <html lang="en">
             <head/>
-            <body>
-                <div className="md:container md:mx-auto bg-blue-900">
+            <body className="bg-blue-900">
+                <div className="md:container md:mx-auto bg-green-500">
                     <NavBar/>
                     {children}
                 </div>
