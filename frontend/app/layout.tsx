@@ -1,8 +1,8 @@
-import React from "react";
+import { NavBar } from "@/components/navbar"
+import React from "react"
 
-import { NavBar } from "../components/navbar";
-
-import "./global.css";
+import "../styles/bootstrap.scss"
+import "../styles/global.scss"
 
 export default function Layout(
     {children}: { children: React.ReactNode },
@@ -10,12 +10,12 @@ export default function Layout(
     return (
         <html lang="en">
             <head/>
-            <body className="bg-blue-900">
-                <div className="md:container md:mx-auto bg-green-500">
+            <body className="">
+                <div className="">
                     <NavBar/>
                     {children}
                 </div>
             </body>
         </html>
-    );
+    )
 }
