@@ -11,4 +11,14 @@ module.exports = {
             path.join(__dirname, "styles"),
         ],
     },
+    images: {
+        remotePatterns: [
+            {
+                protocol: "https",
+                hostname: "placehold.co",
+                port: "",
+                pathname: "/32.png",
+            },
+        ],
+    },
 }

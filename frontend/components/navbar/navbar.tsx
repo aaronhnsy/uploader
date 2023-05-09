@@ -1,25 +1,68 @@
+'use client';
+
 import Image from "next/image"
 import Link from "next/link"
-import logoSrc from "./logo_200x40.png"
+import { useState, useRef, MutableRefObject } from "react"
+import LogoSrc from "./logo_200x40.png"
 
 export function NavBar() {
+    const [isNavbarExpanded, setIsNavbarExpanded] = useState(false)
+    const collapseRef: MutableRefObject<HTMLDivElement | null> = useRef(null)
+
+    if (collapseRef.current != null) {
+        if (isNavbarExpanded) {
+            collapseRef.current.classList.remove("collapse")
+            collapseRef.current.classList.add("collapsing")
+            collapseRef.current.style["height"] = "0px"
+            collapseRef.current.style["height"] = `${collapseRef.current.scrollHeight}px`
+        }
+        else {
+            collapseRef.current.style["height"] = `${collapseRef.current?.getBoundingClientRect()["height"]}px`
+            collapseRef.current.offsetHeight // ?????????????
+            collapseRef.current.classList.add("collapsing")
+            collapseRef.current.classList.remove("collapse", "show")
+            collapseRef.current.style["height"] = ""
+        }
+    }
+    const complete = () => {
+        if (collapseRef.current != null) {
+            if (isNavbarExpanded) {
+                collapseRef.current.classList.remove("collapsing")
+                collapseRef.current.classList.add("collapse", "show")
+                collapseRef.current.style["height"] = ""
+            }
+            else {
+                collapseRef.current.classList.remove("collapsing")
+                collapseRef.current.classList.add("collapse")
+            }
+        }
+    }
+
     return (
-        <nav className="">
-            <div className="">
-                <Image src={logoSrc} alt="TODO"></Image>
-                <div className="">
-                    <button type="button" className="btn btn-primary">Get started</button>
-                    <button data-collapse-toggle="navbar-cta" type="button" className="btn btn-primary" aria-controls="navbar-cta" aria-expanded="false">
-                        <svg className="" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                            <path fillRule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clipRule="evenodd"></path>
+        <nav className="navbar navbar-expand-md mb-2">
+            <div className="container">
+                <a className="navbar-brand" href="#">
+                    <Image src={LogoSrc} alt="logo"></Image>
+                </a>
+                <div className="btn-group">
+                    <div className="nav-item dropdown">
+                        <a className="nav-link dropdown-toggle text-light me-2" href="#" type="button">
+                            <Image className="rounded-circle me-2" src="https://placehold.co/32.png" alt="avatar" width="32" height="32"></Image>
+                            Username
+                        </a>
+                        {/* dropdown menu here */}
+                    </div>
+                    <button className={"navbar-toggler border-0" + (isNavbarExpanded ? "" : " collapsed")} type="button" onClick={() => setIsNavbarExpanded(!isNavbarExpanded)}>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#DEE2E6" className="bi bi-list" viewBox="0 0 16 16">
+                            <path fillRule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"></path>
                         </svg>
                     </button>
                 </div>
-                <div className="">
-                    <ul className="">
-                        <Link href="/">Home</Link>
-                        <Link href="/about">About</Link>
-                        <Link href="/faq">FAQ</Link>
+                <div className="navbar-collapse" ref={collapseRef} onTransitionEnd={(e) => e.propertyName == "height" ? complete() : null}>
+                    <ul className="navbar-nav ms-auto">
+                        <li className="nav-item"><Link className="nav-link" href="/">Home</Link></li>
+                        <li className="nav-item"><Link className="nav-link" href="/about">About</Link></li>
+                        <li className="nav-item"><Link className="nav-link" href="/faq">FAQ</Link></li>
                     </ul>
                 </div>
             </div>

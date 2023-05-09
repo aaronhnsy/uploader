@@ -1,5 +1,7 @@
 export default function Main() {
     return (
-        <h1>Main Page</h1>
+        <div className="container">
+            <h1>Home</h1>
+        </div>
     )
 }
