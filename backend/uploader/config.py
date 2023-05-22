@@ -9,9 +9,9 @@ from typing import Literal
 import colorama
 import dacite
 
-from uploader import utilities
 from uploader.enums import Environment
 from uploader.types import FileSize
+from uploader.utilities import DACITE_CONFIG, parse_file_size
 
 
 __all__ = ["CONFIG"]
@@ -44,7 +44,7 @@ class FileHandler:
     enabled: bool = True
     path: pathlib.Path = pathlib.Path("logs/")
     backup_count: int = 5
-    max_file_size: FileSize = utilities.parse_file_size("5mb")
+    max_file_size: FileSize = parse_file_size("5mb")
 
 
 @dataclasses.dataclass
@@ -81,7 +81,7 @@ class Config:
 
 def load_config(file: io.BufferedReader) -> Config:
     try:
-        config = dacite.from_dict(Config, tomllib.load(file), utilities.DACITE_CONFIG)
+        config = dacite.from_dict(Config, tomllib.load(file), DACITE_CONFIG)
     except (tomllib.TOMLDecodeError, dacite.DaciteError) as error:
         sys.exit(
             f"Error while parsing '{file.name}':\n"

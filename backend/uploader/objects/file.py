@@ -4,8 +4,8 @@ from typing import Self
 import asyncpg
 import dacite
 
-from uploader import utilities
 from uploader.types import Pool
+from uploader.utilities import DACITE_CONFIG
 
 
 __all__ = ["File"]
@@ -31,4 +31,4 @@ class File:
             "INSERT INTO files (user_id, name, format, private) VALUES ($1, $2, $3, $4) RETURNING *",
             user_id, name, format, private
         )
-        return dacite.from_dict(cls, {**file}, config=utilities.DACITE_CONFIG)
+        return dacite.from_dict(cls, {**file}, config=DACITE_CONFIG)

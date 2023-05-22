@@ -6,9 +6,10 @@ import aiohttp.multipart
 import aiohttp.web
 import orjson
 
-from uploader import decorators, exceptions
 from uploader.config import CONFIG
+from uploader.decorators import check_content_type
 from uploader.enums import Environment
+from uploader.exceptions import JSONException
 from uploader.objects import File, User
 from uploader.types import Request, Response
 
@@ -17,23 +18,25 @@ __all__ = ["upload_file"]
 
 
 if CONFIG.general.environment == Environment.PRODUCTION:
-    MEDIA_PATH = pathlib.Path("/home/axel/media/")
+    _path = pathlib.Path("/home/axel/media/")
 else:
-    MEDIA_PATH = pathlib.Path("media/")
+    _path = pathlib.Path("media/")
+
+MEDIA = _path
 
 
-@decorators.check_content_type("multipart/form-data")
+@check_content_type("multipart/form-data")
 async def upload_file(request: Request) -> Response:
     # get the multipart reader
     reader = await request.multipart()
     field = await reader.next()
     if not isinstance(field, aiohttp.multipart.BodyPartReader):
-        raise exceptions.JSONException(
+        raise JSONException(
             aiohttp.web.HTTPBadRequest,
             detail="Multipart field data is malformed."
         )
     if field.name != "file":
-        raise exceptions.JSONException(
+        raise JSONException(
             aiohttp.web.HTTPBadRequest,
             detail="Multipart field name must be 'file'."
         )
@@ -42,7 +45,7 @@ async def upload_file(request: Request) -> Response:
     name = "".join(random.sample(string.ascii_lowercase, 20))
     format = field.filename.split(".")[-1] if field.filename else "unknown"
     # save the file
-    path = MEDIA_PATH / f"{user.id}" / f"{format}" / f"{name}.{format}"
+    path = MEDIA / f"{user.id}" / f"{format}" / f"{name}.{format}"
     path.parent.mkdir(parents=True, exist_ok=True)
     with path.open(mode="wb") as file_io:
         while chunk := await field.read_chunk():

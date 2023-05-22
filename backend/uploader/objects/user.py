@@ -5,9 +5,10 @@ import aiohttp.web
 import asyncpg
 import dacite
 
-from uploader import exceptions, utilities
 from uploader.enums import Permissions
+from uploader.exceptions import JSONException
 from uploader.types import Pool
+from uploader.utilities import DACITE_CONFIG
 
 
 __all__ = ["User"]
@@ -28,8 +29,8 @@ class User:
             token
         )
         if user is None:
-            raise exceptions.JSONException(
+            raise JSONException(
                 aiohttp.web.HTTPUnauthorized,
                 detail="The provided token is either invalid or did not match any users."
             )
-        return dacite.from_dict(cls, {**user}, config=utilities.DACITE_CONFIG)
+        return dacite.from_dict(cls, {**user}, config=DACITE_CONFIG)

@@ -3,7 +3,8 @@ import traceback
 
 import aiohttp.web
 
-from uploader import exceptions, objects
+from uploader.exceptions import JSONException
+from uploader.objects import User
 from uploader.types import Request, StreamHandler, StreamResponse
 
 
@@ -18,13 +19,13 @@ async def exception_middleware(request: Request, handler: StreamHandler) -> Stre
     try:
         response = await handler(request)
     except Exception as exception:
-        if isinstance(exception, exceptions.JSONException):
+        if isinstance(exception, JSONException):
             raise exception
         elif isinstance(exception, aiohttp.web.HTTPException):
-            raise exceptions.JSONException(exception)
+            raise JSONException(exception)
         else:
             print(f"\n{''.join(lines := traceback.format_exception(exception))}", file=sys.stderr)
-            raise exceptions.JSONException(
+            raise JSONException(
                 aiohttp.web.HTTPInternalServerError,
                 detail=lines[-1].strip()
             )
@@ -34,11 +35,11 @@ async def exception_middleware(request: Request, handler: StreamHandler) -> Stre
 @aiohttp.web.middleware
 async def authentication_middleware(request: Request, handler: StreamHandler) -> StreamResponse:
     if (token := request.headers.get("Authorization")) is None:
-        raise exceptions.JSONException(
+        raise JSONException(
             aiohttp.web.HTTPUnauthorized,
             detail="The 'Authorization' header must contain a token."
         )
-    request["user"] = await objects.User.get(
+    request["user"] = await User.get(
         request.app["pool"],
         token
     )
