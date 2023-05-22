@@ -34,7 +34,7 @@ async def upload_file(request: Request) -> Response:
     name = "".join(random.sample(string.ascii_lowercase, 20))
     format = field.filename.split(".")[-1] if field.filename else "unknown"
     # save the file
-    path = pathlib.Path(f"media/{user.id}/{format}/{name}.{format}")
+    path = pathlib.Path(f"/home/axel/media/{user.id}/{format}/{name}.{format}")
     path.parent.mkdir(parents=True, exist_ok=True)
     with path.open(mode="wb") as file_io:
         while chunk := await field.read_chunk():
