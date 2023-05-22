@@ -1,32 +1,28 @@
 import http
-import json
 
 import aiohttp.web
+import orjson
 
 
-__all__ = (
-    "JsonException",
-)
+__all__ = ["JSONException"]
 
 
-class JsonException(aiohttp.web.HTTPException):
+class JSONException(aiohttp.web.HTTPException):
 
     def __init__(
         self,
-        exception: type[aiohttp.web.HTTPException] | aiohttp.web.HTTPException,
-        detail: str | None = None
+        exception: type[aiohttp.web.HTTPException] | aiohttp.web.HTTPException, /,
+        *, detail: str | None = None
     ) -> None:
         aiohttp.web.Response.__init__(
             self,
-            headers={
-                "Content-Type": "application/json"
-            },
-            body=json.dumps(
+            content_type="application/json",
+            text=orjson.dumps(
                 {
                     "status": exception.status_code,
                     "reason": http.HTTPStatus(exception.status_code).phrase,
                     "detail": detail
                 }
-            )
+            ).decode()
         )
         Exception.__init__(self)

@@ -5,33 +5,31 @@ import aiohttp.web
 import asyncpg
 
 from uploader.config import CONFIG
+from uploader.types import Pool
 
 
-__all__ = (
-    "postgresql",
-)
+__all__ = ["postgresql_context"]
+__log__ = logging.getLogger("uploader.contexts")
 
 
-LOGGER: logging.Logger = logging.getLogger("uploader.contexts")
-
-
-async def postgresql(app: aiohttp.web.Application) -> AsyncIterator[None]:
-
+async def postgresql_context(app: aiohttp.web.Application) -> AsyncIterator[None]:
+    # runs when the app is started
     try:
-        LOGGER.debug("Attempting connection to postgresql.")
-        pool: asyncpg.Pool = await asyncpg.create_pool(
-            CONFIG.connections.postgres_dsn,
+        __log__.debug("Attempting postgresql connection.")
+        pool: Pool = await asyncpg.create_pool(  # pyright: ignore
+            CONFIG.storage.postgres_dsn,
             max_inactive_connection_lifetime=0,
-            max_size=5, min_size=1,
-        )  # type: ignore
+            min_size=1, max_size=5,
+        )
     except Exception as error:
-        LOGGER.critical("Error while connecting to postgresql.")
+        __log__.critical("Error while connecting to postgresql.")
         raise error
-
-    LOGGER.info("Successfully connected to postgresql.")
-    app["pool"] = pool
-
-    yield
-
-    LOGGER.info("Closing postgresql connection.")
-    await pool.close()
+    else:
+        __log__.info("Successfully connected to postgresql.")
+        app["pool"] = pool
+    # runs when the app is closed
+    try:
+        yield
+    finally:
+        __log__.info("Closing postgresql connection.")
+        await pool.close()

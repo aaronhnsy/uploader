@@ -2,29 +2,27 @@
 requires      = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
 
-
 [tool.poetry]
 name        = "uploader-backend"
-version     = "0.0.1"
-description = "The backend API for my cdn uploader."
-authors     = ["Axel <axelancerr@gmail.com>"]
-
+version     = "0.1.0"
+description = "The backend for my media uploader"
+authors     = ["Axelancerr <axelancerr@gmail.com>"]
 
 [tool.poetry.dependencies]
 python            = "^3.11.0"
-aiohttp           = "~3.8.0"
-asyncpg           = "~0.27.0"
-colorama          = "~0.4.0"
-dacite            = "~1.8.0"
-typing_extensions = "~4.5.0"
-
+aiohttp           = "^3.8.4"
+asyncpg           = "^0.27.0"
+asyncpg-stubs     = "^0.27.0"
+colorama          = "^0.4.6"
+dacite            = "^1.8.0"
+orjson            = "^3.8.0"
+typing-extensions = "^4.5.0"
 
 [tool.pyright]
-include                = ["launcher.py", "uploader"]
-pythonVersion          = "3.10"
+include                = ["uploader", "launcher.py"]
+pythonVersion          = "3.11"
 typeCheckingMode       = "strict"
 useLibraryCodeForTypes = true
-
-reportUnknownMemberType  = false
-reportMissingTypeStubs   = false
-reportPrivateImportUsage = false
+reportPrivateUsage      = false
+reportUnknownMemberType = false
+reportImportCycles      = false

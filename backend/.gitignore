@@ -1,5 +1,8 @@
-media/
-logs/
-
 *.pyc
+*.log*
+
+.idea/
+venv/
+media/
+
 *config.toml

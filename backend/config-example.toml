@@ -1,0 +1,31 @@
+[general]
+environment = "PRODUCTION"
+
+[server]
+host = "127.0.0.1"
+port = 12345
+
+[storage]
+postgres_dsn = "postgres://user:password@localhost:5432/dbname"
+
+# [logging.levels]
+# uploader = "INFO"
+# aiohttp  = "INFO"
+
+# [logging.file_handler]
+# enabled       = true
+# path          = "logs/"
+# backup_count  = 5
+# max_file_size = "5mb"
+
+# [logging.stream_handler]
+# enabled     = true
+# use_colours = true
+
+# [logging.stream_handler.colours]
+# time     = ""
+# critical = ""
+# error    = ""
+# warning  = ""
+# info     = ""
+# debug    = ""

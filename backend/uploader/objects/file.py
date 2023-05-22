@@ -1,30 +1,34 @@
-from typing import TypedDict
-from typing_extensions import Unpack
+import dataclasses
+from typing import Self
+
+import asyncpg
+import dacite
+
+from uploader import utilities
+from uploader.types import Pool
 
 
-__all__ = (
-    "FileData",
-    "File"
-)
+__all__ = ["File"]
 
 
-class FileData(TypedDict):
-    user_id: int
+@dataclasses.dataclass
+class File:
+    user_id: str
     name: str
     format: str
     private: bool
 
-
-class File:
-
-    def __init__(self, **data: Unpack[FileData]) -> None:
-        self.data = data
-
-        self.user_id: int = data["user_id"]
-        self.name: str = data["name"]
-        self.format: str = data["format"]
-        self.private: bool = data["private"]
-
-    @property
-    def info(self) -> FileData:
-        return self.data
+    @classmethod
+    async def create(
+        cls,
+        pool: Pool,
+        user_id: str,
+        name: str,
+        format: str,
+        private: bool,
+    ) -> Self:
+        file: asyncpg.Record = await pool.fetchrow(  # pyright: ignore
+            "INSERT INTO files (user_id, name, format, private) VALUES ($1, $2, $3, $4) RETURNING *",
+            user_id, name, format, private
+        )
+        return dacite.from_dict(cls, {**file}, config=utilities.DACITE_CONFIG)
