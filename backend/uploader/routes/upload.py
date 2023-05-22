@@ -1,17 +1,16 @@
 import pathlib
 import random
 import string
-import platform
 
 import aiohttp.multipart
 import aiohttp.web
 import orjson
 
 from uploader import decorators, exceptions
-from uploader.objects import File, User
-from uploader.types import Request, Response
 from uploader.config import CONFIG
 from uploader.enums import Environment
+from uploader.objects import File, User
+from uploader.types import Request, Response
 
 
 __all__ = ["upload_file"]
