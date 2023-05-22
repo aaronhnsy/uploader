@@ -1,6 +1,7 @@
 import pathlib
 import random
 import string
+import platform
 
 import aiohttp.multipart
 import aiohttp.web
@@ -9,9 +10,17 @@ import orjson
 from uploader import decorators, exceptions
 from uploader.objects import File, User
 from uploader.types import Request, Response
+from uploader.config import CONFIG
+from uploader.enums import Environment
 
 
 __all__ = ["upload_file"]
+
+
+if CONFIG.general.environment == Environment.PRODUCTION:
+    MEDIA_PATH = pathlib.Path("/home/axel/media/")
+else:
+    MEDIA_PATH = pathlib.Path("media/")
 
 
 @decorators.check_content_type("multipart/form-data")
@@ -34,7 +43,7 @@ async def upload_file(request: Request) -> Response:
     name = "".join(random.sample(string.ascii_lowercase, 20))
     format = field.filename.split(".")[-1] if field.filename else "unknown"
     # save the file
-    path = pathlib.Path(f"/home/axel/media/{user.id}/{format}/{name}.{format}")
+    path = MEDIA_PATH / f"{user.id}" / f"{format}" / f"{name}.{format}"
     path.parent.mkdir(parents=True, exist_ok=True)
     with path.open(mode="wb") as file_io:
         while chunk := await field.read_chunk():
