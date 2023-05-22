@@ -4,7 +4,7 @@ import traceback
 import aiohttp.web
 
 from uploader import exceptions, objects
-from uploader.types import Pool, Request, StreamHandler, StreamResponse
+from uploader.types import Request, StreamHandler, StreamResponse
 
 
 __all__ = [
@@ -33,12 +33,13 @@ async def exception_middleware(request: Request, handler: StreamHandler) -> Stre
 
 @aiohttp.web.middleware
 async def authentication_middleware(request: Request, handler: StreamHandler) -> StreamResponse:
-    token = request.headers.get("Authorization")
-    if token is None:
+    if (token := request.headers.get("Authorization")) is None:
         raise exceptions.JSONException(
             aiohttp.web.HTTPUnauthorized,
-            detail="A valid token must be provided in the 'Authorization' header."
+            detail="The 'Authorization' header must contain a token."
         )
-    pool: Pool = request.app["pool"]
-    request["user"] = await objects.User.get(pool, token)
+    request["user"] = await objects.User.get(
+        request.app["pool"],
+        token
+    )
     return await handler(request)

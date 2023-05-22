@@ -7,7 +7,7 @@ import colorama
 from uploader.config import CONFIG
 
 
-__all__ = ["setup_logging"]
+__all__ = ["setup"]
 
 
 class _Formatter(logging.Formatter):
@@ -33,7 +33,7 @@ class _Formatter(logging.Formatter):
         return super().format(record)
 
 
-def setup_logging() -> None:
+def setup() -> None:
     # fix ansi escape sequences on windows
     colorama.init()
 
