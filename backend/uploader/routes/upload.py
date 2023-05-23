@@ -1,6 +1,4 @@
 import pathlib
-import random
-import string
 
 import aiohttp.multipart
 import aiohttp.web
@@ -12,6 +10,7 @@ from uploader.enums import Environment
 from uploader.exceptions import JSONException
 from uploader.objects import File, User
 from uploader.types import Request, Response
+from uploader.utilities import generate_id
 
 
 __all__ = ["upload_file"]
@@ -42,7 +41,7 @@ async def upload_file(request: Request) -> Response:
         )
     # get the user and file info
     user: User = request["user"]
-    name = "".join(random.sample(string.ascii_lowercase, 20))
+    name = generate_id()
     format = field.filename.split(".")[-1] if field.filename else "unknown"
     # save the file
     path = MEDIA / f"{user.id}" / f"{format}" / f"{name}.{format}"
