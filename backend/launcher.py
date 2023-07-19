@@ -20,6 +20,7 @@ uploader.middlewares.append(middlewares.authentication_middleware)
 # routes
 uploader.router.add_routes([
     aiohttp.web.post("/api/upload", routes.upload_file),
+    aiohttp.web.get("/api/files", routes.get_files),
 ])
 
 # run

@@ -4,6 +4,7 @@ import pathlib
 import aiohttp
 
 
+"""
 async def main() -> None:
     session = aiohttp.ClientSession()
     headers = {
@@ -18,6 +19,15 @@ async def main() -> None:
     async with session.post("https://axel.casa/api/upload", headers=headers, data=data) as response:
         print(await response.json())
     await session.close()
+"""
 
+async def main() -> None:
+    session = aiohttp.ClientSession()
+    headers = {
+        "Authorization": "dfbjdasvbuwgb43jwrefbcvbj4wbgjkerbdq0-9we3r9013-0udfh"
+    }
+    async with session.get("http://127.0.0.1:12345/api/files", headers=headers) as response:
+        print(await response.json())
+    await session.close()
 
 asyncio.run(main())

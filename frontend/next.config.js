@@ -1,10 +1,10 @@
-const path = require("path")
+const path = require("path");
 
 /** @type {import("next").NextConfig} **/
 module.exports = {
     experimental: {
-        appDir: true,
         typedRoutes: true,
+        serverActions: true,
     },
     sassOptions: {
         includePaths: [
@@ -13,12 +13,8 @@ module.exports = {
     },
     images: {
         remotePatterns: [
-            {
-                protocol: "https",
-                hostname: "placehold.co",
-                port: "",
-                pathname: "/32.png",
-            },
+            {protocol: "https", hostname: "placehold.co"},
+            {protocol: "https", hostname: "uploader.axel.casa"},
         ],
     },
-}
+};
