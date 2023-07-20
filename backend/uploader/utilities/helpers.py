@@ -29,4 +29,4 @@ def truncate(string: str, length: int) -> str:
 
 def generate_id() -> str:
     """Generates a random sixteen character ID."""
-    return uuid.uuid4().hex[:16].upper()
+    return uuid.uuid4().hex[:16].lower()
