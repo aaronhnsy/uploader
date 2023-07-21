@@ -19,13 +19,13 @@ export const metadata: Metadata = {
 
 export default function Layout({children}: { children: React.ReactNode }) {
     return (
-        <html lang="en" className={`${inter.variable} bg-gray-900`}>
-        <body>
-        <div className={"container mx-auto p-3"}>
-            <Navbar/>
-            {children}
-        </div>
-        </body>
+        <html lang="en" className={inter.variable}>
+            <body className="bg-gray-900">
+                <div className="container mx-auto p-3">
+                    <Navbar/>
+                    {children}
+                </div>
+            </body>
         </html>
     );
 }

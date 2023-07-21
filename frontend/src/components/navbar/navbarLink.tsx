@@ -9,11 +9,14 @@ export function NavbarLink({href, text}: { href: LinkProps<typeof Link>["href"],
         <Link
             className={
                 clsx(
-                    "p-2", "sm:p-0",
-                    "rounded",
-                    "text-sm", "font-medium",
+                    "p-2", "sm:p-0", "rounded",
+                    "font-medium", "text-sm",
+                    (
+                        (usePathname() === href)
+                            ? "text-yellow-400 underline"
+                            : "text-white"
+                    ),
                     "hover:bg-gray-700 sm:hover:bg-transparent",
-                    ((usePathname() === href) ? "text-yellow-400 underline": "text-gray-300"), "hover:text-gray-400",
                 )
             }
             href={href}
