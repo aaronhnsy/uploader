@@ -27,6 +27,11 @@ MEDIA = _path
 @check_content_type("multipart/form-data")
 async def upload_file(request: Request) -> Response:
     # get the multipart reader
+    if request.can_read_body is False:
+        raise JSONException(
+            aiohttp.web.HTTPBadRequest,
+            detail="Request body must not be empty."
+        )
     reader = await request.multipart()
     field = await reader.next()
     if not isinstance(field, aiohttp.multipart.BodyPartReader):
