@@ -40,7 +40,7 @@ export function NavBar() {
                     () => setTheme(
                         (() => {
                             const options = Object.keys(themes);
-                            const index = options.indexOf(theme);
+                            const index = options.indexOf(theme ?? "system");
                             return options[(index + 1) % options.length];
                         })(),
                     )}>
