@@ -4,13 +4,13 @@ import { NavLink } from "@/src/components/nav/link";
 import { clsx } from "clsx";
 import { useTheme } from "next-themes";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { darkModeIcon, lightModeIcon, logoIcon, navbarExpandedIcon, navbarExpandIcon, systemModeIcon } from "./icons";
 
 const themes = {
-    "system": systemModeIcon,
-    "light": lightModeIcon,
-    "dark": darkModeIcon,
+    system: systemModeIcon,
+    light: lightModeIcon,
+    dark: darkModeIcon,
 };
 
 export function NavBar() {
@@ -32,11 +32,11 @@ export function NavBar() {
                     () => setTheme(
                         (() => {
                             const options = Object.keys(themes);
-                            const index = options.indexOf(theme ?? "system");
-                            return options[(index + 1) % options.length];
+                            const current = options.indexOf(theme ?? "system");
+                            return options[(current + 1) % options.length];
                         })(),
                     )}>
-            {themes[theme ?? "system"]}
+            {themes[(theme ?? "system") as keyof typeof themes]}
         </button>
     );
     ////////////
