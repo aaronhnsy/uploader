@@ -1,3 +1,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+    .theme-transition {
+        @apply transition-colors duration-300 ease-in-out;
+    }
+}
