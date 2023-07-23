@@ -4,14 +4,28 @@ import { NavLink } from "@/src/components/nav/link";
 import { clsx } from "clsx";
 import { useTheme } from "next-themes";
 import Link from "next/link";
-import { useState } from "react";
-import { darkModeIcon, lightModeIcon, logoIcon, navbarExpandedIcon, navbarExpandIcon } from "./icons";
+import { useEffect, useState } from "react";
+import { darkModeIcon, lightModeIcon, logoIcon, navbarExpandedIcon, navbarExpandIcon, systemModeIcon } from "./icons";
+
+const themes = {
+    "system": systemModeIcon,
+    "light": lightModeIcon,
+    "dark": darkModeIcon,
+};
 
 export function NavBar() {
     ////////////
     // theme  //
     ////////////
     const {theme, setTheme} = useTheme();
+    // this prevents hydration errors when rendering for the first time
+    const [mounted, setMounted] = useState(false);
+    useEffect(
+        () => {
+            setMounted(true);
+        },
+        [],
+    );
     const themeButton = (
         <button type="button"
                 className={clsx(
@@ -22,8 +36,15 @@ export function NavBar() {
                     "focus:outline-none", "focus:ring", "focus:ring-yellow-500 dark:focus-ring-yellow-400",
                     "theme-transition",
                 )}
-                onClick={() => (theme === "dark") ? setTheme("light") : setTheme("dark")}>
-            {(theme === "dark") ? lightModeIcon : darkModeIcon}
+                onClick={
+                    () => setTheme(
+                        (() => {
+                            const options = Object.keys(themes);
+                            const index = options.indexOf(theme);
+                            return options[(index + 1) % options.length];
+                        })(),
+                    )}>
+            {mounted ? themes[theme] : <></>}
         </button>
     );
     ////////////
@@ -86,7 +107,7 @@ export function NavBar() {
             <div className={`mt-2 sm:mt-0 w-full sm:w-auto ${isExpanded ? "" : "hidden"} sm:block sm:order-1`}>
                 <ul className="flex flex-col sm:flex-row p-1 sm:p-0 sm:space-x-6 rounded bg-gray-900 sm:bg-transparent dark:bg-gray-800 dark:sm:bg-transparent theme-transition sm:transition-none">
                     <NavLink href={"/"} text="Home"></NavLink>
-                    <NavLink href={"/files"} text="Files"></NavLink>
+                    {/*<NavLink href={"/files"} text="Files"></NavLink>*/}
                 </ul>
             </div>
         </nav>
