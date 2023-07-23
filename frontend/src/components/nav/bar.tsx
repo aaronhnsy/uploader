@@ -18,14 +18,6 @@ export function NavBar() {
     // theme  //
     ////////////
     const {theme, setTheme} = useTheme();
-    // this prevents hydration errors when rendering for the first time
-    const [mounted, setMounted] = useState(false);
-    useEffect(
-        () => {
-            setMounted(true);
-        },
-        [],
-    );
     const themeButton = (
         <button type="button"
                 className={clsx(
@@ -44,7 +36,7 @@ export function NavBar() {
                             return options[(index + 1) % options.length];
                         })(),
                     )}>
-            {mounted ? themes[theme] : <></>}
+            {themes[theme ?? "system"]}
         </button>
     );
     ////////////
