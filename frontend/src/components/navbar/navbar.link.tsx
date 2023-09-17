@@ -9,12 +9,21 @@ export function NavbarLink({href, text}: { href: LinkProps<typeof Link>["href"],
                   "p-2", "rounded",
                   "font-bold", "text-sm",
                   (usePathname() === href)
-                      ? ["text-yellow-400", "sm:text-yellow-500", "dark:text-yellow-400", "dark:sm:text-yellow-400"]
-                      : ["text-gray-100", "sm:text-gray-900", "dark:text-gray-100", "dark:sm:text-gray-100"],
-                  "hover:bg-gray-700", "sm:hover:bg-gray-300", "dark:hover:bg-gray-700", "dark:sm:hover:bg-gray-700",
-                  "transition-colors", "duration-300", "ease-in-out",
+                      ? [clsx(
+                          "text-accent", "hover:text-accent-hover",
+                          "decoration-accent", "hover:decoration-accent-hover", "decoration-2",
+                          "underline", "underline-offset-2",
+                      )]
+                      : [clsx(
+                          "text-gray-100", "sm:text-gray-900", "dark:sm:text-gray-100",
+                          "hover:text-gray-300", "sm:hover:text-gray-950", "dark:sm:hover:text-gray-300",
+                      )],
+                  "bg-transparent", "sm:bg-transparent", "dark:sm:bg-transparent",
+                  "hover:bg-gray-950", "sm:hover:bg-gray-300", "dark:sm:hover:bg-gray-950",
+                  "focus:outline-none", "focus:ring", "focus:ring-accent", "focus:ring-3",
+                  "theme-transition",
               )}>
-            {text}
+            <p>{text}</p>
         </Link>
     );
 }

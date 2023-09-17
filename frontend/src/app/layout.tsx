@@ -1,4 +1,5 @@
 import { Providers } from "@/src/app/providers";
+import { Footer } from "@/src/components/footer";
 import { Navbar } from "@/src/components/navbar";
 import "@/src/styles/global.css";
 import { Metadata } from "next";
@@ -21,14 +22,15 @@ export const metadata: Metadata = {
 export default function Layout({children}: { children: React.ReactNode }) {
     return (
         <html suppressHydrationWarning className={inter.variable} lang="en">
-            <body className="bg-gray-100 dark:bg-gray-900 transition-colors duration-300 ease-in-out">
-                <Providers>
-                    <div className="container mx-auto p-3">
-                        <Navbar/>
-                        {children}
-                    </div>
-                </Providers>
-            </body>
+        <body className="bg-gray-200 dark:bg-gray-800 theme-transition">
+        <Providers>
+            <div className="container mx-auto p-4 space-y-4">
+                <Navbar/>
+                {children}
+                <Footer/>
+            </div>
+        </Providers>
+        </body>
         </html>
     );
 }

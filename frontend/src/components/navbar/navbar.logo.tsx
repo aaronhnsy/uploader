@@ -3,7 +3,7 @@ import Link from "next/link";
 import React from "react";
 
 const logoIcon = (
-    <svg className="h-8 w-8 fill-yellow-400"
+    <svg className="w-8 h-8"
          viewBox="0 0 640 512"
          xmlns="http://www.w3.org/2000/svg">
         <path d="M144 480C64.5 480 0 415.5 0 336c0-62.8 40.2-116.2 96.2-135.9c-.1-2.7-.2-5.4-.2-8.1c0-88.4
@@ -20,11 +20,11 @@ export function NavbarLogo() {
               className={clsx(
                   "inline-flex", "items-center", "justify-center",
                   "h-10", "px-2", "space-x-2", "rounded",
-                  "font-bold", "text-lg", "text-gray-100",
-                  "bg-gray-900", "hover:bg-gray-700",
-                  "dark:bg-transparent", "dark:hover:bg-gray-700",
-                  "focus:outline-none", "focus:ring", "focus:ring-yellow-500 dark:focus-ring-yellow-400",
-                  "transition-colors", "duration-300", "ease-in-out",
+                  "font-bold", "text-lg", "text-gray-100", "hover:text-gray-300",
+                  "bg-gray-900", "hover:bg-gray-950",
+                  "fill-accent", "hover:fill-accent-hover",
+                  "focus:outline-none", "focus:ring", "focus:ring-accent", "focus:ring-3",
+                  "theme-transition",
               )}>
             {logoIcon}
             <h1>Uploader</h1>

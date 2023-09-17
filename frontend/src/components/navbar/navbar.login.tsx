@@ -8,13 +8,12 @@ export function NavbarLogin() {
               className={clsx(
                   "inline-flex", "items-center", "justify-center",
                   "h-10", "px-2", "rounded",
-                  "font-bold", "text-sm", "text-gray-900",
-                  "bg-yellow-400", "hover:bg-yellow-600",
-                  "dark:bg-yellow-400", "dark:hover:bg-yellow-600",
-                  "focus:outline-none", "focus:ring", "focus:ring-gray-900 dark:focus:ring-gray-100",
-                  "transition-colors", "duration-300", "ease-in-out",
+                  "font-bold", "text-sm", "text-gray-900", "hover:text-gray-950",
+                  "bg-accent", "hover:bg-accent-hover",
+                  "focus:outline-none", "focus:ring", "focus:ring-gray-100", "focus:ring-3",
+                  "theme-transition",
               )}>
-            Log In
+            <p>Login</p>
         </Link>
     );
 }

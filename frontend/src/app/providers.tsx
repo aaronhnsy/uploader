@@ -1,8 +1,13 @@
 "use client";
 
+import { themes } from "@/src/components/footer/footer.themeChanger";
 import { ThemeProvider } from "next-themes";
 import React from "react";
 
 export function Providers({children}: { children: React.ReactNode }) {
-    return (<ThemeProvider attribute="class">{children}</ThemeProvider>);
+    return (
+        <ThemeProvider themes={themes} defaultTheme="dark-yellow">
+            {children}
+        </ThemeProvider>
+    );
 }
