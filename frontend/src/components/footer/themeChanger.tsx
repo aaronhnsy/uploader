@@ -1,6 +1,7 @@
 "use client";
 
 import ThemeButton from "@/src/components/footer/themeButton";
+import { useTheme } from "next-themes";
 import React, { useState } from "react";
 
 export const modes = {
@@ -28,17 +29,18 @@ export const themes =
 
 export function ThemeChanger() {
     // states
-    const [mode, setMode] = useState("dark");
-    const [colour, setColour] = useState("yellow");
+    const {theme} = useTheme();
+    const [mode, setMode] = useState(theme?.split("-")[0] ?? "dark");
+    const [colour, setColour] = useState(theme?.split("-")[1] ?? "yellow");
     // buttons
     return (
         <div className="space-y-2">
-            <div className="flex flex-wrap flex-row-reverse gap-2 p-2 rounded bg-gray-950">
+            <div className="flex flex-wrap flex-row-reverse gap-3 p-2 rounded bg-gray-800">
                 {Object.keys(modes).map(
                     (key) => (<ThemeButton colour={colour} value={key} setValue={setMode} key={key}/>),
                 )}
             </div>
-            <div className="flex flex-wrap flex-row-reverse gap-2 p-2 rounded bg-gray-950">
+            <div className="flex flex-wrap flex-row-reverse gap-3 p-2 rounded bg-gray-800">
                 {Object.keys(colours).map(
                     (key) => (<ThemeButton mode={mode} value={key} setValue={setColour} key={key}/>),
                 )}
