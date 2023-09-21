@@ -70,7 +70,7 @@ export function Navbar() {
                 )}>
                     <NavbarLink href={"/"} text="Home"></NavbarLink>
                     <NavbarLink href={"/files"} text="Files"></NavbarLink>
-                    <NavbarLink href={"/compare"} text="Compare"></NavbarLink>
+                    <NavbarLink href={"/ranker"} text="Ranker"></NavbarLink>
                 </ul>
             </div>
         </nav>

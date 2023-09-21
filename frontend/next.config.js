@@ -15,6 +15,8 @@ module.exports = {
         remotePatterns: [
             {protocol: "https", hostname: "placehold.co"},
             {protocol: "https", hostname: "uploader.axel.casa"},
+            {protocol: "https", hostname: "www.billboard.com"},
+            {protocol: "https", hostname: "lastfm.freetls.fastly.net"},
         ],
     },
 };
