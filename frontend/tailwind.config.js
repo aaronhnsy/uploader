@@ -2,7 +2,9 @@ const plugin = require("tailwindcss/plugin");
 const colors = require("tailwindcss/colors");
 const {parseColor} = require("tailwindcss/lib/util/color");
 
+
 const toRGB = (value) => parseColor(value).color.join(" ");
+
 
 /** @type {import("tailwindcss").Config} */
 module.exports = {
@@ -14,6 +16,10 @@ module.exports = {
         },
         extend: {
             colors: {
+                "background": "rgb(var(--background) / <alpha-value>)",
+                "background-hover": "rgb(var(--background-hover) / <alpha-value>)",
+                "primary": "rgb(var(--primary) / <alpha-value>)",
+                "primary-hover": "rgb(var(--primary-hover) / <alpha-value>)",
                 "accent": "rgb(var(--accent) / <alpha-value>)",
                 "accent-hover": "rgb(var(--accent-hover) / <alpha-value>)",
             },
@@ -23,6 +29,18 @@ module.exports = {
         plugin(
             function ({addBase}) {
                 addBase({
+                    "html": {
+                        "--primary": toRGB(colors.gray[800]),
+                        "--primary-hover": toRGB(colors.gray[900]),
+                    },
+                    "html[data-theme*='light']": {
+                        "--background": toRGB(colors.gray[200]),
+                        "--background-hover": toRGB(colors.gray[300]),
+                    },
+                    "html[data-theme*='dark']": {
+                        "--background": toRGB(colors.gray[700]),
+                        "--background-hover": toRGB(colors.gray[800]),
+                    },
                     "html[data-theme='light-red']": {
                         "--accent": toRGB(colors.rose[500]),
                         "--accent-hover": toRGB(colors.rose[700]),

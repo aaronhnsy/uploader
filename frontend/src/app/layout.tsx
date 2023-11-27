@@ -16,13 +16,12 @@ const inter = Inter(
 export const metadata: Metadata = {
     title: "Uploader",
     description: "Uploader",
-    viewport: {width: "device-width", initialScale: 1},
 };
 
 export default function Layout({children}: { children: React.ReactNode }) {
     return (
         <html suppressHydrationWarning className={inter.variable} lang="en">
-        <body className="bg-gray-200 dark:bg-gray-800 theme-transition">
+        <body className="bg-background transitions">
         <Providers>
             <div className="container mx-auto p-4 space-y-4">
                 <Navbar/>

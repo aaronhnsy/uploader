@@ -2,6 +2,29 @@
 @tailwind components;
 @tailwind utilities;
 
-.theme-transition {
-    @apply transition-colors duration-300;
+@layer components {
+    .c_bg-primary {
+        @apply bg-primary hover:bg-primary-hover
+    }
+    .c_bg-accent {
+        @apply bg-accent hover:bg-accent-hover
+    }
+
+    .c_fill-primary {
+        @apply fill-primary hover:fill-primary-hover
+    }
+    .c_fill-accent {
+        @apply fill-accent hover:fill-accent-hover
+    }
+
+    .c_ring-primary {
+        @apply focus:outline-none focus:ring focus:ring-primary focus:hover:ring-primary-hover
+    }
+    .c_ring-accent {
+        @apply focus:outline-none focus:ring focus:ring-accent focus:hover:ring-accent-hover
+    }
+
+    .transitions {
+        @apply transition ease-in-out duration-[250ms];
+    }
 }
