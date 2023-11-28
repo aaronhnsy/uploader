@@ -1,4 +1,4 @@
-import { ThemeChanger } from "@/src/components/footer/themeChanger";
+import { ThemeChanger } from "./footer.themeChanger";
 
 export function Footer() {
     return (

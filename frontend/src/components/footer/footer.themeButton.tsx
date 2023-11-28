@@ -1,6 +1,6 @@
 "use client";
 
-import { modesAndColours } from "@/src/components/footer/themeChanger";
+import { modesAndColours } from "./footer.themeChanger";
 import { clsx } from "clsx";
 import { useTheme } from "next-themes";
 import React, { useEffect, useState } from "react";
@@ -24,7 +24,8 @@ export default function ThemeButton({mode, colour, value, setValue}: ThemeButton
                     mounted && (theme as string).includes(value) ? "h-5 w-10" : "h-5 w-5",
                     "rounded",
                     modesAndColours[value as keyof typeof modesAndColours],
-                    "outline", "outline-gray-900",
+                    "outline", "outline-tertiary",
+                    "transitions",
                 )}
                 onClick={() => {
                     setValue(value);
