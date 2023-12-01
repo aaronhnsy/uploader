@@ -13,9 +13,10 @@ export function Navbar() {
     const expandButton = (
         <button type="button" aria-label="expand navbar"
                 className={clsx(
-                    "inline-flex", "items-center", "justify-center", "sm:hidden",
-                    "w-10", "h-10", "rounded",
-                    "c_bg-primary", "c_fill-accent", "c_ring-accent", "transitions",
+                    "c-button", "w-10", "h-10", "sm:hidden",
+                    "bg-colour-primary", "hover:bg-colour-secondary",
+                    "fill-colour-accent-primary", "hover:fill-colour-accent-secondary",
+                    "u-ring-accent", "u-transition",
                 )}
                 onClick={() => setIsExpanded(!isExpanded)}>
             {isExpanded ? navbarExpandedIcon : navbarExpandIcon}
@@ -37,9 +38,10 @@ export function Navbar() {
             )}>
                 <ul className={clsx(
                     "flex", "flex-col", "sm:flex-row",
-                    "p-1", "sm:p-0", "sm:space-x-5", "rounded",
-                    "bg-primary", "sm:bg-transparent",
-                    "transitions", "sm:transition-none",
+                    "p-1", "sm:p-0", "space-y-1", "sm:space-y-0", "sm:space-x-5",
+                    "rounded",
+                    "bg-colour-primary", "sm:bg-transparent",
+                    "u-transition", "sm:transition-none",
                 )}>
                     <NavbarLink href={"/"} text="Home"></NavbarLink>
                     <NavbarLink href={"/files"} text="Files"></NavbarLink>

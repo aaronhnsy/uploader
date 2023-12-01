@@ -21,11 +21,11 @@ export default function ThemeButton({mode, colour, value, setValue}: ThemeButton
     return (
         <button type="button" aria-label="theme switcher"
                 className={clsx(
-                    mounted && (theme as string).includes(value) ? "h-5 w-10" : "h-5 w-5",
-                    "rounded",
+                    mounted && (theme as string).includes(value) ? ["h-5", "w-10"] : ["h-5", "w-5"], "rounded",
                     modesAndColours[value as keyof typeof modesAndColours],
-                    "outline", "outline-tertiary",
-                    "transitions",
+                    "focus:scale-[115%]", "hover:scale-[115%]",
+                    "focus:outline-none", "ring", "ring-colour-tertiary",
+                    "u-transition",
                 )}
                 onClick={() => {
                     setValue(value);

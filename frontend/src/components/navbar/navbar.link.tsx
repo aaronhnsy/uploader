@@ -10,18 +10,17 @@ export function NavbarLink({href, text}: { href: LinkProps<typeof Link>["href"],
                   "font-bold", "text-sm",
                   (usePathname() === href)
                       ? [clsx(
-                          "text-accent", "hover:text-accent-hover",
-                          "decoration-accent", "hover:decoration-accent-hover", "decoration-2",
-                          "underline", "underline-offset-2",
+                          "text-colour-accent-primary", "hover:text-colour-accent-secondary",
+                          "decoration-colour-accent-primary", "hover:decoration-colour-accent-secondary", "decoration-2",
+                          "sm:underline", "sm:underline-offset-2",
                       )]
                       : [clsx(
-                          "text-gray-100", "sm:text-gray-900", "dark:sm:text-gray-100",
-                          "hover:text-gray-300", "sm:hover:text-gray-950", "dark:sm:hover:text-gray-300",
+                          "text-gray-100", "hover:text-gray-300",
+                          "sm:text-gray-900", "sm:hover:text-gray-950",
+                          "dark:sm:text-gray-100", "dark:sm:hover:text-gray-300",
                       )],
-                  "bg-transparent", "sm:bg-transparent",
-                  "hover:bg-primary-hover", "sm:hover:bg-background-hover",
-                  "focus:outline-none",
-                  "transitions",
+                  "hover:bg-colour-secondary", "hover:sm:bg-colour-background-hover",
+                  "u-ring-accent", "u-transition",
               )}>
             <p>{text}</p>
         </Link>

@@ -22,9 +22,11 @@ export function Item({itemData, selected, setSelected}: ItemProps) {
              className={clsx(
                  "h-full", "w-full",
                  "p-2", "rounded",
-                 "bg-secondary",
-                 (selected === itemData.id) ? "ring ring-accent" : "")
-             }>
+                 "bg-colour-secondary",
+                 (selected === itemData.id) ? "ring ring-colour-accent-primary hover:ring-colour-accent-secondary" : "",
+                 "hover:scale-105",
+                 "u-transition"
+             )}>
             <Image className="mb-2 rounded"
                    src={itemData.imageUrl}
                    alt="Comparison Item 1"

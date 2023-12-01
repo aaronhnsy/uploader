@@ -4,68 +4,69 @@ const {parseColor} = require("tailwindcss/lib/util/color");
 export const accentColours = {
     "red": {
         "light": {
-            "normal": colors.red[500],
-            "hover": colors.red[600],
+            "primary": colors.red[500],
+            "secondary": colors.red[600],
         },
         "dark": {
-            "normal": colors.red[500],
-            "hover": colors.red[600],
+            "primary": colors.red[500],
+            "secondary": colors.red[600],
         },
     },
     "orange": {
         "light": {
-            "normal": colors.orange[500],
-            "hover": colors.orange[600],
+            "primary": colors.orange[500],
+            "secondary": colors.orange[600],
         },
         "dark": {
-            "normal": colors.orange[400],
-            "hover": colors.orange[500],
+            "primary": colors.orange[500],
+            "secondary": colors.orange[600],
         },
     },
     "yellow": {
         "light": {
-            "normal": colors.yellow[500],
-            "hover": colors.yellow[600],
+            "primary": colors.yellow[500],
+            "secondary": colors.yellow[600],
         },
         "dark": {
-            "normal": colors.yellow[400],
-            "hover": colors.yellow[500],
+            "primary": colors.yellow[400],
+            "secondary": colors.yellow[500],
         },
     },
     "green": {
         "light": {
-            "normal": colors.green[500],
-            "hover": colors.green[600],
+            "primary": colors.green[500],
+            "secondary": colors.green[600],
         },
         "dark": {
-            "normal": colors.green[400],
-            "hover": colors.green[500],
+            "primary": colors.green[400],
+            "secondary": colors.green[500],
         },
     },
     "blue": {
         "light": {
-            "normal": colors.blue[500],
-            "hover": colors.blue[600],
+            "primary": colors.blue[500],
+            "secondary": colors.blue[600],
         },
         "dark": {
-            "normal": colors.blue[400],
-            "hover": colors.blue[500],
+            "primary": colors.blue[500],
+            "secondary": colors.blue[600],
         },
     },
     "purple": {
         "light": {
-            "normal": colors.purple[500],
-            "hover": colors.purple[600],
+            "primary": colors.purple[500],
+            "secondary": colors.purple[600],
         },
         "dark": {
-            "normal": colors.purple[400],
-            "hover": colors.purple[500],
+            "primary": colors.purple[500],
+            "secondary": colors.purple[600],
         },
     },
 };
 
-// This is way too complicated, but it makes me look like I know
-// what I'm doing, so I'm going to leave it for now.
+// This is a way-too-complicated way of converting the above object into
+// a set of CSS selectors for the different accent colours, but it works
+// and was a good learning experience for me, so it stays.
 
 export const toRgb = (value) => parseColor(value).color.join(" ");
 
@@ -78,8 +79,8 @@ export const accentColourHtmlSelectors = Object.entries(accentColours).reduce(
                     return {
                         ...themeAcc,
                         [`html[data-theme='${theme}-${colour}']`]: {
-                            "--accent-normal": toRgb(variations.normal),
-                            "--accent-hover": toRgb(variations.hover),
+                            "--colour-accent-primary": toRgb(variations.primary),
+                            "--colour-accent-secondary": toRgb(variations.secondary),
                         },
                     };
                 }, {},

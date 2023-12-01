@@ -6,10 +6,13 @@ export function NavbarLogo() {
     return (
         <Link href={"/"}
               className={clsx(
-                  "inline-flex", "items-center", "justify-center",
-                  "h-10", "px-2", "space-x-2", "rounded",
-                  "font-bold", "text-lg", "text-gray-100", "hover:text-gray-300",
-                  "c_bg-primary", "c_fill-accent", "c_ring-accent", "transitions",
+                  "c-button", "h-10",
+                  "px-2", "space-x-2",
+                  "font-bold", "text-lg",
+                  "text-gray-100", "hover:text-gray-300",
+                  "bg-colour-primary", "hover:bg-colour-secondary",
+                  "fill-colour-accent-primary", "hover:fill-colour-accent-secondary",
+                  "u-ring-accent", "u-transition",
               )}>
             {logoIcon}
             <h1>Uploader</h1>
