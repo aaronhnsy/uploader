@@ -22,7 +22,7 @@ const icon = (
 );
 
 export default function ThemeButton({mode, colour, value, setValue}: ThemeButtonProps) {
-    // make sure theme is mounted before rendering
+    // make sure the theme is mounted before rendering
     const [mounted, setMounted] = useState(false);
     useEffect(() => setMounted(true), []);
     // button
