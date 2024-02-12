@@ -6,7 +6,7 @@ host = "127.0.0.1"
 port = 12345
 
 [storage]
-postgres_dsn = "postgres://user:password@localhost:5432/dbname"
+postgres_dsn = "postgres://user:password@host:port/db-name"
 
 # [logging.levels]
 # uploader = "INFO"

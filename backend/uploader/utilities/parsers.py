@@ -23,8 +23,8 @@ def parse_time(time: str) -> datetime.time:
     except ValueError:
         raise exceptions.JSONException(
             aiohttp.web.HTTPBadRequest,
-            detail=f"The value '{utilities.truncate(time, 25)}' is not a valid time. It must be in the format of "
-                   f"'HH:MM:SS'."
+            detail=f"The value '{utilities.truncate(time, 25)}' is not a valid time. It must be in the "
+                   f"format of 'HH:MM:SS'."
         )
 
 
@@ -38,8 +38,8 @@ def parse_colour(colour: str) -> Colour:
     if _COLOUR_REGEX.fullmatch(colour) is None:
         raise exceptions.JSONException(
             aiohttp.web.HTTPBadRequest,
-            detail=f"The value '{utilities.truncate(colour, 25)}' is not a valid colour. It must be in the format of "
-                   f"'#RRGGBB'."
+            detail=f"The value '{utilities.truncate(colour, 25)}' is not a valid colour. It must be in the "
+                   f"format of '#RRGGBB'."
         )
     return Colour(colour)
 

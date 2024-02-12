@@ -1,8 +1,6 @@
 import asyncio
-import pathlib
 
 import aiohttp
-
 
 """
 async def main() -> None:
@@ -21,6 +19,7 @@ async def main() -> None:
     await session.close()
 """
 
+
 async def main() -> None:
     session = aiohttp.ClientSession()
     headers = {
@@ -29,5 +28,6 @@ async def main() -> None:
     async with session.get("http://127.0.0.1:12345/api/files", headers=headers) as response:
         print(await response.json())
     await session.close()
+
 
 asyncio.run(main())

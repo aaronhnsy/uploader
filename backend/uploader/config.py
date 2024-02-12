@@ -94,14 +94,14 @@ def load_config(file: io.BufferedReader) -> Config:
 
 _argument_parser = argparse.ArgumentParser(
     prog="launcher.py",
-    description="CLI options for running uploader's API.",
+    description="CLI options for running uploader.",
 )
 _argument_parser.add_argument(
     "-c", "--config",
     required=False,
-    default="config.toml", metavar="<.toml file>",
+    default="backend.config.toml", metavar="<.toml file>",
     type=argparse.FileType(mode="rb"),
-    help="provide a path to the config file that uploader's API should use.",
+    help="Provide a path to the config file that uploader should use.",
 )
 _arguments = _argument_parser.parse_args()
 

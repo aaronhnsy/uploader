@@ -1,8 +1,10 @@
-*.pyc
-*.log*
-
+# ide
 .idea/
-venv/
-media/
 
-*config.toml
+# python
+*.pyc
+
+# app
+media/
+*.log*
+backend.config.toml

@@ -1,7 +1,5 @@
-from __future__ import annotations
-
 from collections.abc import Awaitable, Callable
-from typing import Any, ClassVar, NewType, Protocol, TypeAlias
+from typing import Any, ClassVar, NewType, Protocol
 
 import aiohttp.web
 import asyncpg
@@ -19,15 +17,16 @@ __all__ = [
     "Dataclass",
 ]
 
+
 # aiohttp
-Request: TypeAlias = aiohttp.web.Request
-Response: TypeAlias = aiohttp.web.Response
-Handler: TypeAlias = Callable[[Request], Awaitable[Response]]
-StreamResponse: TypeAlias = aiohttp.web.StreamResponse
-StreamHandler: TypeAlias = Callable[[Request], Awaitable[StreamResponse]]
+type Request = aiohttp.web.Request
+type Response = aiohttp.web.Response
+type Handler = Callable[[Request], Awaitable[Response]]
+type StreamResponse = aiohttp.web.StreamResponse
+type StreamHandler = Callable[[Request], Awaitable[StreamResponse]]
 
 # asyncpg
-Pool: TypeAlias = "asyncpg.Pool[asyncpg.Record]"
+type Pool = asyncpg.Pool[asyncpg.Record]
 
 # custom
 Colour = NewType("Colour", str)
