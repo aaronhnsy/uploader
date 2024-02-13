@@ -6,5 +6,6 @@
 
 # app
 media/
-*.log*
+*log*
 backend.config.toml
+client.config.toml

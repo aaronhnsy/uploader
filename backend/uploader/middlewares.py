@@ -3,7 +3,6 @@ import traceback
 
 import aiohttp.web
 
-from uploader import utilities
 from uploader.exceptions import JSONException
 from uploader.types import Request, StreamHandler, StreamResponse
 
