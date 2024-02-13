@@ -16,7 +16,7 @@ class File:
     user_id: str
     name: str
     format: str
-    private: bool
+    hidden: bool
 
     @classmethod
     async def create(
@@ -26,10 +26,10 @@ class File:
         user_id: str,
         name: str,
         format: str,
-        private: bool,
+        hidden: bool,
     ) -> Self:
         file: asyncpg.Record = await pool.fetchrow(  # pyright: ignore
-            "INSERT INTO files (user_id, name, format, private) VALUES ($1, $2, $3, $4) RETURNING *",
-            user_id, name, format, private
+            "INSERT INTO files (user_id, name, format, hidden) VALUES ($1, $2, $3, $4) RETURNING *",
+            user_id, name, format, hidden
         )
         return dacite.from_dict(cls, {**file}, config=DACITE_CONFIG)

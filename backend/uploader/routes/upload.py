@@ -5,7 +5,7 @@ import aiohttp.web
 import orjson
 
 from uploader.config import CONFIG
-from uploader.decorators import check_content_type
+from uploader.decorators import authenticate_user, check_content_type
 from uploader.enums import Environment
 from uploader.exceptions import JSONException
 from uploader.objects import File, User
@@ -24,6 +24,7 @@ else:
 MEDIA = _path
 
 
+@authenticate_user
 @check_content_type("multipart/form-data")
 async def upload_file(request: Request) -> Response:
     # get the multipart reader
@@ -63,7 +64,7 @@ async def upload_file(request: Request) -> Response:
                 user_id=user.id,
                 name=name,
                 format=format,
-                private=False
+                hidden=False,
             )
         ).decode()
     )

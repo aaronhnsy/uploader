@@ -3,6 +3,7 @@ import asyncpg
 import dacite
 import orjson
 
+from uploader.decorators import authenticate_user
 from uploader.objects import File
 from uploader.types import Request, Response
 from uploader.utilities import DACITE_CONFIG
@@ -11,6 +12,7 @@ from uploader.utilities import DACITE_CONFIG
 __all__ = ["get_files"]
 
 
+@authenticate_user
 async def get_files(request: Request) -> Response:
     files: asyncpg.Record = await request.app["pool"].fetch(
         "SELECT * FROM files WHERE user_id = $1 ORDER BY user_id ASC",

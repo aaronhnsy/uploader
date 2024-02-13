@@ -10,7 +10,7 @@ __all__ = [
 ]
 
 
-def pretty_join(elements: Sequence[str]) -> str:
+def pretty_join(elements: Sequence[str], /) -> str:
     """Joins a list of elements into a string, adding commas and an 'and' where appropriate."""
     if len(elements) == 1:
         return f"'{elements[0]}'"
@@ -19,7 +19,7 @@ def pretty_join(elements: Sequence[str]) -> str:
 
 def plural(word: str, count: int) -> str:
     """Adds an 's' to the end of a word if the count is more than one."""
-    return f"{word}{'s' if count > 1 else ''}"
+    return f"{word}{"s" if count > 1 else ""}"
 
 
 def truncate(string: str, length: int) -> str:

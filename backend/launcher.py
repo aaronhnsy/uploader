@@ -15,12 +15,12 @@ uploader.cleanup_ctx.append(contexts.postgresql_context)
 
 # middlewares
 uploader.middlewares.append(middlewares.exception_middleware)
-uploader.middlewares.append(middlewares.authentication_middleware)
 
 # routes
 uploader.router.add_routes([
     aiohttp.web.post("/api/upload", routes.upload_file),
     aiohttp.web.get("/api/files", routes.get_files),
+    aiohttp.web.get("/login", routes.login),
 ])
 
 # run

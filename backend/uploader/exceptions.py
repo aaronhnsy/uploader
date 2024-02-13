@@ -11,8 +11,9 @@ class JSONException(aiohttp.web.HTTPException):
 
     def __init__(
         self,
-        exception: type[aiohttp.web.HTTPException] | aiohttp.web.HTTPException, /,
-        *, detail: str | None = None
+        exception: type[aiohttp.web.HTTPException] | aiohttp.web.HTTPException,
+        /, *,
+        detail: str | None = None
     ) -> None:
         aiohttp.web.Response.__init__(
             self,
