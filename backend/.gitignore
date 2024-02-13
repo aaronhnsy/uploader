@@ -5,7 +5,7 @@
 *.pyc
 
 # app
+logs/
 media/
-*log*
-backend.config.toml
 client.config.toml
+backend.config.toml
