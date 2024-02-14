@@ -37,7 +37,6 @@ export function NavbarLinks() {
             )}>
                 <NavbarLink href={"/"} text="Home"></NavbarLink>
                 <NavbarLink href={"/files"} text="Files"></NavbarLink>
-                <NavbarLink href={"/ranker"} text="Ranker"></NavbarLink>
             </ul>
         </div>
     </>;
