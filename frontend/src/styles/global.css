@@ -15,7 +15,6 @@
     .u-ring-accent {
         @apply focus:outline-none focus:ring focus:ring-colour-accent-primary focus:hover:ring-colour-accent-secondary
     }
-
     .u-transition {
         @apply transition ease-in-out duration-[250ms];
     }

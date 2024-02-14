@@ -21,15 +21,15 @@ export const metadata: Metadata = {
 export default function Layout({children}: { children: React.ReactNode }) {
     return (
         <html suppressHydrationWarning className={inter.variable} lang="en">
-            <body className="bg-colour-background u-transition">
-                <Providers>
-                    <div className="container mx-auto p-4 space-y-4">
-                        <Navbar/>
-                            {children}
-                        <Footer/>
-                    </div>
-                </Providers>
-            </body>
+        <body className="bg-colour-background u-transition">
+        <Providers>
+            <div className="container min-h-dvh flex flex-col mx-auto p-3 space-y-3">
+                <Navbar/>
+                {children}
+                <Footer/>
+            </div>
+        </Providers>
+        </body>
         </html>
     );
 }

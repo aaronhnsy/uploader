@@ -7,7 +7,7 @@ export function NavbarLogo() {
         <Link href={"/"}
               className={clsx(
                   "c-button", "h-10",
-                  "px-2", "space-x-2",
+                  "px-3", "space-x-3", "mr-3",
                   "font-bold", "text-lg",
                   "text-gray-100", "hover:text-gray-300",
                   "bg-colour-primary", "hover:bg-colour-secondary",

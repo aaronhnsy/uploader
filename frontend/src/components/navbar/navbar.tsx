@@ -13,7 +13,8 @@ export function Navbar() {
     const expandButton = (
         <button type="button" aria-label="expand navbar"
                 className={clsx(
-                    "c-button", "w-10", "h-10", "sm:hidden",
+                    "c-button", "h-10", "w-10",
+                    "ml-auto", "sm:hidden",
                     "bg-colour-primary", "hover:bg-colour-secondary",
                     "fill-colour-accent-primary", "hover:fill-colour-accent-secondary",
                     "u-ring-accent", "u-transition",
@@ -24,23 +25,20 @@ export function Navbar() {
     );
     // navbar
     return (
-        <nav className={clsx("flex", "flex-wrap", "items-center", "justify-between")}>
+        <nav className={clsx("flex", "flex-wrap")}>
             <NavbarLogo></NavbarLogo>
-            <div className={clsx("flex", "space-x-2", "sm:order-2")}>
-                <NavbarLogin></NavbarLogin>
-                {expandButton}
-            </div>
+            <NavbarLogin></NavbarLogin>
+            {expandButton}
             <div className={clsx(
-                "mt-2", "sm:mt-0",
+                "flex-none", "sm:flex-1",
+                "mt-3", "sm:mt-0",
                 "w-full", "sm:w-auto",
-                "sm:block", "sm:order-1",
                 isExpanded ? "" : "hidden",
             )}>
                 <ul className={clsx(
                     "flex", "flex-col", "sm:flex-row",
-                    "p-1", "sm:p-0", "space-y-1", "sm:space-y-0", "sm:space-x-5",
-                    "rounded",
-                    "bg-colour-primary", "sm:bg-transparent",
+                    "p-1", "sm:p-0", "space-y-1", "sm:space-y-0", "sm:space-x-3",
+                    "bg-colour-primary", "sm:bg-transparent", "rounded", "sm:rounded-none",
                     "u-transition", "sm:transition-none",
                 )}>
                     <NavbarLink href={"/"} text="Home"></NavbarLink>

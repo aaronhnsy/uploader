@@ -6,7 +6,8 @@ export function NavbarLink({href, text}: { href: LinkProps<typeof Link>["href"],
     return (
         <Link href={href}
               className={clsx(
-                  "py-2", "px-3", "rounded",
+                  "inline-flex", "items-center", "rounded", "h-10",
+                  "px-3",
                   "font-bold", "text-sm",
                   (usePathname() === href)
                       ? [clsx(
