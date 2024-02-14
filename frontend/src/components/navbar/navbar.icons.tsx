@@ -1,5 +1,5 @@
 export const logoIcon = (
-    <svg className="w-8 h-8"
+    <svg className="w-8 h-8" width="32px" height="32px"
          viewBox="0 0 640 512" xmlns="http://www.w3.org/2000/svg">
         <path d="M144 480C64.5 480 0 415.5 0 336c0-62.8 40.2-116.2 96.2-135.9c-.1-2.7-.2-5.4-.2-8.1c0-88.4
                  71.6-160 160-160c59.3 0 111 32.2 138.7 80.2C409.9 102 428.3 96 448 96c53 0 96 43 96 96c0
@@ -10,7 +10,7 @@ export const logoIcon = (
 );
 
 export const navbarExpandIcon = (
-    <svg className="h-6 w-6"
+    <svg className="h-6 w-6" width="24px" height="24px"
          viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
         <path fillRule="evenodd" clipRule="evenodd"
               d="M3 6.75A.75.75 0 013.75 6h16.5a.75.75 0 010 1.5H3.75A.75.75 0 013 6.75zM3 12a.75.75 0
@@ -20,7 +20,7 @@ export const navbarExpandIcon = (
 );
 
 export const navbarExpandedIcon = (
-    <svg className="h-6 w-6"
+    <svg className="h-7 w-7" width="28px" height="28px"
          viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
         <path fillRule="evenodd" clipRule="evenodd"
               d="M3 6.75A.75.75 0 013.75 6h16.5a.75.75 0 010 1.5H3.75A.75.75 0 013 6.75zM3 12a.75.75 0

@@ -2,10 +2,12 @@ const plugin = require("tailwindcss/plugin");
 const colors = require("tailwindcss/colors");
 const {accentColourHtmlSelectors, toRgb} = require("./tailwind.colours");
 
-/** @type {import("tailwindcss").Config} */
+/**
+ * @type {import("tailwindcss").Config}
+ **/
 module.exports = {
-    darkMode: ["class", "[data-theme*='dark']"],
     content: ["./src/**/*.{ts,tsx}"],
+    darkMode: ["class", "[data-theme*='dark']"],
     theme: {
         fontFamily: {sans: ["var(--font-inter)"]},
         extend: {
