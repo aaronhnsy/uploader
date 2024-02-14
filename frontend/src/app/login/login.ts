@@ -1,6 +1,5 @@
 "use server";
 
-
 export async function login(formData: FormData) {
     const data = await fetch(
         "http://localhost:12345/api/login",
@@ -11,9 +10,9 @@ export async function login(formData: FormData) {
             },
             body: JSON.stringify({
                 email: formData.get("email"),
-                password: formData.get("password")
+                password: formData.get("password"),
             }),
-        }
-    )
+        },
+    );
     console.log(await data.json());
 }

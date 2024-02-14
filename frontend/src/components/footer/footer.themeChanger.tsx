@@ -1,8 +1,8 @@
 "use client";
 
-import ThemeButton from "./footer.themeButton";
 import { useTheme } from "next-themes";
 import React, { useState } from "react";
+import ThemeButton from "./footer.themeButton";
 
 export const modes = {
     "light": "bg-gray-200 hover:bg-gray-400",

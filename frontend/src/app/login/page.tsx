@@ -1,7 +1,6 @@
 import { clsx } from "clsx";
 import { login } from "./login";
 
-
 export default function Page() {
     return (
         <div className="flex-1 flex items-center justify-center">

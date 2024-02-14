@@ -20,24 +20,27 @@ export function NavbarLinks() {
             {isExpanded ? navbarCollapseIcon : navbarExpandIcon}
         </button>
     );
-    return <>
-        {expandButton}
-        <div className={clsx(
-            "flex-none", "sm:flex-1",
-            "mt-3", "sm:mt-0",
-            "w-full", "sm:w-auto",
-            "sm:block",
-            isExpanded ? "" : "hidden",
-        )}>
-            <ul className={clsx(
-                "flex", "flex-col", "sm:flex-row",
-                "p-1", "sm:p-0", "space-y-1", "sm:space-y-0", "sm:space-x-3",
-                "bg-colour-primary", "sm:bg-transparent", "rounded", "sm:rounded-none",
-                "u-transition", "sm:transition-none",
+    return (
+        <>
+            {expandButton}
+            <div className={clsx(
+                "flex-none", "sm:flex-1",
+                "mt-3", "sm:mt-0",
+                "w-full", "sm:w-auto",
+                "sm:block",
+                isExpanded ? "" : "hidden",
             )}>
-                <NavbarLink href={"/"} text="Home"></NavbarLink>
-                <NavbarLink href={"/files"} text="Files"></NavbarLink>
-            </ul>
-        </div>
-    </>;
+                <ul className={clsx(
+                    "flex", "flex-col", "sm:flex-row",
+                    "p-1", "sm:p-0", "space-y-1", "sm:space-y-0", "sm:space-x-3",
+                    "bg-colour-primary", "sm:bg-transparent", "rounded", "sm:rounded-none",
+                    "u-transition", "sm:transition-none",
+                )}>
+                    <NavbarLink href={"/"} text="Home"></NavbarLink>
+                    <NavbarLink href={"/files"} text="Files"></NavbarLink>
+                </ul>
+            </div>
+            ;
+        </>
+    );
 }

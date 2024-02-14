@@ -10,7 +10,7 @@ export type File = {
 export async function getFiles(): Promise<File[]> {
     const response = await fetch("http://127.0.0.1:12345/api/files", {
         method: "GET",
-        headers: {"Authorization": "0cf429d46c83497b86a47215aba566d9AAAAAAAAAAAA"},
+        headers: {"Authorization": process.env.UPLOADER_TOKEN as string},
         next: {revalidate: 10},
     });
     return response.json();
