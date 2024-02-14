@@ -19,7 +19,7 @@ export const navbarExpandIcon = (
     </svg>
 );
 
-export const navbarExpandedIcon = (
+export const navbarCollapseIcon = (
     <svg className="h-7 w-7" width="28px" height="28px"
          viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
         <path fillRule="evenodd" clipRule="evenodd"
