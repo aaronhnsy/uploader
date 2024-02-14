@@ -33,6 +33,7 @@ export function Navbar() {
                 "flex-none", "sm:flex-1",
                 "mt-3", "sm:mt-0",
                 "w-full", "sm:w-auto",
+                "sm:block",
                 isExpanded ? "" : "hidden",
             )}>
                 <ul className={clsx(
