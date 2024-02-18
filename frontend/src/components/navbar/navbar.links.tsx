@@ -40,7 +40,6 @@ export function NavbarLinks() {
                     <NavbarLink href={"/files"} text="Files"></NavbarLink>
                 </ul>
             </div>
-            ;
         </>
     );
 }

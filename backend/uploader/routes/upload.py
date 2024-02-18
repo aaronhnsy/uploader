@@ -1,3 +1,4 @@
+import os
 import pathlib
 
 import aiohttp.multipart
@@ -16,12 +17,11 @@ from uploader.utilities import generate_id
 __all__ = ["upload_file"]
 
 
-if CONFIG.general.environment == Environment.PRODUCTION:
-    _path = pathlib.Path("/home/axel/media/")
-else:
-    _path = pathlib.Path("media/")
-
-MEDIA = _path
+MEDIA = pathlib.Path(
+    f"{os.environ["home"]}/media/"
+    if CONFIG.general.environment == Environment.PRODUCTION
+    else "media/"
+)
 
 
 @authenticate_user
