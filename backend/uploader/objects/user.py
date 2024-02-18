@@ -17,7 +17,7 @@ __all__ = ["User"]
 @dataclasses.dataclass
 class User:
     id: str
-    email: str
+    email: str | None
     token: str
     name: str
     bot: bool
