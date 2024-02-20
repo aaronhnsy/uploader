@@ -1,8 +1,10 @@
 "use server";
 
+import { cookies } from "next/headers";
+
 export async function login(formData: FormData) {
-    const data = await fetch(
-        "http://localhost:12345/api/login",
+    const response = await fetch(
+        "http://localhost:10000/api/login",
         {
             method: "POST",
             headers: {
@@ -14,5 +16,16 @@ export async function login(formData: FormData) {
             }),
         },
     );
-    console.log(await data.json());
+    if (response.ok) {
+        const data = await response.json();
+        cookies().set({
+            name: "token",
+            value: data.token,
+            path: "/",
+            sameSite: "strict",
+            httpOnly: true,
+        });
+    } else {
+
+    }
 }

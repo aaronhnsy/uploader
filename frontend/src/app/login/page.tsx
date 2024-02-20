@@ -1,4 +1,5 @@
 import { clsx } from "clsx";
+import { login } from "./login";
 
 export default function Page() {
     return (
@@ -7,7 +8,7 @@ export default function Page() {
                 "flex", "flex-col", "grow",
                 "p-3", "max-w-96", "space-y-3",
                 "bg-colour-primary", "rounded",
-            )}>
+            )} action={login} >
                 <div className={clsx("flex", "flex-col", "space-y-2")}>
                     <label className={clsx("font-bold", "text-md", "text-gray-100")} htmlFor="email">
                         Email Address
@@ -16,7 +17,7 @@ export default function Page() {
                         "p-2",
                         "font-semibold", "text-sm", "text-gray-100",
                         "bg-colour-secondary", "rounded",
-                    )} id="email" type="email" placeholder="aaron@hnsy.com"/>
+                    )} id="email" type="email" name="email" placeholder="aaron@hnsy.com"/>
                 </div>
                 <div className={clsx("flex", "flex-col", "space-y-2")}>
                     <label className={clsx("font-bold", "text-md", "text-gray-100")} htmlFor="password">
@@ -26,7 +27,7 @@ export default function Page() {
                         "p-2",
                         "font-semibold", "text-sm", "text-gray-100",
                         "bg-colour-secondary", "rounded",
-                    )} id="password" type="password" placeholder="********"/>
+                    )} id="password" type="password" name="password" placeholder="********"/>
                 </div>
                 <button className={clsx(
                     "c-button", "h-10",
@@ -37,6 +38,5 @@ export default function Page() {
                 </button>
             </form>
         </div>
-
     );
 }
