@@ -4,9 +4,8 @@ import pathlib
 import aiohttp.multipart
 import aiohttp.web
 import orjson
-
 from uploader.config import CONFIG
-from uploader.decorators import authenticate_user, check_content_type
+from uploader.decorators import check_content_type
 from uploader.enums import Environment
 from uploader.exceptions import JSONException
 from uploader.objects import File, User
@@ -24,7 +23,6 @@ MEDIA = pathlib.Path(
 )
 
 
-@authenticate_user
 @check_content_type("multipart/form-data")
 async def upload_file(request: Request) -> Response:
     # get the multipart reader

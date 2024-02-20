@@ -8,6 +8,9 @@ port = 12345
 [storage]
 postgres_dsn = "postgres://user:password@host:port/db-name"
 
+[security]
+itsdangerous_secret = "SECRET_KEY"
+
 # [logging.levels]
 # uploader = "INFO"
 # aiohttp  = "INFO"

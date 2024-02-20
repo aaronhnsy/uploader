@@ -1,22 +1,24 @@
+import contextlib
 import logging
-from collections.abc import AsyncIterator
+from typing import AsyncGenerator
 
-import aiohttp.web
 import asyncpg
+from litestar import Litestar
 
-from uploader.config import CONFIG
-from uploader.types import Pool
-
-
-__all__ = ["postgresql_context"]
-__log__ = logging.getLogger("uploader.contexts")
+from src.config import CONFIG
+from src.types import Database
 
 
-async def postgresql_context(app: aiohttp.web.Application) -> AsyncIterator[None]:
+__all__ = ["db_connection"]
+__log__ = logging.getLogger("uploader.database")
+
+
+@contextlib.asynccontextmanager
+async def db_connection(app: Litestar) -> AsyncGenerator[None, None]:
     # runs when the app is started
     try:
         __log__.debug("Attempting postgresql connection.")
-        pool: Pool = await asyncpg.create_pool(  # pyright: ignore
+        database: Database = await asyncpg.create_pool(  # pyright: ignore
             CONFIG.storage.postgres_dsn,
             max_inactive_connection_lifetime=0,
             min_size=1, max_size=5,
@@ -26,10 +28,10 @@ async def postgresql_context(app: aiohttp.web.Application) -> AsyncIterator[None
         raise error
     else:
         __log__.info("Successfully connected to postgresql.")
-        app["pool"] = pool
+        app.state.database = database
     # runs when the app is closed
     try:
         yield
     finally:
         __log__.info("Closing postgresql connection.")
-        await pool.close()
+        await app.state.database.close()

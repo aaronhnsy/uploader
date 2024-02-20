@@ -1,19 +1,18 @@
-import dataclasses
-from typing import Self
+from __future__ import annotations
+
+from typing import Annotated
 
 import asyncpg
-import dacite
+from pydantic import BaseModel, Field
 
-from uploader.types import Pool
-from uploader.utilities import DACITE_CONFIG
+from src.types import Database
 
 
 __all__ = ["File"]
 
 
-@dataclasses.dataclass
-class File:
-    user_id: str
+class File(BaseModel):
+    user_id: Annotated[str, Field(min_length=16, max_length=16)]
     name: str
     format: str
     hidden: bool
@@ -21,15 +20,15 @@ class File:
     @classmethod
     async def create(
         cls,
-        pool: Pool,
+        database: Database,
         /, *,
         user_id: str,
         name: str,
         format: str,
         hidden: bool,
-    ) -> Self:
-        file: asyncpg.Record = await pool.fetchrow(  # pyright: ignore
+    ) -> File:
+        file: asyncpg.Record = await database.fetchrow(  # pyright: ignore
             "INSERT INTO files (user_id, name, format, hidden) VALUES ($1, $2, $3, $4) RETURNING *",
             user_id, name, format, hidden
         )
-        return dacite.from_dict(cls, {**file}, config=DACITE_CONFIG)
+        return File.model_validate(file)
