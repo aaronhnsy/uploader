@@ -5,7 +5,7 @@ build-backend = "poetry.core.masonry.api"
 [tool.poetry]
 name        = "uploader-backend"
 version     = "1.0.0"
-description = "The backend API for my media uploader."
+description = "The backend API for my file uploader."
 authors     = ["Aaron Hennessey <aaronhnsy@gmail.com>"]
 
 [tool.poetry.dependencies]

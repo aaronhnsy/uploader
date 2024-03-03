@@ -3,7 +3,7 @@ from __future__ import annotations
 from typing import Annotated
 
 import asyncpg
-from pydantic import BaseModel, Field
+import pydantic
 
 from src.enums import Permissions
 from src.types import Database
@@ -12,9 +12,9 @@ from src.types import Database
 __all__ = ["User"]
 
 
-class User(BaseModel):
-    id: Annotated[str, Field(min_length=16, max_length=16)]
-    name: Annotated[str, Field(max_length=32)]
+class User(pydantic.BaseModel):
+    id: Annotated[str, pydantic.Field(min_length=16, max_length=16)]
+    name: Annotated[str, pydantic.Field(max_length=32)]
     bot: bool
     permissions: Permissions
 
