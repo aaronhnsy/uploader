@@ -8,7 +8,7 @@ from litestar.handlers.http_handlers import HTTPRouteHandler
 
 
 if TYPE_CHECKING:
-    from src.objects import User
+    from src.models import User
 
 
 __all__ = [

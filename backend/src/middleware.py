@@ -3,8 +3,8 @@ from litestar.middleware import AbstractAuthenticationMiddleware, Authentication
 from litestar.status_codes import HTTP_401_UNAUTHORIZED
 
 from src.exceptions import CustomException
-from src.objects import User
-from src.types import ASGIConnection
+from src.models import User
+from src.types import Connection
 from src.utilities import unsign_token
 
 
@@ -13,7 +13,7 @@ __all__ = ["AuthenticationMiddleware"]
 
 class _AuthenticationMiddleware(AbstractAuthenticationMiddleware):
 
-    async def authenticate_request(self, connection: ASGIConnection) -> AuthenticationResult:
+    async def authenticate_request(self, connection: Connection) -> AuthenticationResult:
         # check if the 'Authorization' header is present
         token = connection.headers.get("Authorization")
         if token is None:

@@ -10,14 +10,14 @@ authors     = ["Aaron Hennessey <aaronhnsy@gmail.com>"]
 
 [tool.poetry.dependencies]
 python            = "~3.12.0"
-aiohttp           = { version = "~3.9.0"  }
-asyncpg           = { version = "~0.29.0" }
-asyncpg-stubs     = { version = "~0.29.0" }
-colorama          = { version = "~0.4.0"  }
-itsdangerous      = { version = "~2.1.0"  }
-litestar          = { version = "~2.6.0", extras = ["standard", "pydantic"] }
-orjson            = { version = "~3.9.0"  }
-typing-extensions = { version = "~4.9.0"  }
+aiohttp           = { version = "~3.9.0"   }
+asyncpg           = { version = "~0.29.0"  }
+asyncpg-stubs     = { version = "~0.29.0"  }
+colorama          = { version = "~0.4.0"   }
+itsdangerous      = { version = "~2.1.0"   }
+litestar          = { version = "~2.6.0",  extras = ["standard", "pydantic"] }
+orjson            = { version = "~3.9.0"   }
+typing-extensions = { version = "~4.10.0"  }
 
 [tool.pyright]
 include                 = ["src"]
@@ -27,7 +27,7 @@ useLibraryCodeForTypes  = true
 reportUnknownMemberType = false
 
 [tool.isort]
-line_length            = 110
+line_length            = 125
 lines_after_imports    = 2
 multi_line_output      = 9
 include_trailing_comma = true
