@@ -10,11 +10,11 @@ __all__ = [
 ]
 
 
-def pretty_join(elements: Sequence[str], /) -> str:
-    """Joins a list of elements into a string, adding commas and an 'and' where appropriate."""
+def pretty_join(elements: Sequence[str], /, *, joiner: str = "and") -> str:
+    """Joins a list of elements into a string, adding commas and an 'and'/'or' where appropriate."""
     if len(elements) == 1:
         return f"'{elements[0]}'"
-    return ", ".join([f"'{element}'" for element in elements[:-1]]) + f" and '{elements[-1]}'"
+    return ", ".join([f"'{element}'" for element in elements[:-1]]) + f" {joiner} '{elements[-1]}'"
 
 
 def plural(word: str, count: int) -> str:

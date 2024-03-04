@@ -14,7 +14,7 @@ from src.types import Request
 
 __all__ = [
     "CustomException",
-    "ExceptionModel",
+    "ExceptionData",
     "handle_custom_exception",
     "handle_http_exception",
     "handle_other_exception",
@@ -29,7 +29,7 @@ class CustomException(Exception):
         self.reason: str = reason
 
 
-class ExceptionModel(pydantic.BaseModel):
+class ExceptionData(pydantic.BaseModel):
     model_config = pydantic.ConfigDict(strict=True)
 
     status_code: Annotated[
@@ -47,7 +47,7 @@ class ExceptionModel(pydantic.BaseModel):
 
 
 def handle_custom_exception(request: Request, exception: CustomException) -> Response[dict[str, str | int | None]]:
-    model = ExceptionModel(
+    model = ExceptionData(
         status_code=exception.status_code,
         status_name=http.HTTPStatus(exception.status_code).phrase,
         reason=exception.reason,
@@ -60,7 +60,7 @@ def handle_custom_exception(request: Request, exception: CustomException) -> Res
 
 
 def handle_http_exception(request: Request, exception: HTTPException) -> Response[dict[str, str | int | None]]:
-    model = ExceptionModel(
+    model = ExceptionData(
         status_code=exception.status_code,
         status_name=http.HTTPStatus(exception.status_code).phrase,
         reason=None,
@@ -75,7 +75,7 @@ def handle_http_exception(request: Request, exception: HTTPException) -> Respons
 def handle_other_exception(request: Request, exception: Exception) -> Response[dict[str, str | int | None]]:
     tb = traceback.format_exception(exception)
     print("".join(tb))
-    model = ExceptionModel(
+    model = ExceptionData(
         status_code=HTTP_500_INTERNAL_SERVER_ERROR,
         status_name=http.HTTPStatus(HTTP_500_INTERNAL_SERVER_ERROR).phrase,
         reason=tb[-1] if CONFIG.general.environment == Environment.DEVELOPMENT else None

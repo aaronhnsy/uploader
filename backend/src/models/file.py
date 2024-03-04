@@ -17,15 +17,15 @@ class File(pydantic.BaseModel):
     user_id: Annotated[
         str,
         pydantic.Field(
-            description="The owner's user ID.",
             min_length=16, max_length=16,
+            description="The owner's user id.",
         )
     ]
     name: Annotated[
         str,
         pydantic.Field(
-            description="The name of the file. Including the file extension.",
-            min_length=1, max_length=255
+            min_length=1, max_length=255,
+            description="The name of the file, including the file extension.",
         )
     ]
     created_at: Annotated[
@@ -39,9 +39,8 @@ class File(pydantic.BaseModel):
 
     @classmethod
     async def create(
-        cls,
-        database: Database,
-        /, *,
+        cls, database: Database, /,
+        *,
         user_id: str,
         name: str,
         private: bool,
@@ -54,9 +53,8 @@ class File(pydantic.BaseModel):
 
     @classmethod
     async def get(
-        cls,
-        database: Database,
-        /, *,
+        cls, database: Database, /,
+        *,
         user_id: str,
         name: str,
     ) -> File | None:
@@ -65,3 +63,9 @@ class File(pydantic.BaseModel):
             user_id, name
         )
         return File.model_validate({**file}) if file else None
+
+    async def delete(self, database: Database, /) -> None:
+        await database.execute(
+            "DELETE FROM files WHERE user_id = $1 AND name = $2",
+            self.user_id, self.name
+        )
