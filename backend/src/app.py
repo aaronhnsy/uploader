@@ -2,6 +2,8 @@ from litestar import Litestar
 from litestar.exceptions import HTTPException
 from litestar.openapi import OpenAPIConfig
 from litestar.openapi.spec import Components, SecurityScheme, Tag
+from litestar.stores.redis import RedisStore
+from litestar.stores.registry import StoreRegistry
 
 from src.api import api_router
 from src.config import CONFIG
@@ -14,10 +16,18 @@ from src.middleware import AuthenticationMiddleware
 __all__ = ["uploader"]
 
 
+redis_store = RedisStore.with_client(CONFIG.storage.redis_dsn)
+
+
+def store_default_factory(name: str) -> RedisStore:
+    return redis_store.with_namespace(name)
+
+
 uploader = Litestar(
     route_handlers=[api_router],
     lifespan=[db_connection],  # type: ignore
     middleware=[AuthenticationMiddleware],
+    stores=StoreRegistry(default_factory=store_default_factory),
     exception_handlers={
         CustomException: handle_custom_exception,
         HTTPException:   handle_http_exception,
@@ -30,6 +40,7 @@ uploader = Litestar(
         tags=[
             Tag(name="Files", description="Operations related to files."),
             Tag(name="Tokens", description="Operations related to users."),
+            Tag(name="Session", description="Operations related to sessions."),
         ],
         components=Components(
             security_schemes={

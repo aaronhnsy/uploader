@@ -25,6 +25,7 @@ class General(pydantic.BaseModel):
 
 class Storage(pydantic.BaseModel):
     postgres_dsn: Annotated[str, pydantic.PostgresDsn]
+    redis_dsn: Annotated[str, pydantic.RedisDsn]
 
 
 class Security(pydantic.BaseModel):

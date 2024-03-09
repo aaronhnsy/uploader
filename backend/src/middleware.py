@@ -27,14 +27,25 @@ class _AuthenticationMiddleware(AbstractAuthenticationMiddleware):
         except itsdangerous.BadSignature:
             raise CustomException(
                 HTTP_401_UNAUTHORIZED,
-                reason="The token provided is invalid."
+                reason="The provided token is invalid."
             )
-        # fetch the user from the database
+
+        # valid: asyncpg.Record | None = await connection.app.state.database.fetchrow(
+        #     "SELECT * FROM tokens WHERE user_id = $1 AND secret = $2",
+        #     data["user_id"], data["secret"]
+        # )
+        # if valid is None:
+        #     raise CustomException(
+        #         HTTP_401_UNAUTHORIZED,
+        #         reason="The token provided is invalid."
+        #     )
+
+        # fetch the user from the database; TODO: use a cache
         user = await User.fetch_by_id(connection.app.state.database, data["user_id"])
         if user is None:
             raise CustomException(
                 HTTP_401_UNAUTHORIZED,
-                reason="The user associated with the token provided does not exist."
+                reason="The user associated with the provided token does not exist."
             )
         # return the user
         return AuthenticationResult(user=user, auth=None)

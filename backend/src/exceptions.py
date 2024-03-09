@@ -31,7 +31,6 @@ class CustomException(Exception):
 
 class ExceptionData(pydantic.BaseModel):
     model_config = pydantic.ConfigDict(strict=True)
-
     status_code: Annotated[
         int,
         pydantic.Field(description="The status code of the response.")
@@ -47,41 +46,41 @@ class ExceptionData(pydantic.BaseModel):
 
 
 def handle_custom_exception(request: Request, exception: CustomException) -> Response[dict[str, str | int | None]]:
-    model = ExceptionData(
+    data = ExceptionData(
         status_code=exception.status_code,
         status_name=http.HTTPStatus(exception.status_code).phrase,
         reason=exception.reason,
     )
     return Response(
         media_type=MediaType.JSON,
-        status_code=model.status_code,
-        content=model.model_dump()
+        status_code=data.status_code,
+        content=data.model_dump()
     )
 
 
 def handle_http_exception(request: Request, exception: HTTPException) -> Response[dict[str, str | int | None]]:
-    model = ExceptionData(
+    data = ExceptionData(
         status_code=exception.status_code,
         status_name=http.HTTPStatus(exception.status_code).phrase,
         reason=None,
     )
     return Response(
         media_type=MediaType.JSON,
-        status_code=model.status_code,
-        content=model.model_dump()
+        status_code=data.status_code,
+        content=data.model_dump()
     )
 
 
 def handle_other_exception(request: Request, exception: Exception) -> Response[dict[str, str | int | None]]:
     tb = traceback.format_exception(exception)
     print("".join(tb))
-    model = ExceptionData(
+    data = ExceptionData(
         status_code=HTTP_500_INTERNAL_SERVER_ERROR,
         status_name=http.HTTPStatus(HTTP_500_INTERNAL_SERVER_ERROR).phrase,
         reason=tb[-1] if CONFIG.general.environment == Environment.DEVELOPMENT else None
     )
     return Response(
         media_type=MediaType.JSON,
-        status_code=model.status_code,
-        content=model.model_dump()
+        status_code=data.status_code,
+        content=data.model_dump()
     )
