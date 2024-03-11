@@ -14,6 +14,7 @@ __all__ = ["File"]
 
 class File(pydantic.BaseModel):
     model_config = pydantic.ConfigDict(strict=True)
+
     user_id: Annotated[
         str,
         pydantic.Field(

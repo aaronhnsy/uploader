@@ -18,6 +18,7 @@ module.exports = {
             {protocol: "https", hostname: "uploader.axel.casa"},
             {protocol: "https", hostname: "www.billboard.com"},
             {protocol: "https", hostname: "lastfm.freetls.fastly.net"},
+            {protocol: "https", hostname: "cdn.discordapp.com"},
         ],
     },
 };

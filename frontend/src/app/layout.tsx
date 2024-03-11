@@ -1,6 +1,6 @@
 import { Providers } from "@/src/app/providers";
 import { Footer } from "@/src/components/footer";
-import { Navbar } from "@/src/components/navbar";
+import { Header } from "@/src/components/header";
 import "@/src/styles/global.css";
 import { clsx } from "clsx";
 import { Metadata } from "next";
@@ -27,7 +27,7 @@ export default function Layout({children}: { children: React.ReactNode }) {
                 "flex", "flex-col",
                 "min-h-dvh", "mx-auto", "p-3", "space-y-3",
             )}>
-                <Navbar/>
+                <Header/>
                 {children}
                 <Footer/>
             </div>

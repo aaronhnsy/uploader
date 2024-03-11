@@ -4,12 +4,12 @@ from typing import Annotated
 import pydantic
 from litestar import post
 from litestar.params import Body
+from litestar.status_codes import HTTP_400_BAD_REQUEST
 
 from src.api.common import InvalidRequestResponse
 from src.exceptions import CustomException
 from src.models import User
 from src.types import Request, State
-from litestar.status_codes import HTTP_400_BAD_REQUEST
 from src.utilities import sign_token
 
 

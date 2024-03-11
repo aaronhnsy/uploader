@@ -2,7 +2,7 @@ import { clsx } from "clsx";
 import Link, { LinkProps } from "next/link";
 import { usePathname } from "next/navigation";
 
-export function NavbarLink({href, text}: { href: LinkProps<typeof Link>["href"], text: string }) {
+export function HeaderLink({href, text}: { href: LinkProps<typeof Link>["href"], text: string }) {
     return (
         <Link href={href}
               className={clsx(

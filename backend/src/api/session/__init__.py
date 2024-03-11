@@ -1,13 +1,13 @@
 from litestar import Router
 
-from .login import login
+from .create_session import create_session
 
 
 __all__ = ["session_router"]
 
 
 session_router = Router(
-    path="/session",
-    tags=["Session"],
-    route_handlers=[login]
+    path="/sessions",
+    tags=["Sessions"],
+    route_handlers=[create_session]
 )

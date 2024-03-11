@@ -2,13 +2,13 @@
 
 import { clsx } from "clsx";
 import { useState } from "react";
-import { navbarCollapseIcon, navbarExpandIcon } from "./navbar.icons";
-import { NavbarLink } from "./navbar.link";
+import { headerLinkBarCollapseIcon, headerLinkBarExpandIcon } from "./header.icons";
+import { HeaderLink } from "./header.link";
 
-export function NavbarLinks() {
+export function HeaderLinkBar() {
     const [isExpanded, setIsExpanded] = useState(false);
     const expandButton = (
-        <button type="button" aria-label="expand navbar"
+        <button type="button" aria-label="expand header"
                 className={clsx(
                     "c-button", "h-10", "w-10",
                     "ml-auto", "sm:hidden",
@@ -17,7 +17,7 @@ export function NavbarLinks() {
                     "u-ring-accent", "u-transition",
                 )}
                 onClick={() => setIsExpanded(!isExpanded)}>
-            {isExpanded ? navbarCollapseIcon : navbarExpandIcon}
+            {isExpanded ? headerLinkBarCollapseIcon : headerLinkBarExpandIcon}
         </button>
     );
     return (
@@ -36,8 +36,8 @@ export function NavbarLinks() {
                     "bg-colour-primary", "sm:bg-transparent", "rounded", "sm:rounded-none",
                     "u-transition", "sm:transition-none",
                 )}>
-                    <NavbarLink href={"/"} text="Home"></NavbarLink>
-                    <NavbarLink href={"/files"} text="Files"></NavbarLink>
+                    <HeaderLink href={"/"} text="Home"></HeaderLink>
+                    <HeaderLink href={"/files"} text="Files"></HeaderLink>
                 </ul>
             </div>
         </>

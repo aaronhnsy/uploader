@@ -1,4 +1,4 @@
-export const logoIcon = (
+export const headerLogoIcon = (
     <svg className="w-8 h-8" width="32px" height="32px"
          viewBox="0 0 640 512" xmlns="http://www.w3.org/2000/svg">
         <path d="M144 480C64.5 480 0 415.5 0 336c0-62.8 40.2-116.2 96.2-135.9c-.1-2.7-.2-5.4-.2-8.1c0-88.4
@@ -9,7 +9,7 @@ export const logoIcon = (
     </svg>
 );
 
-export const navbarExpandIcon = (
+export const headerLinkBarExpandIcon = (
     <svg className="h-6 w-6" width="24px" height="24px"
          viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
         <path fillRule="evenodd" clipRule="evenodd"
@@ -19,7 +19,7 @@ export const navbarExpandIcon = (
     </svg>
 );
 
-export const navbarCollapseIcon = (
+export const headerLinkBarCollapseIcon = (
     <svg className="h-7 w-7" width="28px" height="28px"
          viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
         <path fillRule="evenodd" clipRule="evenodd"

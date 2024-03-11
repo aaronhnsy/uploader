@@ -39,8 +39,9 @@ uploader = Litestar(
         root_schema_site="elements",
         tags=[
             Tag(name="Files", description="Operations related to files."),
+            Tag(name="Sessions", description="Operations related to sessions."),
             Tag(name="Tokens", description="Operations related to users."),
-            Tag(name="Session", description="Operations related to sessions."),
+            Tag(name="Users", description="Operations related to users."),
         ],
         components=Components(
             security_schemes={

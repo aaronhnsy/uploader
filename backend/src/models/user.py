@@ -4,29 +4,27 @@ from typing import Annotated
 
 import asyncpg
 import pydantic
+from litestar.status_codes import HTTP_401_UNAUTHORIZED
 
 from src.enums import Permissions
+from src.exceptions import CustomException
 from src.types import Database
+from src.utilities import verify_password
 
 
 __all__ = ["User"]
 
 
 class User(pydantic.BaseModel):
-    model_config = pydantic.ConfigDict(strict=True, use_enum_values=True)
+    model_config = pydantic.ConfigDict(strict=True, extra="ignore")
+
     id: Annotated[
         str,
-        pydantic.Field(
-            min_length=16, max_length=16,
-            description="The user's id."
-        )
+        pydantic.Field(description="The user's id.", min_length=16, max_length=16)
     ]
     name: Annotated[
         str,
-        pydantic.Field(
-            min_length=1, max_length=32,
-            description="The user's name."
-        )
+        pydantic.Field(description="The user's name.", min_length=1, max_length=32)
     ]
     bot: Annotated[
         bool,
@@ -34,38 +32,49 @@ class User(pydantic.BaseModel):
     ]
     permissions: Annotated[
         Permissions,
-        pydantic.Field(description="The user's permissions.")
+        pydantic.Field(description="The user's permissions.", strict=False)
+    ]
+    profile_picture: Annotated[
+        str,
+        pydantic.Field(description="The user's profile picture.")
     ]
 
-    @pydantic.field_validator("permissions", mode="before")
     @classmethod
-    def _validate_permissions(cls, value: int) -> Permissions:
-        try:
-            return Permissions(value)
-        except KeyError:
-            raise ValueError(f"Invalid permissions: '{value}'")
-
-    @classmethod
-    async def fetch_by_name_and_password(
-        cls, database: Database, /,
-        *,
+    async def fetch_with_username_and_password(
+        cls, database: Database,
+        /, *,
         name: str,
-        password: str,
-    ) -> User | None:
-        user: asyncpg.Record | None = await database.fetchrow(
-            "SELECT id, name, bot, permissions "
-            "FROM users "
-            "WHERE name = $1 AND password = crypt($2, password)",
-            name, password
+        password: str
+    ) -> User:
+        data: asyncpg.Record | None = await database.fetchrow(
+            "SELECT id, name, password, bot, permissions, profile_picture FROM users WHERE name = $1",
+            name
         )
-        return User.model_validate({**user}) if user else None
+        if data is None:
+            raise CustomException(
+                HTTP_401_UNAUTHORIZED,
+                reason="User not found."
+            )
+        if verify_password(password, data["password"]) is False:
+            raise CustomException(
+                HTTP_401_UNAUTHORIZED,
+                reason="Password is incorrect."
+            )
+        return User.model_validate({**data})
 
     @classmethod
-    async def fetch_by_id(cls, database: Database, id: int) -> User | None:
-        user: asyncpg.Record | None = await database.fetchrow(
-            "SELECT id, name, bot, permissions "
-            "FROM users "
-            "WHERE id = $1",
+    async def fetch_with_id(
+        cls, database: Database,
+        /, *,
+        id: str
+    ) -> User:
+        data: asyncpg.Record | None = await database.fetchrow(
+            "SELECT id, name, bot, permissions, profile_picture FROM users WHERE id = $1",
             id
         )
-        return User.model_validate({**user}) if user else None
+        if data is None:
+            raise CustomException(
+                HTTP_401_UNAUTHORIZED,
+                reason="User not found."
+            )
+        return User.model_validate({**data})

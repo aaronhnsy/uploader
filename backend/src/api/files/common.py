@@ -12,15 +12,14 @@ __all__ = [
     "FileNotFoundResponse",
 ]
 
-# Parameters
-UserIdParameter = Annotated[
+type UserIdParameter = Annotated[
     str,
     Parameter(
         min_length=16, max_length=16,
         description="The file owner's user id.",
     )
 ]
-FilenameParameter = Annotated[
+type FilenameParameter = Annotated[
     str,
     Parameter(
         min_length=1, max_length=255,
@@ -28,8 +27,7 @@ FilenameParameter = Annotated[
     )
 ]
 
-# Responses
-FileNotFoundResponse = ResponseSpec(
+FileNotFoundResponse: ResponseSpec = ResponseSpec(
     data_container=ExceptionData, generate_examples=False,
     description="The file was not found.",
 )
