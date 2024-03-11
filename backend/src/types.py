@@ -12,17 +12,17 @@ if TYPE_CHECKING:
 
 
 __all__ = [
-    "Database",
+    "PostgreSQL",
     "Connection",
     "Request",
     "State",
 ]
 
 
-type Database = asyncpg.Pool[asyncpg.Record]
+type PostgreSQL = asyncpg.Pool[asyncpg.Record]
 type Connection = ASGIConnection[HTTPRouteHandler, User, None, State]
 type Request = _Request[User, None, State]
 
 
 class State(_State):
-    database: Database
+    postgresql: PostgreSQL

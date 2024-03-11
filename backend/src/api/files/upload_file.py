@@ -11,10 +11,10 @@ from litestar.openapi import ResponseSpec
 from litestar.params import Body
 from litestar.status_codes import HTTP_409_CONFLICT
 
-from src.api.common import InvalidRequestResponse, MissingOrInvalidAuthorizationResponse
+from src.api.common import InvalidRequestResponseSpec, MissingOrInvalidAuthorizationResponseSpec
 from src.config import CONFIG
 from src.enums import Environment
-from src.exceptions import CustomException, ExceptionData
+from src.exceptions import Error, ReasonException
 from src.models import File
 from src.types import Request, State
 from src.utilities import generate_id
@@ -30,7 +30,7 @@ MEDIA_DIRECTORY = pathlib.Path(
 )
 
 
-class UploadFileData(pydantic.BaseModel):
+class UploadFileRequest(pydantic.BaseModel):
     model_config = pydantic.ConfigDict(arbitrary_types_allowed=True, strict=True)
     file: Annotated[
         UploadFile,
@@ -54,10 +54,10 @@ class UploadFileData(pydantic.BaseModel):
             data_container=File, generate_examples=False,
             description="The file was uploaded successfully.",
         ),
-        400: InvalidRequestResponse,
-        401: MissingOrInvalidAuthorizationResponse,
+        400: InvalidRequestResponseSpec,
+        401: MissingOrInvalidAuthorizationResponseSpec,
         409: ResponseSpec(
-            data_container=ExceptionData, generate_examples=False,
+            data_container=Error, generate_examples=False,
             description="You already have a file with that name.",
         ),
     }
@@ -65,7 +65,7 @@ class UploadFileData(pydantic.BaseModel):
 async def upload_file(
     request: Request, state: State,
     data: Annotated[
-        UploadFileData,
+        UploadFileRequest,
         Body(
             media_type=RequestEncodingType.MULTI_PART,
             description="Information about the file to upload.",
@@ -80,13 +80,13 @@ async def upload_file(
     # create a new file record in the database
     try:
         file = await File.create(
-            state.database,
+            state.postgresql,
             user_id=request.user.id,
             name=filename,
             private=data.private
         )
     except asyncpg.UniqueViolationError:
-        raise CustomException(
+        raise ReasonException(
             HTTP_409_CONFLICT,
             reason="You already have a file with that name."
         )

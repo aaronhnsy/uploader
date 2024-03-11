@@ -6,8 +6,8 @@ from litestar import post
 from litestar.params import Body
 from litestar.status_codes import HTTP_400_BAD_REQUEST
 
-from src.api.common import InvalidRequestResponse
-from src.exceptions import CustomException
+from src.api.common import InvalidRequestResponseSpec
+from src.exceptions import ReasonException
 from src.models import User
 from src.types import Request, State
 from src.utilities import sign_token
@@ -16,7 +16,7 @@ from src.utilities import sign_token
 __all__ = ["create_token"]
 
 
-class CreateTokenData(pydantic.BaseModel):
+class CreateTokenRequest(pydantic.BaseModel):
     model_config = pydantic.ConfigDict(strict=True)
     username: Annotated[
         str,
@@ -30,28 +30,28 @@ class CreateTokenData(pydantic.BaseModel):
     exclude_from_auth=True,
     summary="Create Token",
     responses={
-        400: InvalidRequestResponse,
+        400: InvalidRequestResponseSpec,
     }
 )
 async def create_token(
     request: Request,
     state: State,
     data: Annotated[
-        CreateTokenData,
+        CreateTokenRequest,
         Body(description="The username and password to generate a token for.")
     ]
 ) -> str:
     user = await User.fetch_by_name_and_password(
-        state.database,
+        state.postgresql,
         name=data.username, password=data.password
     )
     if user is None:
-        raise CustomException(
+        raise ReasonException(
             HTTP_400_BAD_REQUEST,
             reason="Invalid username or password."
         )
     secret = secrets.token_hex(16)
-    await state.database.execute(
+    await state.postgresql.execute(
         "INSERT INTO tokens (user_id, secret) VALUES ($1, $2)",
         user.id, secret
     )

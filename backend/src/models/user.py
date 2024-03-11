@@ -7,8 +7,8 @@ import pydantic
 from litestar.status_codes import HTTP_401_UNAUTHORIZED
 
 from src.enums import Permissions
-from src.exceptions import CustomException
-from src.types import Database
+from src.exceptions import ReasonException
+from src.types import PostgreSQL
 from src.utilities import verify_password
 
 
@@ -41,7 +41,7 @@ class User(pydantic.BaseModel):
 
     @classmethod
     async def fetch_with_username_and_password(
-        cls, database: Database,
+        cls, database: PostgreSQL,
         /, *,
         name: str,
         password: str
@@ -51,12 +51,12 @@ class User(pydantic.BaseModel):
             name
         )
         if data is None:
-            raise CustomException(
+            raise ReasonException(
                 HTTP_401_UNAUTHORIZED,
                 reason="User not found."
             )
         if verify_password(password, data["password"]) is False:
-            raise CustomException(
+            raise ReasonException(
                 HTTP_401_UNAUTHORIZED,
                 reason="Password is incorrect."
             )
@@ -64,7 +64,7 @@ class User(pydantic.BaseModel):
 
     @classmethod
     async def fetch_with_id(
-        cls, database: Database, _id: str, /
+        cls, database: PostgreSQL, _id: str, /
 
     ) -> User:
         data: asyncpg.Record | None = await database.fetchrow(
@@ -72,7 +72,7 @@ class User(pydantic.BaseModel):
             _id
         )
         if data is None:
-            raise CustomException(
+            raise ReasonException(
                 HTTP_401_UNAUTHORIZED,
                 reason="User not found."
             )

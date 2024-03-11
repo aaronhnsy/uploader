@@ -1,7 +1,7 @@
 from litestar.middleware import AbstractAuthenticationMiddleware, AuthenticationResult, DefineMiddleware
 from litestar.status_codes import HTTP_401_UNAUTHORIZED
 
-from src.exceptions import CustomException
+from src.exceptions import ReasonException
 from src.models import User
 from src.types import Connection
 
@@ -15,7 +15,7 @@ __all__ = ["AuthenticationMiddleware"]
 #         # check if the 'Authorization' header is present
 #         token = connection.headers.get("Authorization")
 #         if token is None:
-#             raise CustomException(
+#             raise ReasonException(
 #                 HTTP_401_UNAUTHORIZED,
 #                 reason="You must provide a token in the 'Authorization' header."
 #             )
@@ -23,7 +23,7 @@ __all__ = ["AuthenticationMiddleware"]
 #         try:
 #             data = unsign_token(token)
 #         except itsdangerous.BadSignature:
-#             raise CustomException(
+#             raise ReasonException(
 #                 HTTP_401_UNAUTHORIZED,
 #                 reason="The provided token is invalid."
 #             )
@@ -33,7 +33,7 @@ __all__ = ["AuthenticationMiddleware"]
 #         #     data["user_id"], data["secret"]
 #         # )
 #         # if valid is None:
-#         #     raise CustomException(
+#         #     raise ReasonException(
 #         #         HTTP_401_UNAUTHORIZED,
 #         #         reason="The token provided is invalid."
 #         #     )
@@ -41,7 +41,7 @@ __all__ = ["AuthenticationMiddleware"]
 #         # fetch the user from the database; TODO: use a cache
 #         user = await User.fetch_by_id(connection.app.state.database, data["user_id"])
 #         if user is None:
-#             raise CustomException(
+#             raise ReasonException(
 #                 HTTP_401_UNAUTHORIZED,
 #                 reason="The user associated with the provided token does not exist."
 #             )
@@ -54,17 +54,17 @@ class _AuthenticationMiddleware(AbstractAuthenticationMiddleware):
     async def authenticate_request(self, connection: Connection) -> AuthenticationResult:
         session_id = connection.cookies.get("__session_id")
         if session_id is None:
-            raise CustomException(
+            raise ReasonException(
                 HTTP_401_UNAUTHORIZED,
                 reason="You must provide a session id in the '__session_id' cookie."
             )
         user_id = await connection.app.stores.get("sessions").get(session_id)
         if user_id is None:
-            raise CustomException(
+            raise ReasonException(
                 HTTP_401_UNAUTHORIZED,
                 reason="The session id provided is invalid."
             )
-        user = await User.fetch_with_id(connection.app.state.database, id=user_id.decode())
+        user = await User.fetch_with_id(connection.app.state.postgresql, user_id.decode())
         return AuthenticationResult(user=user, auth=None)
 
 

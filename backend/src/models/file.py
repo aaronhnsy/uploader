@@ -6,7 +6,7 @@ from typing import Annotated
 import asyncpg
 import pydantic
 
-from src.types import Database
+from src.types import PostgreSQL
 
 
 __all__ = ["File"]
@@ -40,7 +40,7 @@ class File(pydantic.BaseModel):
 
     @classmethod
     async def create(
-        cls, database: Database, /,
+        cls, database: PostgreSQL, /,
         *,
         user_id: str,
         name: str,
@@ -54,7 +54,7 @@ class File(pydantic.BaseModel):
 
     @classmethod
     async def get(
-        cls, database: Database, /,
+        cls, database: PostgreSQL, /,
         *,
         user_id: str,
         name: str,
@@ -65,7 +65,7 @@ class File(pydantic.BaseModel):
         )
         return File.model_validate({**file}) if file else None
 
-    async def delete(self, database: Database, /) -> None:
+    async def delete(self, database: PostgreSQL, /) -> None:
         await database.execute(
             "DELETE FROM files WHERE user_id = $1 AND name = $2",
             self.user_id, self.name

@@ -3,13 +3,13 @@ from typing import Annotated
 from litestar.openapi import ResponseSpec
 from litestar.params import Parameter
 
-from src.exceptions import ExceptionData
+from src.exceptions import Error
 
 
 __all__ = [
     "UserIdParameter",
     "FilenameParameter",
-    "FileNotFoundResponse",
+    "FileNotFoundResponseSpec",
 ]
 
 type UserIdParameter = Annotated[
@@ -27,7 +27,7 @@ type FilenameParameter = Annotated[
     )
 ]
 
-FileNotFoundResponse: ResponseSpec = ResponseSpec(
-    data_container=ExceptionData, generate_examples=False,
+FileNotFoundResponseSpec: ResponseSpec = ResponseSpec(
+    data_container=Error, generate_examples=False,
     description="The file was not found.",
 )

@@ -6,8 +6,8 @@ from litestar import post
 from litestar.openapi import ResponseSpec
 from litestar.params import Body
 
-from src.api.common import InvalidRequestResponse
-from src.exceptions import ExceptionData
+from src.api.common import InvalidRequestResponseSpec
+from src.exceptions import Error
 from src.models import User
 from src.types import Request, State
 
@@ -15,7 +15,7 @@ from src.types import Request, State
 __all__ = ["create_session"]
 
 
-class CreateSessionData(pydantic.BaseModel):
+class CreateSessionRequest(pydantic.BaseModel):
     model_config = pydantic.ConfigDict(strict=True)
     username: Annotated[
         str,
@@ -33,9 +33,9 @@ class CreateSessionData(pydantic.BaseModel):
             data_container=str, generate_examples=False,
             description="Response contains the newly created session id."
         ),
-        400: InvalidRequestResponse,
+        400: InvalidRequestResponseSpec,
         401: ResponseSpec(
-            data_container=ExceptionData, generate_examples=False,
+            data_container=Error, generate_examples=False,
             description="The username doesn't match an existing user or the password is incorrect."
         )
     },
@@ -44,12 +44,12 @@ async def create_session(
     request: Request,
     state: State,
     data: Annotated[
-        CreateSessionData,
+        CreateSessionRequest,
         Body(description="The username and password to create a session for.")
     ]
 ) -> str:
     user = await User.fetch_with_username_and_password(
-        state.database,
+        state.postgresql,
         name=data.username,
         password=data.password
     )

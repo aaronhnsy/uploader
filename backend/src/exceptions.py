@@ -1,6 +1,7 @@
 import http
 import traceback
-from typing import Annotated
+from collections.abc import Callable
+from typing import Annotated, Any
 
 import pydantic
 from litestar import MediaType, Response
@@ -13,15 +14,21 @@ from src.types import Request
 
 
 __all__ = [
-    "CustomException",
-    "ExceptionData",
-    "handle_custom_exception",
-    "handle_http_exception",
-    "handle_other_exception",
+    "ReasonException",
+    "Error",
+    "exception_handlers",
 ]
 
+type _ExceptionHandlerResponse = Response[dict[str, Any]]
+type _ExceptionHandler[T: Exception] = Callable[[Request, T], _ExceptionHandlerResponse]
+type _ExceptionHandlerMapping = \
+    dict[
+        type[ReasonException] | type[HTTPException] | type[Exception],
+        _ExceptionHandler[ReasonException] | _ExceptionHandler[HTTPException] | _ExceptionHandler[Exception]
+    ]
 
-class CustomException(Exception):
+
+class ReasonException(Exception):
 
     def __init__(self, status_code: int, /, *, reason: str) -> None:
         super().__init__(self)
@@ -29,7 +36,7 @@ class CustomException(Exception):
         self.reason: str = reason
 
 
-class ExceptionData(pydantic.BaseModel):
+class Error(pydantic.BaseModel):
     model_config = pydantic.ConfigDict(strict=True)
     status_code: Annotated[
         int,
@@ -45,42 +52,47 @@ class ExceptionData(pydantic.BaseModel):
     ]
 
 
-def handle_custom_exception(request: Request, exception: CustomException) -> Response[dict[str, str | int | None]]:
-    data = ExceptionData(
-        status_code=exception.status_code,
-        status_name=http.HTTPStatus(exception.status_code).phrase,
-        reason=exception.reason,
-    )
+def handle_custom_exception(request: Request, exception: ReasonException) -> _ExceptionHandlerResponse:
     return Response(
         media_type=MediaType.JSON,
-        status_code=data.status_code,
-        content=data.model_dump()
-    )
-
-
-def handle_http_exception(request: Request, exception: HTTPException) -> Response[dict[str, str | int | None]]:
-    data = ExceptionData(
         status_code=exception.status_code,
-        status_name=http.HTTPStatus(exception.status_code).phrase,
-        reason=None,
+        content=Error(
+            status_code=exception.status_code,
+            status_name=http.HTTPStatus(exception.status_code).phrase,
+            reason=exception.reason,
+        ).model_dump()
     )
+
+
+def handle_http_exception(request: Request, exception: HTTPException) -> _ExceptionHandlerResponse:
     return Response(
         media_type=MediaType.JSON,
-        status_code=data.status_code,
-        content=data.model_dump()
+        status_code=exception.status_code,
+        content=Error(
+            status_code=exception.status_code,
+            status_name=http.HTTPStatus(exception.status_code).phrase,
+            reason=None,
+        ).model_dump()
     )
 
 
-def handle_other_exception(request: Request, exception: Exception) -> Response[dict[str, str | int | None]]:
+def handle_other_exception(request: Request, exception: Exception) -> _ExceptionHandlerResponse:
+    status_code = HTTP_500_INTERNAL_SERVER_ERROR
     tb = traceback.format_exception(exception)
     print("".join(tb))
-    data = ExceptionData(
-        status_code=HTTP_500_INTERNAL_SERVER_ERROR,
-        status_name=http.HTTPStatus(HTTP_500_INTERNAL_SERVER_ERROR).phrase,
-        reason=tb[-1] if CONFIG.general.environment == Environment.DEVELOPMENT else None
-    )
     return Response(
         media_type=MediaType.JSON,
-        status_code=data.status_code,
-        content=data.model_dump()
+        status_code=status_code,
+        content=Error(
+            status_code=status_code,
+            status_name=http.HTTPStatus(status_code).phrase,
+            reason=tb[-1] if CONFIG.general.environment == Environment.DEVELOPMENT else None
+        ).model_dump()
     )
+
+
+exception_handlers: _ExceptionHandlerMapping = {
+    ReasonException: handle_custom_exception,
+    HTTPException:   handle_http_exception,
+    Exception:       handle_other_exception,
+}

@@ -2,12 +2,12 @@ from litestar import delete
 from litestar.openapi import ResponseSpec
 from litestar.status_codes import HTTP_404_NOT_FOUND
 
-from src.api.common import InvalidRequestResponse, MissingOrInvalidAuthorizationResponse
-from src.exceptions import CustomException
+from src.api.common import InvalidRequestResponseSpec, MissingOrInvalidAuthorizationResponseSpec
+from src.exceptions import ReasonException
 from src.models import File
 from src.types import Request, State
 
-from .common import FilenameParameter, FileNotFoundResponse, UserIdParameter
+from .common import FilenameParameter, FileNotFoundResponseSpec, UserIdParameter
 
 
 __all__ = ["delete_file"]
@@ -21,9 +21,9 @@ __all__ = ["delete_file"]
             data_container=None, generate_examples=False,
             description="The file was deleted.",
         ),
-        400: InvalidRequestResponse,
-        401: MissingOrInvalidAuthorizationResponse,
-        404: FileNotFoundResponse,
+        400: InvalidRequestResponseSpec,
+        401: MissingOrInvalidAuthorizationResponseSpec,
+        404: FileNotFoundResponseSpec,
     }
 )
 async def delete_file(
@@ -33,12 +33,12 @@ async def delete_file(
     filename: FilenameParameter
 ) -> None:
     file = await File.get(
-        state.database,
+        state.postgresql,
         user_id=user_id, name=filename
     )
     if (file is None) or (file.user_id != request.user.id):
-        raise CustomException(
+        raise ReasonException(
             HTTP_404_NOT_FOUND,
             reason="The specified file does not exist."
         )
-    await file.delete(state.database)
+    await file.delete(state.postgresql)
