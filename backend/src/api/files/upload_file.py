@@ -11,7 +11,7 @@ from litestar.openapi import ResponseSpec
 from litestar.params import Body
 from litestar.status_codes import HTTP_409_CONFLICT
 
-from src.api.common import InvalidRequestResponse, NotAuthenticatedResponse
+from src.api.common import InvalidRequestResponse, MissingOrInvalidAuthorizationResponse
 from src.config import CONFIG
 from src.enums import Environment
 from src.exceptions import CustomException, ExceptionData
@@ -47,14 +47,15 @@ class UploadFileData(pydantic.BaseModel):
 
 
 @post(
-    "/",
+    path="/",
+    summary="Upload File",
     responses={
         201: ResponseSpec(
             data_container=File, generate_examples=False,
             description="The file was uploaded successfully.",
         ),
         400: InvalidRequestResponse,
-        401: NotAuthenticatedResponse,
+        401: MissingOrInvalidAuthorizationResponse,
         409: ResponseSpec(
             data_container=ExceptionData, generate_examples=False,
             description="You already have a file with that name.",

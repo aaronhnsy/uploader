@@ -26,8 +26,9 @@ class CreateTokenData(pydantic.BaseModel):
 
 
 @post(
-    "/",
+    path="/",
     exclude_from_auth=True,
+    summary="Create Token",
     responses={
         400: InvalidRequestResponse,
     }

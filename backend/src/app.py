@@ -49,7 +49,7 @@ uploader = Litestar(
                     type="apiKey",
                     name="Authorization",
                     security_scheme_in="header",
-                )
+                ),
             },
         ),
     ),

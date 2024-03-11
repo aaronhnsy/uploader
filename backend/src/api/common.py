@@ -5,20 +5,15 @@ from src.exceptions import ExceptionData
 
 __all__ = [
     "InvalidRequestResponse",
-    "UserNotFoundOrPasswordNotMatchedResponse",
-    "NotAuthenticatedResponse",
+    "MissingOrInvalidAuthorizationResponse",
 ]
 
 
 InvalidRequestResponse: ResponseSpec = ResponseSpec(
     data_container=ExceptionData, generate_examples=False,
-    description="Your request was invalid.",
+    description="Your request is invalid. Check the response `reason` for more information."
 )
-UserNotFoundOrPasswordNotMatchedResponse: ResponseSpec = ResponseSpec(
+MissingOrInvalidAuthorizationResponse: ResponseSpec = ResponseSpec(
     data_container=ExceptionData, generate_examples=False,
-    description="The user was not found or the password did not match.",
-)
-NotAuthenticatedResponse: ResponseSpec = ResponseSpec(
-    data_container=ExceptionData, generate_examples=False,
-    description="You are not authenticated.",
+    description="This endpoint requires authentication. Provide a valid `Authorization` header."
 )

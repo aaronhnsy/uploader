@@ -1,11 +1,9 @@
-import itsdangerous
 from litestar.middleware import AbstractAuthenticationMiddleware, AuthenticationResult, DefineMiddleware
 from litestar.status_codes import HTTP_401_UNAUTHORIZED
 
 from src.exceptions import CustomException
 from src.models import User
 from src.types import Connection
-from src.utilities import unsign_token
 
 
 __all__ = ["AuthenticationMiddleware"]

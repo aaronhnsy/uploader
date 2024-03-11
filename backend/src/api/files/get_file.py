@@ -2,7 +2,7 @@ from litestar import get
 from litestar.openapi import ResponseSpec
 from litestar.status_codes import HTTP_404_NOT_FOUND
 
-from src.api.common import InvalidRequestResponse, NotAuthenticatedResponse
+from src.api.common import InvalidRequestResponse, MissingOrInvalidAuthorizationResponse
 from src.exceptions import CustomException
 from src.models import File
 from src.types import Request, State
@@ -14,14 +14,15 @@ __all__ = ["get_file"]
 
 
 @get(
-    "/{user_id:str}/{filename:str}",
+    path="/{user_id:str}/{filename:str}",
+    summary="Get File",
     responses={
         200: ResponseSpec(
             data_container=File, generate_examples=False,
             description="The file was found.",
         ),
         400: InvalidRequestResponse,
-        401: NotAuthenticatedResponse,
+        401: MissingOrInvalidAuthorizationResponse,
         404: FileNotFoundResponse,
     }
 )

@@ -64,13 +64,12 @@ class User(pydantic.BaseModel):
 
     @classmethod
     async def fetch_with_id(
-        cls, database: Database,
-        /, *,
-        id: str
+        cls, database: Database, _id: str, /
+
     ) -> User:
         data: asyncpg.Record | None = await database.fetchrow(
             "SELECT id, name, bot, permissions, profile_picture FROM users WHERE id = $1",
-            id
+            _id
         )
         if data is None:
             raise CustomException(
