@@ -7,7 +7,7 @@ export async function HeaderAccountButton() {
     let user = await useUser();
     if (user !== null) {
         return (
-            <Link href={"/"}
+            <Link href={"/account"}
                   className={clsx(
                       "c-button", "h-10",
                       "px-3", "space-x-3", "mr-3", "sm:order-1",

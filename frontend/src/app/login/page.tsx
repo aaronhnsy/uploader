@@ -6,22 +6,9 @@ export default async function Page() {
     if (user !== null) {
         return (
             <div className={clsx("flex-1", "flex", "items-center", "justify-center")}>
-                <div className={clsx(
-                    "flex", "flex-col", "items-center", "justify-center",
-                    "p-3", "max-w-96", "space-y-3",
-                    "bg-colour-primary", "rounded",
-                )}>
-                    <h1 className={clsx("font-bold", "text-2xl", "text-gray-100")}>
-                        Welcome, {user.name}
-                    </h1>
-                    <a className={clsx(
-                        "c-button", "h-10",
-                        "font-bold", "text-md", "text-gray-900", "hover:text-gray-950",
-                        "bg-colour-accent-primary", "hover:bg-colour-accent-secondary",
-                        "u-ring-primary", "u-transition",
-                    )} href="/logout">Logout
-                    </a>
-                </div>
+                <h1 className="font-bold text-lg text-gray-900 dark:text-gray-100">
+                    You are already logged in
+                </h1>
             </div>
         );
     }
