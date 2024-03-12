@@ -12,14 +12,14 @@ __all__ = [
     "FileNotFoundResponseSpec",
 ]
 
-type UserIdParameter = Annotated[
+UserIdParameter = Annotated[
     str,
     Parameter(
         min_length=16, max_length=16,
         description="The file owner's user id.",
     )
 ]
-type FilenameParameter = Annotated[
+FilenameParameter = Annotated[
     str,
     Parameter(
         min_length=1, max_length=255,

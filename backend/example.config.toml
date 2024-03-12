@@ -2,8 +2,8 @@
 environment = "PRODUCTION"
 
 [storage]
-postgres_dsn = "postgres://user:password@host:port/db-name"
-redis_dsn = "redis://host:port/db"
+postgres_dsn = "postgres://username:password@host:5432/database"
+redis_dsn = "redis://username:password@host:6379/database"
 
 [security]
 itsdangerous_secret = "SECRET_KEY"
