@@ -8,8 +8,8 @@ from litestar.status_codes import HTTP_401_UNAUTHORIZED
 
 from src.enums import Permissions
 from src.exceptions import ReasonException
+from src.security import verify_password
 from src.types import PostgreSQL
-from src.utilities import verify_password
 
 
 __all__ = ["User"]
@@ -63,10 +63,7 @@ class User(pydantic.BaseModel):
         return User.model_validate({**data})
 
     @classmethod
-    async def fetch_with_id(
-        cls, database: PostgreSQL, _id: str, /
-
-    ) -> User:
+    async def fetch_with_id(cls, database: PostgreSQL, _id: str, /) -> User:
         data: asyncpg.Record | None = await database.fetchrow(
             "SELECT id, name, bot, permissions, profile_picture FROM users WHERE id = $1",
             _id

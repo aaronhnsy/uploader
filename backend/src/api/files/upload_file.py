@@ -15,7 +15,7 @@ from src.api.common import InvalidRequestResponseSpec, MissingOrInvalidAuthoriza
 from src.config import CONFIG
 from src.enums import Environment
 from src.exceptions import Error, ReasonException
-from src.models import File
+from src.objects import File
 from src.types import Request, State
 from src.utilities import generate_id
 

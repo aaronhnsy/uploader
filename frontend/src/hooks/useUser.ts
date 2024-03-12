@@ -1,15 +1,15 @@
 import { cookies } from "next/headers";
 
-export async function useSession() {
-    let sessionId = cookies().get("__session_id");
-    if (sessionId === undefined) {
+export async function useUser() {
+    let token = cookies().get("__token");
+    if (token === undefined) {
         return null;
     }
     const response = await fetch(
         "http://localhost:8000/api/users/@me",
         {
             method: "GET",
-            headers: {Cookie: cookies().toString()},
+            headers: {"Authorization": `${token.value}`},
         },
     );
     if (response.ok) {

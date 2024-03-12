@@ -6,7 +6,7 @@ from litestar.params import Body
 
 from src.api.common import InvalidRequestResponseSpec, MissingOrInvalidAuthorizationResponseSpec
 from src.exceptions import Error
-from src.models import User
+from src.objects import User
 from src.types import State
 
 

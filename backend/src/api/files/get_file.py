@@ -4,7 +4,7 @@ from litestar.status_codes import HTTP_404_NOT_FOUND
 
 from src.api.common import InvalidRequestResponseSpec, MissingOrInvalidAuthorizationResponseSpec
 from src.exceptions import ReasonException
-from src.models import File
+from src.objects import File
 from src.types import Request, State
 
 from .common import FilenameParameter, FileNotFoundResponseSpec, UserIdParameter

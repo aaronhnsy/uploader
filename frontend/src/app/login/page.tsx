@@ -1,10 +1,9 @@
 import { clsx } from "clsx";
-import { login } from "./login";
-import { useSession } from "@/src/hooks/session";
+import { useUser } from "@/src/hooks/useUser";
 
 export default async function Page() {
-    let session = await useSession();
-    if (session !== null) {
+    let user = await useUser();
+    if (user !== null) {
         return (
             <div className={clsx("flex-1", "flex", "items-center", "justify-center")}>
                 <div className={clsx(
@@ -13,7 +12,7 @@ export default async function Page() {
                     "bg-colour-primary", "rounded",
                 )}>
                     <h1 className={clsx("font-bold", "text-2xl", "text-gray-100")}>
-                        Welcome, {session.username}
+                        Welcome, {user.name}
                     </h1>
                     <a className={clsx(
                         "c-button", "h-10",
@@ -32,7 +31,7 @@ export default async function Page() {
                 "flex", "flex-col", "grow",
                 "p-3", "max-w-96",
                 "bg-colour-primary", "rounded",
-            )} action={login} >
+            )} action="/api/login" method="post">
                 <div className={clsx("flex", "flex-col", "space-y-2", "mb-3")}>
                     <label className={clsx("font-bold", "text-md", "text-gray-100")} htmlFor="username">
                         Username

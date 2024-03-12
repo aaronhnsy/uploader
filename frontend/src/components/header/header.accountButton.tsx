@@ -1,11 +1,11 @@
 import Link from "next/link";
 import Image from "next/image";
 import { clsx } from "clsx";
-import { useSession } from "@/src/hooks/session";
+import { useUser } from "@/src/hooks/useUser";
 
 export async function HeaderAccountButton() {
-    let session = await useSession();
-    if (session !== null) {
+    let user = await useUser();
+    if (user !== null) {
         return (
             <Link href={"/"}
                   className={clsx(
@@ -16,8 +16,8 @@ export async function HeaderAccountButton() {
                       "hover:bg-colour-background-hover",
                       "u-ring-accent", "u-transition",
                   )}>
-                <Image className="rounded-full" src={session.profile_picture} alt={"profile picture"} width="32" height="32"></Image>
-                <p>{session.name}</p>
+                <Image className="rounded-full" src={user.profile_picture} alt={"profile picture"} width="32" height="32"></Image>
+                <p>{user.name}</p>
             </Link>
         );
     }
