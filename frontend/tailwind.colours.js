@@ -8,8 +8,8 @@ export const accentColours = {
             "hover": colors.red[600],
         },
         "dark": {
-            "main": colors.red[600],
-            "hover": colors.red[500],
+            "main": colors.red[500],
+            "hover": colors.red[600],
         },
     },
     "orange": {
@@ -19,7 +19,7 @@ export const accentColours = {
         },
         "dark": {
             "main": colors.orange[600],
-            "hover": colors.orange[500],
+            "hover": colors.orange[700],
         },
     },
     "yellow": {
@@ -29,7 +29,7 @@ export const accentColours = {
         },
         "dark": {
             "main": colors.yellow[500],
-            "hover": colors.yellow[400],
+            "hover": colors.yellow[600],
         },
     },
     "green": {
@@ -39,7 +39,7 @@ export const accentColours = {
         },
         "dark": {
             "main": colors.green[500],
-            "hover": colors.green[400],
+            "hover": colors.green[600],
         },
     },
     "blue": {
@@ -58,8 +58,8 @@ export const accentColours = {
             "hover": colors.purple[600],
         },
         "dark": {
-            "main": colors.purple[600],
-            "hover": colors.purple[500],
+            "main": colors.purple[500],
+            "hover": colors.purple[600],
         },
     },
 };

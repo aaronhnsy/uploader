@@ -6,6 +6,7 @@
     .c-button {
         @apply inline-flex items-center justify-center rounded
     }
+
     .c-button-left-aligned {
         @apply inline-flex items-center justify-normal rounded
     }
@@ -14,5 +15,30 @@
 @layer utilities {
     .u-transition {
         @apply transition ease-in-out duration-[300ms];
+    }
+}
+
+html {
+    --scrollbar-color-track: rgb(var(--theme-secondary));
+    --scrollbar-color-thumb: rgb(var(--theme-accent));
+    --scrollbar-width: auto;
+    --scrollbar-width-legacy: 10px;
+
+    @supports (scrollbar-width: auto) {
+        scrollbar-color: var(--scrollbar-color-thumb) var(--scrollbar-color-track);
+        scrollbar-width: var(--scrollbar-width);
+    }
+    @supports selector(::-webkit-scrollbar) {
+        .-webkit-scrollbar-thumb {
+            background: var(--scrollbar-color-thumb);
+            border-radius: 5px;
+        }
+        .-webkit-scrollbar-track {
+            background: var(--scrollbar-color-track);
+        }
+        .-webkit-scrollbar {
+            max-width: var(--scrollbar-width-legacy);
+            max-height: var(--scrollbar-width-legacy);
+        }
     }
 }
