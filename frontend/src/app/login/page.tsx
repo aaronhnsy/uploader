@@ -6,7 +6,7 @@ export default async function Page() {
     if (user !== null) {
         return (
             <div className={clsx("flex-1", "flex", "items-center", "justify-center")}>
-                <h1 className={clsx("font-bold", "text-lg", "text-theme-text")}>
+                <h1 className={clsx("font-bold", "text-lg", "text-theme-text", "u-transition")}>
                     You are already logged in!
                 </h1>
             </div>
@@ -48,7 +48,8 @@ export default async function Page() {
                     "font-bold", "text-md",
                     "text-gray-800", "hover:text-gray-900",
                     "u-transition",
-                )} type="submit">Login
+                )} type="submit">
+                    Login
                 </button>
             </form>
         </div>

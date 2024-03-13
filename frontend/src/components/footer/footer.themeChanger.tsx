@@ -36,12 +36,12 @@ export function ThemeChanger() {
     // buttons
     return (
         <div className={clsx("space-y-2")}>
-            <div className={clsx("flex", "flex-wrap", "flex-row-reverse", "gap-2", "p-2", "rounded", "bg-theme-secondary-hover")}>
+            <div className={clsx("flex", "flex-wrap", "flex-row-reverse", "gap-2", "p-2", "rounded", "bg-theme-secondary-hover", "u-transition")}>
                 {Object.keys(modes).map(
                     (key) => (<ThemeButton colour={colour} value={key} setValue={setMode} key={key}/>),
                 )}
             </div>
-            <div className={clsx("flex", "flex-wrap", "flex-row-reverse", "gap-2", "p-2", "rounded", "bg-theme-secondary-hover")}>
+            <div className={clsx("flex", "flex-wrap", "flex-row-reverse", "gap-2", "p-2", "rounded", "bg-theme-secondary-hover", "u-transition")}>
                 {Object.keys(colours).map(
                     (key) => (<ThemeButton mode={mode} value={key} setValue={setColour} key={key}/>),
                 )}
