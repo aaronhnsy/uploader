@@ -27,7 +27,7 @@ export default async function Page() {
                     <input className={clsx(
                         "p-2",
                         "font-semibold", "text-sm", "text-theme-text",
-                        "bg-theme-secondary-hover", "rounded",
+                        "bg-theme-tertiary", "rounded",
                         "u-transition"
                     )} id="username" type="text" name="username"/>
                 </div>
@@ -38,7 +38,7 @@ export default async function Page() {
                     <input className={clsx(
                         "p-2",
                         "font-semibold", "text-sm", "text-theme-text",
-                        "bg-theme-secondary-hover", "rounded",
+                        "bg-theme-tertiary", "rounded",
                         "u-transition"
                     )} id="password" type="password" name="password"/>
                 </div>
