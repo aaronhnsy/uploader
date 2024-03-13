@@ -4,62 +4,62 @@ const {parseColor} = require("tailwindcss/lib/util/color");
 export const accentColours = {
     "red": {
         "light": {
-            "primary": colors.red[500],
-            "secondary": colors.red[600],
+            "main": colors.red[500],
+            "hover": colors.red[600],
         },
         "dark": {
-            "primary": colors.red[500],
-            "secondary": colors.red[600],
+            "main": colors.red[600],
+            "hover": colors.red[500],
         },
     },
     "orange": {
         "light": {
-            "primary": colors.orange[500],
-            "secondary": colors.orange[600],
+            "main": colors.orange[500],
+            "hover": colors.orange[600],
         },
         "dark": {
-            "primary": colors.orange[500],
-            "secondary": colors.orange[600],
+            "main": colors.orange[600],
+            "hover": colors.orange[500],
         },
     },
     "yellow": {
         "light": {
-            "primary": colors.yellow[500],
-            "secondary": colors.yellow[600],
+            "main": colors.yellow[500],
+            "hover": colors.yellow[600],
         },
         "dark": {
-            "primary": colors.yellow[400],
-            "secondary": colors.yellow[500],
+            "main": colors.yellow[500],
+            "hover": colors.yellow[400],
         },
     },
     "green": {
         "light": {
-            "primary": colors.green[500],
-            "secondary": colors.green[600],
+            "main": colors.green[500],
+            "hover": colors.green[600],
         },
         "dark": {
-            "primary": colors.green[400],
-            "secondary": colors.green[500],
+            "main": colors.green[500],
+            "hover": colors.green[400],
         },
     },
     "blue": {
         "light": {
-            "primary": colors.blue[500],
-            "secondary": colors.blue[600],
+            "main": colors.blue[500],
+            "hover": colors.blue[600],
         },
         "dark": {
-            "primary": colors.blue[500],
-            "secondary": colors.blue[600],
+            "main": colors.blue[600],
+            "hover": colors.blue[500],
         },
     },
     "purple": {
         "light": {
-            "primary": colors.purple[500],
-            "secondary": colors.purple[600],
+            "main": colors.purple[500],
+            "hover": colors.purple[600],
         },
         "dark": {
-            "primary": colors.purple[500],
-            "secondary": colors.purple[600],
+            "main": colors.purple[600],
+            "hover": colors.purple[500],
         },
     },
 };
@@ -79,8 +79,8 @@ export const accentColourHtmlSelectors = Object.entries(accentColours).reduce(
                     return {
                         ...themeAcc,
                         [`html[data-theme='${theme}-${colour}']`]: {
-                            "--colour-accent-primary": toRgb(variations.primary),
-                            "--colour-accent-secondary": toRgb(variations.secondary),
+                            "--theme-accent": toRgb(variations.main),
+                            "--theme-accent-hover": toRgb(variations.hover),
                         },
                     };
                 }, {},

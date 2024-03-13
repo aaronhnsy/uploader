@@ -11,12 +11,12 @@ export async function HeaderAccountButton() {
                   className={clsx(
                       "c-button", "h-10",
                       "px-3", "space-x-3", "mr-3", "sm:order-1",
+                      "bg-theme-secondary", "hover:bg-theme-secondary-hover",
                       "font-bold", "text-md",
-                      "text-gray-900", "dark:text-gray-100", "hover:text-gray-950", "dark:hover:text-gray-300",
-                      "hover:bg-colour-background-hover",
-                      "u-ring-accent", "u-transition",
+                      "text-theme-text", "hover:text-theme-text-hover",
+                      "u-transition",
                   )}>
-                <Image className="rounded-full" src={user.profile_picture} alt={"profile picture"} width="32" height="32"></Image>
+                <Image className={clsx("rounded-full")} src={user.profile_picture} alt={"profile picture"} width="32" height="32"></Image>
                 <p>{user.name}</p>
             </Link>
         );
@@ -26,9 +26,10 @@ export async function HeaderAccountButton() {
               className={clsx(
                   "c-button", "h-10",
                   "px-3", "sm:order-1",
-                  "font-bold", "text-sm", "text-gray-900", "hover:text-gray-950",
-                  "bg-colour-accent-primary", "hover:bg-colour-accent-secondary",
-                  "u-ring-primary", "u-transition",
+                  "bg-theme-accent", "hover:bg-theme-accent-hover",
+                  "font-bold", "text-sm",
+                  "text-gray-800", "hover:text-gray-900",
+                  "u-transition",
               )}>
             <p>Login</p>
         </Link>

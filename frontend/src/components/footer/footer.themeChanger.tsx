@@ -3,6 +3,7 @@
 import { useTheme } from "next-themes";
 import React, { useState } from "react";
 import ThemeButton from "./footer.themeButton";
+import { clsx } from "clsx";
 
 export const modes = {
     "light": "bg-gray-200 hover:bg-gray-400",
@@ -34,13 +35,13 @@ export function ThemeChanger() {
     const [colour, setColour] = useState(theme?.split("-")[1] ?? "yellow");
     // buttons
     return (
-        <div className="space-y-2">
-            <div className="flex flex-wrap flex-row-reverse gap-3 p-2 rounded bg-colour-secondary">
+        <div className={clsx("space-y-2")}>
+            <div className={clsx("flex", "flex-wrap", "flex-row-reverse", "gap-2", "p-2", "rounded", "bg-theme-secondary-hover")}>
                 {Object.keys(modes).map(
                     (key) => (<ThemeButton colour={colour} value={key} setValue={setMode} key={key}/>),
                 )}
             </div>
-            <div className="flex flex-wrap flex-row-reverse gap-3 p-2 rounded bg-colour-secondary">
+            <div className={clsx("flex", "flex-wrap", "flex-row-reverse", "gap-2", "p-2", "rounded", "bg-theme-secondary-hover")}>
                 {Object.keys(colours).map(
                     (key) => (<ThemeButton mode={mode} value={key} setValue={setColour} key={key}/>),
                 )}

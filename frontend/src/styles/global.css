@@ -6,16 +6,13 @@
     .c-button {
         @apply inline-flex items-center justify-center rounded
     }
+    .c-button-left-aligned {
+        @apply inline-flex items-center justify-normal rounded
+    }
 }
 
 @layer utilities {
-    .u-ring-primary {
-        @apply focus:outline-none focus:ring focus:ring-colour-primary focus:hover:ring-colour-secondary
-    }
-    .u-ring-accent {
-        @apply focus:outline-none focus:ring focus:ring-colour-accent-primary focus:hover:ring-colour-accent-secondary
-    }
     .u-transition {
-        @apply transition ease-in-out duration-[250ms];
+        @apply transition ease-in-out duration-[300ms];
     }
 }

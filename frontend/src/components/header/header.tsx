@@ -6,15 +6,15 @@ import { HeaderAccountButton } from "./header.accountButton";
 
 export function Header() {
     return (
-        <nav className="flex flex-wrap">
+        <nav className={clsx("flex", "flex-wrap")}>
             <Link href={"/"}
                   className={clsx(
-                      "c-button", "h-10",
-                      "px-3", "space-x-3", "mr-3",
-                      "font-bold", "text-lg", "text-gray-100", "hover:text-gray-300",
-                      "bg-colour-primary", "hover:bg-colour-secondary",
-                      "fill-colour-accent-primary", "hover:fill-colour-accent-secondary",
-                      "u-ring-accent", "u-transition",
+                      "c-button", "h-10", "px-3", "mr-3", "space-x-3",
+                      "bg-theme-secondary", "hover:bg-theme-secondary-hover",
+                      "fill-theme-accent", "hover:fill-theme-accent-hover",
+                      "font-bold", "text-lg",
+                      "text-theme-text", "hover:text-theme-text-hover",
+                      "u-transition",
                   )}>
                 {headerLogoIcon}
                 <p>Uploader</p>

@@ -5,22 +5,29 @@ export default async function Page() {
     let user = await useUser();
     return (
         <div className={clsx("flex-1", "flex", "items-center", "justify-center")}>
-            <h1 className="font-bold text-lg text-gray-900 dark:text-gray-100">
-                {user !== null
-                    ? (<>
-                        Welcome, {user.name}
+            {user !== null
+                ? (
+                    <div className={clsx("flex", "flex-col", "space-y-3")}>
+                        <h1 className={clsx("font-bold", "text-lg", "text-theme-text")}>
+                            Welcome, {user.name}
+                        </h1>
                         <button className={clsx(
                             "c-button", "h-10", "px-3",
-                            "font-bold", "text-md", "text-gray-900", "hover:text-gray-950",
-                            "bg-colour-accent-primary", "hover:bg-colour-accent-secondary",
-                            "u-ring-primary", "u-transition",
+                            "bg-theme-accent", "hover:bg-theme-accent-hover",
+                            "font-bold", "text-sm",
+                            "text-gray-800", "hover:text-gray-900",
+                            "u-transition",
                         )} type="button">
                             Logout
                         </button>
-                    </>)
-                    : ("You are already logged in")
-                }
-            </h1>
+                    </div>
+                )
+                : (
+                    <h1 className={clsx("font-bold", "text-lg", "text-theme-text")}>
+                        You are already logged in
+                    </h1>
+                )
+            }
         </div>
     );
 }

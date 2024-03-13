@@ -1,9 +1,10 @@
 import { ThemeChanger } from "./footer.themeChanger";
+import { clsx } from "clsx";
 
 export function Footer() {
     return (
-        <footer className="flex justify-between items-center p-2 bg-colour-primary rounded">
-            <p className="font-medium text-md text-gray-100">Made by Axelancerr</p>
+        <footer className={clsx("flex", "justify-between", "items-center", "p-2", "bg-theme-secondary", "rounded")}>
+            <p className={clsx("font-semibold", "text-md", "text-theme-text")}>aaronhnsy</p>
             <ThemeChanger/>
         </footer>
     );

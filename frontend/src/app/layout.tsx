@@ -20,19 +20,19 @@ export const metadata: Metadata = {
 export default function Layout({children}: { children: React.ReactNode }) {
     return (
         <html suppressHydrationWarning className={inter.variable} lang="en">
-        <body className="bg-colour-background u-transition">
-        <Providers>
-            <div className={clsx(
-                "container",
-                "flex", "flex-col",
-                "min-h-dvh", "mx-auto", "p-3", "space-y-3",
-            )}>
-                <Header/>
-                {children}
-                <Footer/>
-            </div>
-        </Providers>
-        </body>
+            <body className={clsx("bg-theme-primary", "u-transition")}>
+                <Providers>
+                    <div className={clsx(
+                        "container",
+                        "flex", "flex-col",
+                        "min-h-dvh", "mx-auto", "p-3", "space-y-3",
+                    )}>
+                        <Header/>
+                        {children}
+                        <Footer/>
+                    </div>
+                </Providers>
+            </body>
         </html>
     );
 }

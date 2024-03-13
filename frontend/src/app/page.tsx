@@ -1,7 +1,9 @@
+import { clsx } from "clsx";
+
 export default function Page() {
     return (
-        <div className="flex-1 flex items-center justify-center">
-            <h1 className="font-bold text-lg text-gray-900 dark:text-gray-100">
+        <div className={clsx("flex-1", "flex", "items-center", "justify-center")}>
+            <h1 className={clsx("font-bold", "text-lg", "text-theme-text")}>
                 Home
             </h1>
         </div>
