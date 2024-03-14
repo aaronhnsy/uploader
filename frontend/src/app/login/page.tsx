@@ -5,7 +5,7 @@ export default async function Page() {
     let user = await useUser();
     if (user !== null) {
         return (
-            <div className={clsx("flex-1", "flex", "items-center", "justify-center")}>
+            <div className={clsx("u-centered")}>
                 <h1 className={clsx("font-bold", "text-lg", "text-theme-text", "u-transition")}>
                     You are already logged in!
                 </h1>
@@ -13,7 +13,7 @@ export default async function Page() {
         );
     }
     return (
-        <div className={clsx("flex-1", "flex", "items-center", "justify-center")}>
+        <div className={clsx("u-centered")}>
             <form className={clsx(
                 "flex", "flex-col", "grow",
                 "p-3", "max-w-96",

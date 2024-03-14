@@ -13,6 +13,9 @@
 }
 
 @layer utilities {
+    .u-centered {
+        @apply flex-1 flex items-center justify-center
+    }
     .u-transition {
         @apply transition ease-in-out duration-[300ms];
     }
@@ -33,4 +36,5 @@ html {
             background: var(--scrollbar-color-track);
         }
     }
+
 }

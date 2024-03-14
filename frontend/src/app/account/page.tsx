@@ -4,7 +4,7 @@ import { clsx } from "clsx";
 export default async function Page() {
     let user = await useUser();
     return (
-        <div className={clsx("flex-1", "flex", "items-center", "justify-center")}>
+        <div className={clsx("u-centered")}>
             {user !== null
                 ? (
                     <div className={clsx("flex", "flex-col", "space-y-3")}>

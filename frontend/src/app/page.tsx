@@ -2,7 +2,7 @@ import { clsx } from "clsx";
 
 export default function Page() {
     return (
-        <div className={clsx("flex-1", "flex", "items-center", "justify-center")}>
+        <div className={clsx("u-centered")}>
             <h1 className={clsx("font-bold", "text-lg", "text-theme-text", "u-transition")}>
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam vehicula est et lectus suscipit tempor.
                 Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.

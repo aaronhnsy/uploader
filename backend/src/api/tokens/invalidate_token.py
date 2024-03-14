@@ -1,4 +1,3 @@
-import secrets
 from typing import Annotated
 
 import itsdangerous
@@ -9,13 +8,12 @@ from litestar.params import Body
 from litestar.status_codes import HTTP_400_BAD_REQUEST
 
 from src.api.common import InvalidRequestResponseSpec
-from src.exceptions import Error, ReasonException
-from src.objects import User
-from src.security import sign_token, unsign_token
+from src.exceptions import ReasonException
+from src.security import unsign_token
 from src.types import State
 
 
-__all__ = ["create_token"]
+__all__ = ["invalidate_token"]
 
 
 class InvalidateTokenRequest(pydantic.BaseModel):

@@ -1,4 +1,4 @@
-import { Providers } from "@/app/providers";
+import { Theme } from "@/app/theme";
 import { Footer } from "@/components/footer";
 import { Header } from "@/components/header";
 import "@/styles/global.css";
@@ -14,14 +14,14 @@ const inter = Inter({
 
 export const metadata: Metadata = {
     title: "Uploader",
-    description: "Uploader",
+    description: "Upload, view, and share files with Uploader",
 };
 
 export default function Layout({children}: { children: React.ReactNode }) {
     return (
         <html suppressHydrationWarning className={inter.variable} lang="en">
         <body className={clsx("bg-theme-primary", "u-transition")}>
-        <Providers>
+        <Theme>
             <div className={clsx(
                 "container",
                 "flex", "flex-col",
@@ -31,7 +31,7 @@ export default function Layout({children}: { children: React.ReactNode }) {
                 {children}
                 <Footer/>
             </div>
-        </Providers>
+        </Theme>
         </body>
         </html>
     );
