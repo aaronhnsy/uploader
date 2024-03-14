@@ -1,6 +1,6 @@
 "use client";
 
-import { themes } from "@/src/components/footer/footer.themeChanger";
+import { themes } from "@/components/footer/footer.themeChanger";
 import { ThemeProvider } from "next-themes";
 import React from "react";
 

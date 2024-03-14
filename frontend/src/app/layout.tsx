@@ -1,7 +1,7 @@
-import { Providers } from "@/src/app/providers";
-import { Footer } from "@/src/components/footer";
-import { Header } from "@/src/components/header";
-import "@/src/styles/global.css";
+import { Providers } from "@/app/providers";
+import { Footer } from "@/components/footer";
+import { Header } from "@/components/header";
+import "@/styles/global.css";
 import { clsx } from "clsx";
 import { Metadata } from "next";
 import { Inter } from "next/font/google";

@@ -1,7 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { clsx } from "clsx";
-import { useUser } from "@/src/hooks/useUser";
+import { useUser } from "@/hooks/useUser";
 
 export async function HeaderAccountButton() {
     let user = await useUser();
