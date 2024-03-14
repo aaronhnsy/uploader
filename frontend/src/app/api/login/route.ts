@@ -1,6 +1,6 @@
-import { NextRequest, userAgent } from "next/server";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
+import { NextRequest, userAgent } from "next/server";
 
 export async function POST(request: NextRequest) {
     let formData = await request.formData();

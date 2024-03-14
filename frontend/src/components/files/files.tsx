@@ -26,8 +26,7 @@ export function FileGrid({files}: { files: File[] }) {
                                            style={{width: "100%", height: "auto"}}
                                            autoPlay={true}
                                            controls={false}
-                                           muted={true}
-                                    />
+                                           muted={true}/>
                                 );
                             default:
                                 return (
@@ -37,8 +36,7 @@ export function FileGrid({files}: { files: File[] }) {
                                            key={file.name}
                                            width={0}
                                            height={0}
-                                           sizes={"100vw"}
-                                    />
+                                           sizes={"100vw"}/>
                                 );
                         }
                     }

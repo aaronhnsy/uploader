@@ -1,5 +1,5 @@
-import { clsx } from "clsx";
 import { useUser } from "@/hooks/useUser";
+import { clsx } from "clsx";
 
 export default async function Page() {
     let user = await useUser();
@@ -18,28 +18,30 @@ export default async function Page() {
                 "flex", "flex-col", "grow",
                 "p-3", "max-w-96",
                 "bg-theme-secondary", "rounded",
-                "u-transition"
+                "u-transition",
             )} action="/api/login" method="post">
                 <div className={clsx("flex", "flex-col", "space-y-2", "mb-3")}>
-                    <label className={clsx("font-bold", "text-md", "text-theme-text", "u-transition")} htmlFor="username">
+                    <label className={clsx("font-bold", "text-md", "text-theme-text", "u-transition")}
+                           htmlFor="username">
                         Username
                     </label>
                     <input className={clsx(
                         "p-2",
                         "font-semibold", "text-sm", "text-theme-text",
                         "bg-theme-tertiary", "rounded",
-                        "u-transition"
+                        "u-transition",
                     )} id="username" type="text" name="username"/>
                 </div>
                 <div className={clsx("flex", "flex-col", "space-y-2", "mb-3")}>
-                    <label className={clsx("font-bold", "text-md", "text-theme-text", "u-transition")} htmlFor="password">
+                    <label className={clsx("font-bold", "text-md", "text-theme-text", "u-transition")}
+                           htmlFor="password">
                         Password
                     </label>
                     <input className={clsx(
                         "p-2",
                         "font-semibold", "text-sm", "text-theme-text",
                         "bg-theme-tertiary", "rounded",
-                        "u-transition"
+                        "u-transition",
                     )} id="password" type="password" name="password"/>
                 </div>
                 <button className={clsx(

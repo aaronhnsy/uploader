@@ -1,8 +1,8 @@
 import { clsx } from "clsx";
 import Link from "next/link";
+import { HeaderAccountButton } from "./header.accountButton";
 import { headerLogoIcon } from "./header.icons";
 import { HeaderLinkBar } from "./header.linkBar";
-import { HeaderAccountButton } from "./header.accountButton";
 
 export function Header() {
     return (

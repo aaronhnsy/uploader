@@ -1,5 +1,5 @@
-import { ThemeChanger } from "./footer.themeChanger";
 import { clsx } from "clsx";
+import { ThemeChanger } from "./footer.themeChanger";
 
 export function Footer() {
     return (

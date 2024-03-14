@@ -1,9 +1,9 @@
 "use client";
 
+import { clsx } from "clsx";
 import { useTheme } from "next-themes";
 import React, { useState } from "react";
 import ThemeButton from "./footer.themeButton";
-import { clsx } from "clsx";
 
 export const modes = {
     "light": "bg-gray-200 hover:bg-gray-400",

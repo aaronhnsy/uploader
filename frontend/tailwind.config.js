@@ -1,6 +1,6 @@
 const plugin = require("tailwindcss/plugin");
 const colors = require("tailwindcss/colors");
-const {accentColourHtmlSelectors, toRgb} = require("./tailwind.colours");
+const { accentColourHtmlSelectors, toRgb } = require("./tailwind.colours");
 
 /**
  * @type {import("tailwindcss").Config}
@@ -10,7 +10,7 @@ module.exports = {
     darkMode: ["class", "[data-theme*='dark']"],
     theme: {
         fontFamily: {
-            sans: ["var(--font-inter)"]
+            sans: ["var(--font-inter)"],
         },
         extend: {
             colors: {
@@ -24,12 +24,12 @@ module.exports = {
                 "theme-text-hover": "rgb(var(--theme-text-hover) / <alpha-value>)",
                 "theme-accent": "rgb(var(--theme-accent) / <alpha-value>)",
                 "theme-accent-hover": "rgb(var(--theme-accent-hover) / <alpha-value>)",
-            }
-        }
+            },
+        },
     },
     plugins: [
         plugin(
-            function ({addBase}) {
+            function ({ addBase }) {
                 addBase({
                     "html[data-theme*='light']": {
                         "--theme-primary": toRgb(colors.neutral[100]),

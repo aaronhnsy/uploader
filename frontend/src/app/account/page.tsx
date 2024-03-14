@@ -1,5 +1,5 @@
-import { clsx } from "clsx";
 import { useUser } from "@/hooks/useUser";
+import { clsx } from "clsx";
 
 export default async function Page() {
     let user = await useUser();

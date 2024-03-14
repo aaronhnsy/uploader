@@ -1,7 +1,7 @@
-import Link from "next/link";
-import Image from "next/image";
-import { clsx } from "clsx";
 import { useUser } from "@/hooks/useUser";
+import { clsx } from "clsx";
+import Image from "next/image";
+import Link from "next/link";
 
 export async function HeaderAccountButton() {
     let user = await useUser();
@@ -16,7 +16,8 @@ export async function HeaderAccountButton() {
                       "text-theme-text", "hover:text-theme-text-hover",
                       "u-transition",
                   )}>
-                <Image className={clsx("rounded-full")} src={user.profile_picture} alt={"profile picture"} width="32" height="32"></Image>
+                <Image className={clsx("rounded-full")} src={user.profile_picture}
+                       alt={"profile picture"} width="32" height="32"/>
                 <p>{user.name}</p>
             </Link>
         );

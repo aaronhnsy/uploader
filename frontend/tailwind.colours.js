@@ -1,5 +1,5 @@
 const colors = require("tailwindcss/colors");
-const {parseColor} = require("tailwindcss/lib/util/color");
+const { parseColor } = require("tailwindcss/lib/util/color");
 
 export const accentColours = {
     "red": {
