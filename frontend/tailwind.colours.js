@@ -4,6 +4,7 @@ const { parseColor } = require("tailwindcss/lib/util/color");
 
 const toRGB = (value) => parseColor(value).color.join(" ");
 
+/** @type {{[key: string]: any}} **/
 const themes = {
     "light": {
         "primary": colors.neutral[100],
@@ -76,26 +77,37 @@ const themes = {
 };
 
 let selectors = {};
-for (const theme in themes) {
-    for (const colour in themes[theme]) {
-        if (typeof themes[theme][colour] === "object") {
-            selectors[`html[data-theme='${theme}-${colour}']`] = {
-                "--theme-accent": toRGB(themes[theme][colour]["accent"]),
-                "--theme-accent-hover": toRGB(themes[theme][colour]["accent-hover"]),
+let modes = {};
+let accents = {};
+
+for (const mode in themes) {
+    for (const colour in themes[mode]) {
+        if (typeof themes[mode][colour] === "object") {
+            selectors[`html[data-theme='${mode}-${colour}']`] = {
+                "--theme-accent": toRGB(themes[mode][colour]["accent"]),
+                "--theme-accent-hover": toRGB(themes[mode][colour]["accent-hover"]),
             };
         } else {
-            let selector = `html[data-theme*='${theme}']`;
+            let selector = `html[data-theme*='${mode}']`;
             if (selectors.hasOwnProperty(selector) === true) {
-                selectors[selector][`--theme-${colour}`] = toRGB(themes[theme][colour]);
+                selectors[selector][`--theme-${colour}`] = toRGB(themes[mode][colour]);
             } else {
-                selectors[selector] = { [`--theme-${colour}`]: toRGB(themes[theme][colour]) };
+                selectors[selector] = { [`--theme-${colour}`]: toRGB(themes[mode][colour]) };
             }
         }
     }
 }
 
-export const customColourPlugin = plugin(
+const customColourPlugin = plugin(
     function ({ addBase }) {
         addBase(selectors);
     }
 );
+
+module.exports = {
+    customColourPlugin,
+    themes,
+};
+
+console.log(modes)
+console.log(accents)
