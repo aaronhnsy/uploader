@@ -1,12 +1,12 @@
 "use client";
 
-import { themes } from "@/components/footer/footer.themeChanger";
 import { ThemeProvider } from "next-themes";
 import React from "react";
+import { themeNames } from "../../tailwind.colours";
 
-export function Theme({children}: { children: React.ReactNode }) {
+export function Theme({ children }: { children: React.ReactNode }) {
     return (
-        <ThemeProvider themes={themes} defaultTheme="dark-yellow">
+        <ThemeProvider themes={themeNames} defaultTheme="system">
             {children}
         </ThemeProvider>
     );

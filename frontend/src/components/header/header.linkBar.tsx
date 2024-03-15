@@ -11,8 +11,8 @@ export function HeaderLinkBar() {
         <>
             <button type="button" aria-label="expand header"
                     className={clsx(
-                        "c-button", "h-10", "w-10",
-                        "ml-auto", "sm:hidden",
+                        "flex", "items-center", "justify-center", "rounded",
+                        "h-10", "w-10", "ml-auto", "sm:hidden",
                         "bg-theme-secondary", "hover:bg-theme-secondary-hover",
                         "fill-theme-accent", "hover:fill-theme-accent-hover",
                         "u-transition",
@@ -22,7 +22,7 @@ export function HeaderLinkBar() {
             </button>
             <div className={clsx(
                 "flex-none", "sm:flex-1",
-                "mt-3", "sm:mt-0",
+                "mt-2", "sm:mt-0",
                 "w-full", "sm:w-auto",
                 "sm:block", isExpanded ? "" : "hidden",
             )}>
@@ -30,10 +30,10 @@ export function HeaderLinkBar() {
                     "flex",
                     "flex-col", "sm:flex-row",
                     "p-1", "sm:p-0",
-                    "space-x-0", "sm:space-x-3",
+                    "space-x-0", "sm:space-x-2",
                     "space-y-1", "sm:space-y-0",
-                    "bg-theme-secondary", "sm:bg-transparent",
                     "rounded", "sm:rounded-none",
+                    "bg-theme-secondary", "sm:bg-transparent",
                     "u-transition", "sm:transition-none",
                 )}>
                     <HeaderLink href={"/"} text="Home"></HeaderLink>

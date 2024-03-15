@@ -17,7 +17,7 @@ export const metadata: Metadata = {
     description: "Upload, view, and share files with Uploader",
 };
 
-export default function Layout({children}: { children: React.ReactNode }) {
+export default function Layout({ children }: { children: React.ReactNode }) {
     return (
         <html suppressHydrationWarning className={inter.variable} lang="en">
         <body className={clsx("bg-theme-primary", "u-transition")}>
@@ -25,7 +25,7 @@ export default function Layout({children}: { children: React.ReactNode }) {
             <div className={clsx(
                 "container",
                 "flex", "flex-col",
-                "min-h-dvh", "mx-auto", "p-3", "space-y-3",
+                "min-h-dvh", "mx-auto", "p-2", "space-y-2",
             )}>
                 <Header/>
                 {children}

@@ -11,8 +11,8 @@ export function HeaderLink({href, text}: HeaderLinkProps) {
     return (
         <Link href={href}
               className={clsx(
-                  "c-button-left-aligned", "h-10", "px-3",
-                  "font-bold", "text-sm",
+                  "flex", "items-center", "justify-center", "rounded",
+                  "h-10", "px-2",
                   (usePathname() === href)
                       ? [
                           "text-theme-accent", "hover:text-theme-accent-hover",
@@ -23,6 +23,7 @@ export function HeaderLink({href, text}: HeaderLinkProps) {
                           "text-theme-text", "hover:text-theme-text-hover",
                       ],
                   "hover:bg-theme-secondary-hover", "sm:hover:bg-theme-primary-hover",
+                  "font-bold", "text-sm",
                   "u-transition",
               )}>
             <p>{text}</p>

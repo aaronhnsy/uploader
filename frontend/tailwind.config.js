@@ -1,9 +1,8 @@
-const { customColourPlugin } = require("./tailwind.colours");
+const { coloursPlugin } = require("./tailwind.colours");
 
 /** @type {import("tailwindcss").Config} **/
 module.exports = {
     content: ["./src/**/*.{ts,tsx}"],
-    darkMode: ["class", "[data-theme*='dark']"],
     theme: {
         fontFamily: {
             sans: ["var(--font-inter)"],
@@ -23,5 +22,5 @@ module.exports = {
             },
         },
     },
-    plugins: [customColourPlugin],
+    plugins: [coloursPlugin],
 };

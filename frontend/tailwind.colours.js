@@ -4,8 +4,7 @@ const { parseColor } = require("tailwindcss/lib/util/color");
 
 const toRGB = (value) => parseColor(value).color.join(" ");
 
-/** @type {{[key: string]: any}} **/
-const themes = {
+const modes = {
     "light": {
         "primary": colors.neutral[100],
         "primary-hover": colors.neutral[200],
@@ -15,30 +14,6 @@ const themes = {
         "tertiary-hover": colors.neutral[400],
         "text": colors.neutral[800],
         "text-hover": colors.neutral[900],
-        "red": {
-            "accent": colors.red[500],
-            "accent-hover": colors.red[600],
-        },
-        "orange": {
-            "accent": colors.orange[500],
-            "accent-hover": colors.orange[600],
-        },
-        "yellow": {
-            "accent": colors.yellow[500],
-            "accent-hover": colors.yellow[600],
-        },
-        "green": {
-            "accent": colors.green[500],
-            "accent-hover": colors.green[600],
-        },
-        "blue": {
-            "accent": colors.blue[500],
-            "accent-hover": colors.blue[600],
-        },
-        "purple": {
-            "accent": colors.purple[500],
-            "accent-hover": colors.purple[600],
-        },
     },
     "dark": {
         "primary": colors.gray[700],
@@ -49,65 +24,70 @@ const themes = {
         "tertiary-hover": colors.gray[950],
         "text": colors.neutral[200],
         "text-hover": colors.neutral[300],
-        "red": {
-            "accent": colors.red[500],
-            "accent-hover": colors.red[600],
-        },
-        "orange": {
-            "accent": colors.orange[600],
-            "accent-hover": colors.orange[700],
-        },
-        "yellow": {
-            "accent": colors.yellow[500],
-            "accent-hover": colors.yellow[600],
-        },
-        "green": {
-            "accent": colors.green[500],
-            "accent-hover": colors.green[600],
-        },
-        "blue": {
-            "accent": colors.blue[500],
-            "accent-hover": colors.blue[600],
-        },
-        "purple": {
-            "accent": colors.purple[500],
-            "accent-hover": colors.purple[600],
-        },
+    },
+};
+const accents = {
+    "red": {
+        "light": { "accent": colors.red[500], "accent-hover": colors.red[600] },
+        "dark": { "accent": colors.red[500], "accent-hover": colors.red[600] },
+    },
+    "orange": {
+        "light": { "accent": colors.orange[500], "accent-hover": colors.orange[600] },
+        "dark": { "accent": colors.orange[500], "accent-hover": colors.orange[600] },
+    },
+    "yellow": {
+        "light": { "accent": colors.yellow[500], "accent-hover": colors.yellow[600] },
+        "dark": { "accent": colors.yellow[500], "accent-hover": colors.yellow[600] },
+    },
+    "green": {
+        "light": { "accent": colors.green[500], "accent-hover": colors.green[600] },
+        "dark": { "accent": colors.green[500], "accent-hover": colors.green[600] },
+    },
+    "blue": {
+        "light": { "accent": colors.blue[500], "accent-hover": colors.blue[600] },
+        "dark": { "accent": colors.blue[500], "accent-hover": colors.blue[600] },
+    },
+    "purple": {
+        "light": { "accent": colors.purple[500], "accent-hover": colors.purple[600] },
+        "dark": { "accent": colors.purple[500], "accent-hover": colors.purple[600] },
     },
 };
 
 let selectors = {};
-let modes = {};
-let accents = {};
+let themeNames = ["system"];
 
-for (const mode in themes) {
-    for (const colour in themes[mode]) {
-        if (typeof themes[mode][colour] === "object") {
-            selectors[`html[data-theme='${mode}-${colour}']`] = {
-                "--theme-accent": toRGB(themes[mode][colour]["accent"]),
-                "--theme-accent-hover": toRGB(themes[mode][colour]["accent-hover"]),
-            };
-        } else {
-            let selector = `html[data-theme*='${mode}']`;
-            if (selectors.hasOwnProperty(selector) === true) {
-                selectors[selector][`--theme-${colour}`] = toRGB(themes[mode][colour]);
-            } else {
-                selectors[selector] = { [`--theme-${colour}`]: toRGB(themes[mode][colour]) };
-            }
+for (const mode in modes) {
+    let fuzzyModeSelector = `html[data-theme*="${mode}"]`;
+    selectors[fuzzyModeSelector] = {};
+    for (const [key, value] of Object.entries(modes[mode])) {
+        selectors[fuzzyModeSelector][`--theme-${key}`] = toRGB(value);
+    }
+
+    let strictModeSelector = `html[data-theme="${mode}"]`;
+    selectors[strictModeSelector] = {};
+    for (const [key, value] of Object.entries(accents.yellow[mode])) {
+        selectors[strictModeSelector][`--theme-${key}`] = toRGB(value);
+    }
+
+    for (const accent in accents) {
+        let strictAccentSelector = `html[data-theme="${mode}-${accent}"]`;
+        selectors[strictAccentSelector] = {};
+        for (const [key, value] of Object.entries(accents[accent][mode])) {
+            selectors[strictAccentSelector][`--theme-${key}`] = toRGB(value);
         }
+        themeNames.push(`${mode}-${accent}`);
     }
 }
 
-const customColourPlugin = plugin(
+const coloursPlugin = plugin(
     function ({ addBase }) {
         addBase(selectors);
-    }
+    },
 );
 
 module.exports = {
-    customColourPlugin,
-    themes,
+    modes,
+    accents,
+    themeNames,
+    coloursPlugin,
 };
-
-console.log(modes)
-console.log(accents)
