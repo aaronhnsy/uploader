@@ -1,8 +1,9 @@
 import colors from "tailwindcss/colors";
 import { parseColor } from "tailwindcss/lib/util/color";
 import plugin from "tailwindcss/plugin";
+import { Accents, Modes } from "./colours.types";
 
-export const modes: Record<string, Record<string, string>> = {
+export const modes: Modes = {
     "light": {
         "primary": colors.neutral[100],
         "primary-hover": colors.neutral[200],
@@ -24,7 +25,7 @@ export const modes: Record<string, Record<string, string>> = {
         "text-hover": colors.neutral[300],
     },
 };
-export const accents: Record<string, Record<string, Record<string, string>>> = {
+export const accents: Accents = {
     "red": {
         "light": { "accent": colors.red[500], "accent-hover": colors.red[600] },
         "dark": { "accent": colors.red[500], "accent-hover": colors.red[600] },
