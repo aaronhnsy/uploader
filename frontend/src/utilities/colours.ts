@@ -1,10 +1,8 @@
-const colors = require("tailwindcss/colors");
-const plugin = require("tailwindcss/plugin");
-const { parseColor } = require("tailwindcss/lib/util/color");
+import colors from "tailwindcss/colors";
+import { parseColor } from "tailwindcss/lib/util/color";
+import plugin from "tailwindcss/plugin";
 
-const toRGB = (value) => parseColor(value).color.join(" ");
-
-const modes = {
+export const modes: Record<string, Record<string, string>> = {
     "light": {
         "primary": colors.neutral[100],
         "primary-hover": colors.neutral[200],
@@ -26,7 +24,7 @@ const modes = {
         "text-hover": colors.neutral[300],
     },
 };
-const accents = {
+export const accents: Record<string, Record<string, Record<string, string>>> = {
     "red": {
         "light": { "accent": colors.red[500], "accent-hover": colors.red[600] },
         "dark": { "accent": colors.red[500], "accent-hover": colors.red[600] },
@@ -53,41 +51,38 @@ const accents = {
     },
 };
 
-let selectors = {};
-let themeNames = ["system"];
+export let cssSelectors: Record<string, Record<string, string>> = { ":root": {} };
+export let customColours: Record<string, string> = {};
+export let themeNames: string[] = [];
 
 for (const mode in modes) {
-    let fuzzyModeSelector = `html[data-theme*="${mode}"]`;
-    selectors[fuzzyModeSelector] = {};
-    for (const [key, value] of Object.entries(modes[mode])) {
-        selectors[fuzzyModeSelector][`--theme-${key}`] = toRGB(value);
+    let modeSelector = `html[data-theme*="${mode}"]`;
+    cssSelectors[modeSelector] = {};
+    for (const [variant, value] of Object.entries(modes[mode])) {
+        let themeModeVariant = `theme-${mode}-${variant}`;
+        cssSelectors[":root"][`--${themeModeVariant}`] = parseColor(value).color.join(" ");
+        customColours[themeModeVariant] = `rgb(var(--${themeModeVariant}) / <alpha-value>)`;
+        let themeVariant = `theme-${variant}`;
+        cssSelectors[modeSelector][`--${themeVariant}`] = `var(--${themeModeVariant})`;
+        customColours[themeVariant] = `rgb(var(--${themeVariant}) / <alpha-value>)`;
     }
-
-    let strictModeSelector = `html[data-theme="${mode}"]`;
-    selectors[strictModeSelector] = {};
-    for (const [key, value] of Object.entries(accents.yellow[mode])) {
-        selectors[strictModeSelector][`--theme-${key}`] = toRGB(value);
-    }
-
     for (const accent in accents) {
-        let strictAccentSelector = `html[data-theme="${mode}-${accent}"]`;
-        selectors[strictAccentSelector] = {};
-        for (const [key, value] of Object.entries(accents[accent][mode])) {
-            selectors[strictAccentSelector][`--theme-${key}`] = toRGB(value);
+        let modeAccentSelector = `html[data-theme="${mode}-${accent}"]`;
+        cssSelectors[modeAccentSelector] = {};
+        for (const [variant, value] of Object.entries(accents[accent][mode])) {
+            let themeModeAccentVariant = `theme-${mode}-${accent}-${variant}`;
+            cssSelectors[":root"][`--${themeModeAccentVariant}`] = parseColor(value).color.join(" ");
+            customColours[themeModeAccentVariant] = `rgb(var(--${themeModeAccentVariant}) / <alpha-value>)`;
+            let themeVariant = `theme-${variant}`;
+            cssSelectors[modeAccentSelector][`--${themeVariant}`] = `var(--${themeModeAccentVariant})`;
+            customColours[themeVariant] = `rgb(var(--${themeVariant}) / <alpha-value>)`;
         }
         themeNames.push(`${mode}-${accent}`);
     }
 }
 
-const coloursPlugin = plugin(
+export const coloursPlugin = plugin(
     function ({ addBase }) {
-        addBase(selectors);
+        addBase(cssSelectors);
     },
 );
-
-module.exports = {
-    modes,
-    accents,
-    themeNames,
-    coloursPlugin,
-};
