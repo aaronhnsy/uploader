@@ -1,31 +1,9 @@
 "use client";
 
+import { accentOptions, modeOptions } from "@/utilities/colours";
 import { clsx } from "clsx";
 import { useTheme } from "next-themes";
 import React, { useEffect, useState } from "react";
-
-const modeOptions: Record<string, string> = {
-    "light": "bg-theme-light-primary hover:bg-theme-light-secondary-hover",
-    "dark": "bg-theme-dark-primary hover:bg-theme-dark-primary-hover",
-};
-const accentOptions: Record<string, Record<string, string>> = {
-    "light": {
-        "red": "bg-theme-light-red-accent hover:bg-theme-light-red-accent-hover",
-        "orange": "bg-theme-light-orange-accent hover:bg-theme-light-orange-accent-hover",
-        "yellow": "bg-theme-light-yellow-accent hover:bg-theme-light-yellow-accent-hover",
-        "green": "bg-theme-light-green-accent hover:bg-theme-light-green-accent-hover",
-        "blue": "bg-theme-light-blue-accent hover:bg-theme-light-blue-accent-hover",
-        "purple": "bg-theme-light-purple-accent hover:bg-theme-light-purple-accent-hover",
-    },
-    "dark": {
-        "red": "bg-theme-dark-red-accent hover:bg-theme-dark-red-accent-hover",
-        "orange": "bg-theme-dark-orange-accent hover:bg-theme-dark-orange-accent-hover",
-        "yellow": "bg-theme-dark-yellow-accent hover:bg-theme-dark-yellow-accent-hover",
-        "green": "bg-theme-dark-green-accent hover:bg-theme-dark-green-accent-hover",
-        "blue": "bg-theme-dark-blue-accent hover:bg-theme-dark-blue-accent-hover",
-        "purple": "bg-theme-dark-purple-accent hover:bg-theme-dark-purple-accent-hover",
-    }
-}
 
 interface FooterThemeSwitcherContainerProps {
     options: Record<string, string>;
@@ -83,7 +61,7 @@ export function FooterThemeSwitcher() {
     return (
         <>
             <FooterThemeSwitcherContainer options={modeOptions} accent={accent} state={mode} setState={setMode}/>
-            <FooterThemeSwitcherContainer options={accentOptions[mode]} mode={mode} state={accent} setState={setAccent}/>
+            <FooterThemeSwitcherContainer options={accentOptions} mode={mode} state={accent} setState={setAccent}/>
         </>
     );
 }
