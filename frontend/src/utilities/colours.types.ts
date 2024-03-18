@@ -1,32 +1,29 @@
+type Modes = `light` | `dark`;
+type Accents = `red` | `orange` | `yellow` | `green` | `blue` | `purple`;
+type Themes = `${Modes}-${Accents}`;
 type ModeVariants =
     `primary` | `primary-hover` | `secondary` | `secondary-hover` | `tertiary` | `tertiary-hover` |
     `text` | `text-hover`;
+type AccentVariants = `accent` | `accent-hover`;
+
 type ModeVariantsObject = {
     [MV in ModeVariants]: string
 }
-type Modes = `light` | `dark`;
-export type ModesObject<T extends ModeVariantsObject | AccentVariantsObject = ModeVariantsObject> = {
-    [M in Modes]: T
-}
-
-type AccentVariants = `accent` | `accent-hover`;
 type AccentVariantsObject = {
     [AV in AccentVariants]: string
 }
-type Accents = `red` | `orange` | `yellow` | `green` | `blue` | `purple`;
+export type ModesObject<V extends ModeVariantsObject | AccentVariantsObject = ModeVariantsObject> = {
+    [M in Modes]: V
+}
 export type AccentsObject = {
     [A in Accents]: ModesObject<AccentVariantsObject>
 }
 
-type Themes = `${Modes}-${Accents}`;
-
-type ModeOptionClasses<M extends Modes> = `bg-theme-${M}-primary hover:bg-theme-${M}-primary-hover`
 export type ModeOptionsObject = {
-    [M in Modes]: ModeOptionClasses<M>
+    [M in Modes]: `bg-theme-${M}-primary hover:bg-theme-${M}-primary-hover`
 };
-type AccentOptionClasses<T extends Themes> = `bg-theme-${T}-accent hover:bg-theme-${T}-accent-hover`
 export type AccentOptionsObject = {
-    [T in Themes]: AccentOptionClasses<T>
+    [T in Themes]: `bg-theme-${T}-accent hover:bg-theme-${T}-accent-hover`
 };
 
 export type CSSRulesObject = {
@@ -44,9 +41,9 @@ export type CSSRulesObject = {
 }
 
 export type CustomColours = {
-    [SMV in `theme-${Modes}-${ModeVariants}`]: `rgb(var(--${SMV}) / <alpha-value>)`
+    [MV in `theme-${Modes}-${ModeVariants}`]: `rgb(var(--${MV}) / <alpha-value>)`
 } & {
-    [SAV in `theme-${Themes}-${AccentVariants}`]: `rgb(var(--${SAV}) / <alpha-value>)`
+    [AV in `theme-${Themes}-${AccentVariants}`]: `rgb(var(--${AV}) / <alpha-value>)`
 } & {
     [MV in `theme-${ModeVariants}`]: `rgb(var(--${MV}) / <alpha-value>)`
 } & {
