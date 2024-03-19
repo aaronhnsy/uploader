@@ -1,5 +1,5 @@
-type Modes = `light` | `dark`;
-type Accents = `red` | `orange` | `yellow` | `green` | `blue` | `purple`;
+export type Modes = `light` | `dark`;
+export type Accents = `red` | `orange` | `yellow` | `green` | `blue` | `purple`;
 type Themes = `${Modes}-${Accents}`;
 type ModeVariants =
     `primary` | `primary-hover` | `secondary` | `secondary-hover` | `tertiary` | `tertiary-hover` |
@@ -23,7 +23,9 @@ export type ModeOptionsObject = {
     [M in Modes]: `bg-theme-${M}-primary hover:bg-theme-${M}-primary-hover`
 };
 export type AccentOptionsObject = {
-    [T in Themes]: `bg-theme-${T}-accent hover:bg-theme-${T}-accent-hover`
+    [M in Modes]: {
+        [A in Accents]: `bg-theme-${M}-${A}-accent hover:bg-theme-${M}-${A}-accent-hover`
+    }
 };
 
 export type CSSRulesObject = {

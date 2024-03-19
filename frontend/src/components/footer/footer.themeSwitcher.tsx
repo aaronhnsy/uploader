@@ -1,5 +1,6 @@
 "use client";
 
+import type { Modes } from "@/utilities/colours";
 import { accentOptions, modeOptions } from "@/utilities/colours";
 import { clsx } from "clsx";
 import { useTheme } from "next-themes";
@@ -9,7 +10,7 @@ interface FooterThemeSwitcherContainerProps {
     options: Record<string, string>;
     mode?: string;
     accent?: string;
-    state: string
+    state: string;
     setState: React.Dispatch<React.SetStateAction<string>>;
 }
 
@@ -61,7 +62,7 @@ export function FooterThemeSwitcher() {
     return (
         <>
             <FooterThemeSwitcherContainer options={modeOptions} accent={accent} state={mode} setState={setMode}/>
-            <FooterThemeSwitcherContainer options={accentOptions} mode={mode} state={accent} setState={setAccent}/>
+            <FooterThemeSwitcherContainer options={accentOptions[mode as Modes]} mode={mode} state={accent} setState={setAccent}/>
         </>
     );
 }
