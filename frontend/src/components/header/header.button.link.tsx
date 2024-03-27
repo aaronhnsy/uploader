@@ -7,7 +7,7 @@ interface HeaderLinkProps {
     text: string;
 }
 
-export function HeaderLink({ href, text }: HeaderLinkProps) {
+export function HeaderLinkButton({ href, text }: HeaderLinkProps) {
     return (
         <Link href={href}
               className={clsx(

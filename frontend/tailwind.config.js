@@ -1,4 +1,4 @@
-const { customColours, coloursPlugin } = require("./src/utilities/colours");
+const { customColours, coloursPlugin } = require("./src/styles/colours");
 
 /** @type {import("tailwindcss").Config} **/
 module.exports = {

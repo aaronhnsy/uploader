@@ -1,14 +1,14 @@
 import { clsx } from "clsx";
-import { HeaderAccountButton } from "./header.accountButton";
-import { HeaderLinkBar } from "./header.linkBar";
-import { HeaderLogo } from "./header.logo";
+import { HeaderAccountButton } from "./header.button.account";
+import { HeaderLinks } from "./header.links";
+import { HeaderLogoButton } from "./header.button.logo";
 
 export function Header() {
     return (
         <nav className={clsx("flex", "flex-wrap")}>
-            <HeaderLogo/>
+            <HeaderLogoButton/>
             <HeaderAccountButton/>
-            <HeaderLinkBar/>
+            <HeaderLinks/>
         </nav>
     );
 }

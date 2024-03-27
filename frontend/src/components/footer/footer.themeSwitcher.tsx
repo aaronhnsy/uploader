@@ -1,7 +1,7 @@
 "use client";
 
-import type { Modes } from "@/utilities/colours";
-import { accentOptions, modeOptions } from "@/utilities/colours";
+import type { Modes } from "@/styles/colours";
+import { accentOptions, modeOptions } from "@/styles/colours";
 import { clsx } from "clsx";
 import { useTheme } from "next-themes";
 import React, { useEffect, useState } from "react";

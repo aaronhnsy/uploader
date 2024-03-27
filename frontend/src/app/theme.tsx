@@ -1,6 +1,6 @@
 "use client";
 
-import { accentOptions } from "@/utilities/colours";
+import { accentOptions } from "@/styles/colours";
 import { ThemeProvider } from "next-themes";
 import React from "react";
 

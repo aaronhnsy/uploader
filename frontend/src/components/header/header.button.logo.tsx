@@ -12,7 +12,7 @@ const icon = (
     </svg>
 );
 
-export function HeaderLogo() {
+export function HeaderLogoButton() {
     return (
         <Link href={"/"}
               className={clsx(
