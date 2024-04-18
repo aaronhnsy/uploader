@@ -6,9 +6,9 @@ export function Footer() {
         <footer className={clsx(
             "flex", "justify-between", "items-center", "rounded",
             "p-2",
-            "bg-theme-secondary", "u-transition",
+            "bg-theme-secondary", "cu-transition",
         )}>
-            <p className={clsx("font-semibold", "text-md", "text-theme-text", "u-transition")}>aaronhnsy</p>
+            <p className={clsx("font-semibold", "text-md", "text-theme-text", "cu-transition")}>aaronhnsy</p>
             <div className={clsx("space-y-2")}>
                 <FooterThemeSwitcher/>
             </div>

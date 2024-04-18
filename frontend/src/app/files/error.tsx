@@ -4,8 +4,8 @@ import { clsx } from "clsx";
 
 export default function Error() {
     return (
-        <div className={clsx("u-centered")}>
-            <h1 className={clsx("font-bold", "text-lg", "text-theme-text", "u-transition")}>
+        <div className={clsx("flex-1", "flex", "items-center", "justify-center")}>
+            <h1 className={clsx("font-bold", "text-lg", "text-theme-text", "cu-transition")}>
                 Something went wrong!
             </h1>
         </div>

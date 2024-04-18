@@ -10,14 +10,14 @@ export async function HeaderAccountButton() {
             <Link href={"/account"}
                   className={clsx(
                       "flex", "items-center", "justify-center", "rounded",
-                      "h-10", "px-2", "space-x-2", "sm:order-1",
-                      "bg-theme-secondary", "hover:bg-theme-secondary-hover",
+                      "h-10", "ps-1", "pe-2", "space-x-2", "sm:order-1",
+                      "bg-transparent", "hover:bg-theme-primary-hover",
                       "text-theme-text", "hover:text-theme-text-hover",
                       "font-bold", "text-base",
-                      "u-transition",
+                      "cu-transition",
                   )}>
-                <Image className={clsx("w-8", "h-8", "rounded-full")} width="32" height="32"
-                       src={user.profile_picture} alt={"profile picture"}/>
+                <Image className={clsx("rounded")} width="32" height="32"
+                       src={user.profile_picture} alt={"Profile picture for current user."}/>
                 <p>{user.name}</p>
             </Link>
         );
@@ -30,7 +30,7 @@ export async function HeaderAccountButton() {
                   "bg-theme-accent", "hover:bg-theme-accent-hover",
                   "text-gray-800", "hover:text-gray-900",
                   "font-bold", "text-sm",
-                  "u-transition",
+                  "cu-transition",
               )}>
             <p>Login</p>
         </Link>

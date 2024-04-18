@@ -28,20 +28,16 @@ class _AuthenticationMiddleware(AbstractAuthenticationMiddleware):
 
         try:
             data = unsign_token(token)
-        except itsdangerous.BadSignature:
+            valid: asyncpg.Record | None = await state.postgresql.fetchrow(
+                "SELECT * FROM tokens WHERE user_id = $1 AND secret = $2",
+                data["user_id"], data["secret"]
+            )
+            if valid is None:
+                raise ValueError
+        except (itsdangerous.BadSignature, ValueError):
             raise ReasonException(
                 HTTP_401_UNAUTHORIZED,
                 reason="The provided token is invalid."
-            )
-
-        valid: asyncpg.Record | None = await state.postgresql.fetchrow(
-            "SELECT * FROM tokens WHERE user_id = $1 AND secret = $2",
-            data["user_id"], data["secret"]
-        )
-        if valid is None:
-            raise ReasonException(
-                HTTP_401_UNAUTHORIZED,
-                reason="The token provided is invalid."
             )
 
         user = await User.fetch_with_id(state.postgresql, data["user_id"])

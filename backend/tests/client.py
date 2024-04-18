@@ -38,14 +38,15 @@ async def test_get_file(session: aiohttp.ClientSession) -> None:
         print(json.dumps(await response.json(), indent=4))
 
 
-async def test_login(session: aiohttp.ClientSession) -> None:
+async def test_get_token(session: aiohttp.ClientSession) -> None:
     data = {
         "username": f"{CONFIG["username"]}",
-        "password": f"{CONFIG["password"]}"
+        "password": f"{CONFIG["password"]}",
+        "detail": "api token"
     }
-    async with session.post(f"{URL}/api/session/login", json=data) as response:
+    async with session.post(f"{URL}/api/tokens/", json=data) as response:
         print(json.dumps(await response.json(), indent=4))
         print(response.headers)
 
 
-asyncio.run(wrapper(test_login))
+asyncio.run(wrapper(test_get_token))

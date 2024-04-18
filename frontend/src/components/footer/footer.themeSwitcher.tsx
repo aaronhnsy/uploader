@@ -33,7 +33,7 @@ export function FooterThemeSwitcherContainer({ options, mode, accent, state, set
         <div className={clsx(
             "flex", "flex-wrap", "items-center", "justify-end", "rounded",
             "p-2", "space-x-2",
-            "bg-theme-tertiary", "u-transition",
+            "bg-theme-tertiary", "cu-transition",
         )}>
             {Object.entries(options).map(
                 ([option, value]) => (
@@ -41,7 +41,7 @@ export function FooterThemeSwitcherContainer({ options, mode, accent, state, set
                             className={clsx(
                                 "flex", "items-center", "justify-center", "rounded",
                                 "w-5", "h-5", "hover:active:scale-105",
-                                value, "u-transition",
+                                value, "cu-transition",
                             )}
                             onClick={() => {
                                 setState(option);
