@@ -24,8 +24,6 @@ class _AuthenticationMiddleware(AbstractAuthenticationMiddleware):
                 reason="You must provide a token in the 'Authorization' header."
             )
 
-        print(token)
-
         try:
             data = unsign_token(token)
             valid: asyncpg.Record | None = await state.postgresql.fetchrow(
@@ -40,7 +38,7 @@ class _AuthenticationMiddleware(AbstractAuthenticationMiddleware):
                 reason="The provided token is invalid."
             )
 
-        user = await User.fetch_with_id(state.postgresql, data["user_id"])
+        user = await User.fetch_by_id(state.postgresql, data["user_id"])
         return AuthenticationResult(user=user, auth=None)
 
 
@@ -59,7 +57,7 @@ class _AuthenticationMiddleware(AbstractAuthenticationMiddleware):
 #                 HTTP_401_UNAUTHORIZED,
 #                 reason="The session id provided is invalid."
 #             )
-#         user = await User.fetch_with_id(connection.app.state.postgresql, user_id.decode())
+#         user = await User.fetch_by_id(connection.app.state.postgresql, user_id.decode())
 #         return AuthenticationResult(user=user, auth=None)
 
 

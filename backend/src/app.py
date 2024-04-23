@@ -1,11 +1,11 @@
 from litestar import Litestar
 
-from src.api import api_router
 from src.config import CONFIG
 from src.enums import Environment
 from src.exceptions import exception_handlers
 from src.middleware import AuthenticationMiddleware
 from src.openapi import openapi_config
+from src.routes import router
 from src.storage import postgresql_lifespan, store_registry
 
 
@@ -13,7 +13,7 @@ __all__ = ["uploader"]
 
 
 uploader = Litestar(
-    route_handlers=[api_router],
+    route_handlers=[router],
     lifespan=[postgresql_lifespan],  # type: ignore
     middleware=[AuthenticationMiddleware],
     stores=store_registry,

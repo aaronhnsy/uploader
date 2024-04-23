@@ -16,10 +16,10 @@ openapi_config: OpenAPIConfig = \
         version="1.0.0",
         openapi_controller=CustomOpenAPIController,
         tags=[
-            Tag(name="Files", description="Operations related to files."),
-            Tag(name="Sessions", description="Operations related to sessions."),
-            Tag(name="Tokens", description="Operations related to users."),
             Tag(name="Users", description="Operations related to users."),
+            Tag(name="Files", description="Operations related to files."),
+            Tag(name="Current User", description="Operations related to the current user."),
+            Tag(name="Current User Files", description="Operations related to the current user's files."),
         ],
         components=Components(
             security_schemes={

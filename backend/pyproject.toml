@@ -3,23 +3,21 @@ requires      = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
 
 [tool.poetry]
-name        = "uploader-backend"
-version     = "1.0.0"
-description = "The backend API for my file uploader."
-authors     = ["Aaron Hennessey <aaronhnsy@gmail.com>"]
+name         = "uploader-backend"
+package-mode = false
 
 [tool.poetry.dependencies]
 python            = "~3.12.0"
-aiohttp           = { version = "~3.9.0"   }
-argon2-cffi       = { version = "~23.1.0"  }
-asyncpg           = { version = "~0.29.0"  }
-asyncpg-stubs     = { version = "~0.29.0"  }
-colorama          = { version = "~0.4.0"   }
-passlib           = { version = "~1.7.0"   }
-itsdangerous      = { version = "~2.1.0"   }
-litestar          = { version = "~2.6.0",  extras = ["standard", "pydantic", "redis"] }
-orjson            = { version = "~3.9.0"   }
-typing-extensions = { version = "~4.10.0"  }
+aiohttp           = { version = "~3.9.0"  }
+argon2-cffi       = { version = "~23.1.0" }
+asyncpg           = { version = "~0.29.0" }
+asyncpg-stubs     = { version = "~0.29.0" }
+colorama          = { version = "~0.4.0"  }
+passlib           = { version = "~1.7.0"  }
+itsdangerous      = { version = "~2.2.0"  }
+litestar          = { version = "~2.8.0", extras = ["standard", "pydantic", "redis"] }
+orjson            = { version = "~3.10.0" }
+typing-extensions = { version = "~4.11.0" }
 
 [tool.pyright]
 include                 = ["src"]
