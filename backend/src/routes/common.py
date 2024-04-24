@@ -11,7 +11,8 @@ __all__ = [
     "InvalidRequestResponse",
     "MissingOrInvalidAuthorizationResponse",
     "MissingPermissionsResponse",
-    "UserNotFoundResponse"
+    "UserNotFoundResponse",
+    "FileNotFoundResponse"
 ]
 
 UserIDParameter = Annotated[
@@ -37,4 +38,8 @@ MissingPermissionsResponse: ResponseSpec = ResponseSpec(
 UserNotFoundResponse: ResponseSpec = ResponseSpec(
     data_container=Error, generate_examples=False,
     description="A user with the given ID was not found."
+)
+FileNotFoundResponse: ResponseSpec = ResponseSpec(
+    data_container=Error, generate_examples=False,
+    description="A file with the given ID was not found."
 )

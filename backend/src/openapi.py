@@ -1,20 +1,15 @@
-from litestar.openapi import OpenAPIConfig, OpenAPIController
+from litestar.openapi import OpenAPIConfig
+from litestar.openapi.plugins import ScalarRenderPlugin
 from litestar.openapi.spec import Components, SecurityScheme, Tag
 
 
 __all__ = ["openapi_config"]
 
 
-class CustomOpenAPIController(OpenAPIController):
-    stoplight_elements_js_url = "https://unpkg.com/@stoplight/elements/web-components.min.js"
-    stoplight_elements_css_url = "https://unpkg.com/@stoplight/elements/styles.min.css"
-
-
 openapi_config: OpenAPIConfig = \
     OpenAPIConfig(
         title="Uploader",
         version="1.0.0",
-        openapi_controller=CustomOpenAPIController,
         tags=[
             Tag(name="Users", description="Operations related to users."),
             Tag(name="Files", description="Operations related to files."),
@@ -30,5 +25,5 @@ openapi_config: OpenAPIConfig = \
                 )
             }
         ),
-        root_schema_site="elements",
+        render_plugins=[ScalarRenderPlugin()]
     )

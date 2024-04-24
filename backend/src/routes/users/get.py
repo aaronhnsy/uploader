@@ -1,8 +1,5 @@
-from typing import Annotated
-
 from litestar import get
 from litestar.openapi import ResponseSpec
-from litestar.params import Body
 
 from src.objects import User
 from src.routes.common import InvalidRequestResponse, MissingOrInvalidAuthorizationResponse, UserIDParameter
