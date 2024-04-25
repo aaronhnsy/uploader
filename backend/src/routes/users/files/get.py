@@ -2,8 +2,9 @@ from litestar import get
 from litestar.openapi import ResponseSpec
 
 from src.objects import File
-from src.routes.common import FileNotFoundResponse, InvalidRequestResponse, MissingOrInvalidAuthorizationResponse
-from src.routes.common import UserIDParameter, UserNotFoundResponse
+from src.routes.common import FilenameParameter, FileNotFoundResponse, InvalidRequestResponse
+from src.routes.common import MissingOrInvalidAuthorizationResponse, UserIDParameter, UserNotFoundResponse
+from src.routes.common import UserOrFileNotFoundResponse
 
 
 __all__ = [
@@ -21,7 +22,7 @@ __all__ = [
     responses={
         200: ResponseSpec(
             data_container=list[File], generate_examples=False,
-            description="Response contains a list of files."
+            description="Response contains a list of the users files."
         ),
         400: InvalidRequestResponse,
         401: MissingOrInvalidAuthorizationResponse,
@@ -33,11 +34,20 @@ async def get_users_files(user_id: UserIDParameter) -> None:
 
 
 @get(
-    path="/{file_id:str}",
+    path="/{filename:str}",
     summary="Get File",
     tags=["Files"],
+    responses={
+        200: ResponseSpec(
+            data_container=File, generate_examples=False,
+            description="Response contains the user's file with the given ID."
+        ),
+        400: InvalidRequestResponse,
+        401: MissingOrInvalidAuthorizationResponse,
+        404: UserOrFileNotFoundResponse
+    }
 )
-async def get_users_file(user_id: UserIDParameter) -> None:
+async def get_users_file(user_id: UserIDParameter, filename: FilenameParameter) -> None:
     pass
 
 
@@ -48,7 +58,7 @@ async def get_users_file(user_id: UserIDParameter) -> None:
     responses={
         200: ResponseSpec(
             data_container=list[File], generate_examples=False,
-            description="Response contains a list of files."
+            description="Response contains a list of the current user's files."
         ),
         400: InvalidRequestResponse,
         401: MissingOrInvalidAuthorizationResponse,
@@ -59,18 +69,18 @@ async def get_current_users_files() -> None:
 
 
 @get(
-    path="/{file_id:str}",
+    path="/{filename:str}",
     summary="Get File",
     tags=["Current User Files"],
     responses={
         200: ResponseSpec(
-            data_container=list[File], generate_examples=False,
-            description="Response contains a list of files."
+            data_container=File, generate_examples=False,
+            description="Response contains the current user's file with the given ID."
         ),
         400: InvalidRequestResponse,
         401: MissingOrInvalidAuthorizationResponse,
         404: FileNotFoundResponse
     }
 )
-async def get_current_users_file() -> None:
+async def get_current_users_file(filename: FilenameParameter) -> None:
     pass

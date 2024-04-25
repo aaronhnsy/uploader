@@ -8,18 +8,27 @@ from src.exceptions import Error
 
 __all__ = [
     "UserIDParameter",
+    "FilenameParameter",
     "InvalidRequestResponse",
     "MissingOrInvalidAuthorizationResponse",
     "MissingPermissionsResponse",
     "UserNotFoundResponse",
-    "FileNotFoundResponse"
+    "FileNotFoundResponse",
+    "UserOrFileNotFoundResponse"
 ]
 
 UserIDParameter = Annotated[
     str,
     Body(
         min_length=16, max_length=16,
-        description="An existing 16 character user ID."
+        description="The user's 16 character ID."
+    )
+]
+FilenameParameter = Annotated[
+    str,
+    Body(
+        min_length=1, max_length=255,
+        description="The name of the file."
     )
 ]
 
@@ -37,9 +46,13 @@ MissingPermissionsResponse: ResponseSpec = ResponseSpec(
 )
 UserNotFoundResponse: ResponseSpec = ResponseSpec(
     data_container=Error, generate_examples=False,
-    description="A user with the given ID was not found."
+    description="The specified user was not found."
 )
 FileNotFoundResponse: ResponseSpec = ResponseSpec(
     data_container=Error, generate_examples=False,
-    description="A file with the given ID was not found."
+    description="The specified file was not found."
+)
+UserOrFileNotFoundResponse: ResponseSpec = ResponseSpec(
+    data_container=Error, generate_examples=False,
+    description="The specified user or file was not found."
 )
