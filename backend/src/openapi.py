@@ -10,6 +10,7 @@ openapi_config: OpenAPIConfig = \
     OpenAPIConfig(
         title="Uploader",
         version="1.0.0",
+        path="/api/schema"
         tags=[
             Tag(name="Users", description="Operations related to users."),
             Tag(name="Files", description="Operations related to files."),
