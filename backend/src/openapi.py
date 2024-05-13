@@ -1,5 +1,5 @@
 from litestar.openapi import OpenAPIConfig
-from litestar.openapi.plugins import ScalarRenderPlugin, SwaggerRenderPlugin, StoplightRenderPlugin
+from litestar.openapi.plugins import ScalarRenderPlugin, StoplightRenderPlugin, SwaggerRenderPlugin
 from litestar.openapi.spec import Components, SecurityScheme, Tag
 
 

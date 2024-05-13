@@ -1,10 +1,10 @@
 import secrets
 from typing import Annotated
 
+import pydantic
 from litestar import post
 from litestar.openapi import ResponseSpec
 from litestar.params import Body
-import pydantic
 
 from src.exceptions import Error
 from src.objects import User

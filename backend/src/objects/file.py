@@ -36,10 +36,6 @@ class File(pydantic.BaseModel):
         bool,
         pydantic.Field(description="Whether the file is private or public.")
     ]
-    tags: Annotated[
-        list[str],
-        pydantic.Field(description="The tags associated with the file.")
-    ]
 
     @classmethod
     async def create(
@@ -67,3 +63,15 @@ class File(pydantic.BaseModel):
             user_id, name
         )
         return File.model_validate({**file}) if file else None
+
+    @classmethod
+    async def get_all(
+        cls, database: PostgreSQL,
+        /, *,
+        user_id: str,
+    ) -> list[File]:
+        files: list[asyncpg.Record] = await database.fetch(
+            "SELECT * from files WHERE user_id = $1",
+            user_id
+        )
+        return [File.model_validate({**file}) for file in files]
