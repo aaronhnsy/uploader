@@ -1,8 +1,9 @@
-from litestar import Request, get
+from litestar import get
 from litestar.openapi import ResponseSpec
 
 from src.objects import User
 from src.routes.common import InvalidRequestResponse, MissingOrInvalidAuthorizationResponse
+from src.types import Request
 
 
 __all__ = ["get_current_user"]
