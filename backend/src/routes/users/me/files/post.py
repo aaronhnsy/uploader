@@ -9,9 +9,8 @@ __all__ = ["upload_files"]
 
 
 @post(
-    path="/",
+    path="/users/me/files",
     summary="Upload Files",
-    tags=["Current User Files"],
     responses={
         201: ResponseSpec(
             data_container=list[File], generate_examples=False,
