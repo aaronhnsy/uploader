@@ -53,7 +53,7 @@ async def get_users_file(user_id: UserIDParameter, filename: FilenameParameter) 
 
 @get(
     path="/",
-    summary="Get Multiple Files",
+    summary="Get Current User's Files",
     tags=["Current User Files"],
     responses={
         200: ResponseSpec(
@@ -70,7 +70,7 @@ async def get_current_users_files() -> None:
 
 @get(
     path="/{filename:str}",
-    summary="Get File",
+    summary="Get Current User's File",
     tags=["Current User Files"],
     responses={
         200: ResponseSpec(

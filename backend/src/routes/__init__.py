@@ -4,7 +4,7 @@ from src.routes.files.delete import delete_current_users_file, delete_users_file
 from src.routes.files.get import get_current_users_file, get_current_users_files, get_users_file, get_users_files
 from src.routes.files.patch import edit_current_users_file, edit_users_file
 from src.routes.files.post import upload_files
-from src.routes.tokens.post import create_current_user_token
+from src.routes.tokens.post import create_token
 from src.routes.users.delete import delete_current_user, delete_user
 from src.routes.users.get import get_current_user, get_user
 from src.routes.users.patch import edit_current_user, edit_user
@@ -30,12 +30,6 @@ current_user_files_router = Router(
         upload_files,
     ]
 )
-current_user_tokens_router = Router(
-    path="/me/tokens",
-    route_handlers=[
-        create_current_user_token
-    ]
-)
 users_router = Router(
     path="/users",
     route_handlers=[
@@ -43,12 +37,15 @@ users_router = Router(
         edit_user, edit_current_user,
         delete_user, delete_current_user,
         user_files_router, current_user_files_router,
-        current_user_tokens_router
     ]
+)
+tokens_router = Router(
+    path="/tokens",
+    route_handlers=[create_token]
 )
 
 router = Router(
     path="/api",
     security=[{"token": []}],
-    route_handlers=[users_router]
+    route_handlers=[users_router, tokens_router]
 )

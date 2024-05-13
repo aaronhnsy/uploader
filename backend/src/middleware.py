@@ -42,23 +42,4 @@ class _AuthenticationMiddleware(AbstractAuthenticationMiddleware):
         return AuthenticationResult(user=user, auth=None)
 
 
-# class _AuthenticationMiddleware(AbstractAuthenticationMiddleware):
-#
-#     async def authenticate_request(self, connection: Connection) -> AuthenticationResult:
-#         session_id = connection.cookies.get("__session_id")
-#         if session_id is None:
-#             raise ReasonException(
-#                 HTTP_401_UNAUTHORIZED,
-#                 reason="You must provide a session id in the '__session_id' cookie."
-#             )
-#         user_id = await connection.app.stores.get("sessions").get(session_id)
-#         if user_id is None:
-#             raise ReasonException(
-#                 HTTP_401_UNAUTHORIZED,
-#                 reason="The session id provided is invalid."
-#             )
-#         user = await User.fetch_by_id(connection.app.state.postgresql, user_id.decode())
-#         return AuthenticationResult(user=user, auth=None)
-
-
 AuthenticationMiddleware = DefineMiddleware(_AuthenticationMiddleware, exclude="schema")

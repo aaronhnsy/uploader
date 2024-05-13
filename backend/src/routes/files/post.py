@@ -13,7 +13,7 @@ __all__ = ["upload_files"]
     summary="Upload Files",
     tags=["Current User Files"],
     responses={
-        200: ResponseSpec(
+        201: ResponseSpec(
             data_container=list[File], generate_examples=False,
             description="Response contains the uploaded files."
         ),

@@ -17,14 +17,19 @@ __all__ = ["User"]
 
 class User(pydantic.BaseModel):
     model_config = pydantic.ConfigDict(strict=True, extra="ignore")
-
     id: Annotated[
         str,
-        pydantic.Field(description="The user's id.", min_length=16, max_length=16)
+        pydantic.Field(
+            description="The user's id.",
+            min_length=16, max_length=16
+        )
     ]
     name: Annotated[
         str,
-        pydantic.Field(description="The user's name.", min_length=1, max_length=32)
+        pydantic.Field(
+            description="The user's name.",
+            min_length=1, max_length=32
+        )
     ]
     bot: Annotated[
         bool,
@@ -32,12 +37,28 @@ class User(pydantic.BaseModel):
     ]
     permissions: Annotated[
         Permissions,
-        pydantic.Field(description="The user's permissions.", strict=False)
+        pydantic.Field(
+            description="The user's permissions.",
+            strict=False
+        )
     ]
     profile_picture: Annotated[
         str,
         pydantic.Field(description="The user's profile picture.")
     ]
+
+    @classmethod
+    async def fetch_by_id(cls, database: PostgreSQL, _id: str, /) -> User:
+        data: asyncpg.Record | None = await database.fetchrow(
+            "SELECT id, name, bot, permissions, profile_picture FROM users WHERE id = $1",
+            _id
+        )
+        if data is None:
+            raise ReasonException(
+                HTTP_401_UNAUTHORIZED,
+                reason="User not found."
+            )
+        return User.model_validate({**data})
 
     @classmethod
     async def fetch_by_username_and_password(
@@ -59,18 +80,5 @@ class User(pydantic.BaseModel):
             raise ReasonException(
                 HTTP_401_UNAUTHORIZED,
                 reason="Password is incorrect."
-            )
-        return User.model_validate({**data})
-
-    @classmethod
-    async def fetch_by_id(cls, database: PostgreSQL, _id: str, /) -> User:
-        data: asyncpg.Record | None = await database.fetchrow(
-            "SELECT id, name, bot, permissions, profile_picture FROM users WHERE id = $1",
-            _id
-        )
-        if data is None:
-            raise ReasonException(
-                HTTP_401_UNAUTHORIZED,
-                reason="User not found."
             )
         return User.model_validate({**data})

@@ -33,7 +33,7 @@ async def delete_users_file(user_id: UserIDParameter, filename: FilenameParamete
 
 @delete(
     path="/{filename:str}",
-    summary="Delete File",
+    summary="Delete Current User's File",
     tags=["Current User Files"],
     responses={
         204: ResponseSpec(

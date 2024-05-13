@@ -1,25 +1,80 @@
+import secrets
+from typing import Annotated
+
 from litestar import post
 from litestar.openapi import ResponseSpec
+from litestar.params import Body
+import pydantic
 
-from src.objects import File
-from src.routes.common import InvalidRequestResponse, MissingOrInvalidAuthorizationResponse
+from src.exceptions import Error
+from src.objects import User
+from src.routes.common import InvalidRequestResponse
+from src.security import sign_token
+from src.types import State
 
 
-__all__ = ["create_current_user_token"]
+__all__ = ["create_token"]
+
+
+class CreateTokenRequest(pydantic.BaseModel):
+    model_config = pydantic.ConfigDict(strict=True, extra="ignore")
+    username: Annotated[
+        str,
+        pydantic.Field(
+            description="The name of the user to create a token for.",
+            min_length=1, max_length=32,
+        )
+    ]
+    password: Annotated[
+        str,
+        pydantic.Field(description="The matching password for the user.")
+    ]
+    detail: Annotated[
+        str,
+        pydantic.Field(description="Extra information about the token's purpose.")
+    ]
+
+
+class CreateTokenResponse(pydantic.BaseModel):
+    model_config = pydantic.ConfigDict(strict=True, extra="ignore")
+    token: Annotated[
+        str,
+        pydantic.Field(description="The newly created token.")
+    ]
 
 
 @post(
     path="/",
     summary="Create Token",
-    tags=["Current User Tokens"],
+    tags=["Tokens"],
+    exclude_from_auth=True,
     responses={
-        200: ResponseSpec(
-            data_container=list[File], generate_examples=False,
-            description="Response contains the uploaded files."
+        201: ResponseSpec(
+            data_container=CreateTokenResponse, generate_examples=False,
+            description="Response contains the newly created token."
         ),
         400: InvalidRequestResponse,
-        401: MissingOrInvalidAuthorizationResponse,
+        401: ResponseSpec(
+            data_container=Error, generate_examples=False,
+            description="The provided username and/or password do not match an existing user."
+        ),
     }
 )
-async def create_current_user_token() -> None:
-    pass
+async def create_token(
+    state: State,
+    data: Annotated[
+        CreateTokenRequest,
+        Body(description="The token creation data.")
+    ]
+) -> CreateTokenResponse:
+    user = await User.fetch_by_username_and_password(
+        state.postgresql,
+        name=data.username, password=data.password
+    )
+    secret = secrets.token_hex(32)
+    token = sign_token({"user_id": user.id, "secret": secret})
+    await state.postgresql.execute(
+        "INSERT INTO tokens (user_id, secret, detail) VALUES ($1, $2, $3)",
+        user.id, secret, data.detail
+    )
+    return CreateTokenResponse(token=token)

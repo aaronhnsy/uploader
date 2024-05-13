@@ -13,20 +13,19 @@ __all__ = ["File"]
 
 
 class File(pydantic.BaseModel):
-    model_config = pydantic.ConfigDict(strict=True)
-
+    model_config = pydantic.ConfigDict(strict=True, extra="ignore")
     user_id: Annotated[
         str,
         pydantic.Field(
-            min_length=16, max_length=16,
             description="The owner's user id.",
+            min_length=16, max_length=16
         )
     ]
     name: Annotated[
         str,
         pydantic.Field(
-            min_length=1, max_length=255,
             description="The name of the file, including the file extension.",
+            min_length=1, max_length=255,
         )
     ]
     created_at: Annotated[
@@ -37,11 +36,15 @@ class File(pydantic.BaseModel):
         bool,
         pydantic.Field(description="Whether the file is private or public.")
     ]
+    tags: Annotated[
+        list[str],
+        pydantic.Field(description="The tags associated with the file.")
+    ]
 
     @classmethod
     async def create(
-        cls, database: PostgreSQL, /,
-        *,
+        cls, database: PostgreSQL,
+        /, *,
         user_id: str,
         name: str,
         private: bool,
@@ -54,8 +57,8 @@ class File(pydantic.BaseModel):
 
     @classmethod
     async def get(
-        cls, database: PostgreSQL, /,
-        *,
+        cls, database: PostgreSQL,
+        /, *,
         user_id: str,
         name: str,
     ) -> File | None:
@@ -64,9 +67,3 @@ class File(pydantic.BaseModel):
             user_id, name
         )
         return File.model_validate({**file}) if file else None
-
-    async def delete(self, database: PostgreSQL, /) -> None:
-        await database.execute(
-            "DELETE FROM files WHERE user_id = $1 AND name = $2",
-            self.user_id, self.name
-        )

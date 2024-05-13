@@ -28,13 +28,13 @@ __all__ = [
         404: UserOrFileNotFoundResponse
     }
 )
-async def edit_users_file(user_id: UserIDParameter, filename: FilenameParameter) -> None:
+async def edit_users_file(user_id: UserIDParameter, filename: FilenameParameter) -> File:
     pass
 
 
 @patch(
     path="/{filename:str}",
-    summary="Edit File",
+    summary="Edit Current User's File",
     tags=["Current User Files"],
     responses={
         200: ResponseSpec(
@@ -46,5 +46,5 @@ async def edit_users_file(user_id: UserIDParameter, filename: FilenameParameter)
         404: FileNotFoundResponse
     }
 )
-async def edit_current_users_file(filename: FilenameParameter) -> None:
+async def edit_current_users_file(filename: FilenameParameter) -> File:
     pass
