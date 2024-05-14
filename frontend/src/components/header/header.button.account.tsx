@@ -18,7 +18,7 @@ export async function HeaderAccountButton() {
                   )}>
                 <Image className={clsx("rounded")} width="32" height="32"
                        src={user.profile_picture} alt={"Profile picture for current user."}/>
-                <p>{user.name}</p>
+                <p>{user.username}</p>
             </Link>
         );
     }

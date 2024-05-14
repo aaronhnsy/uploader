@@ -10,7 +10,7 @@ export function FileGrid({files}: { files: File[] }) {
             <Masonry
                 config={{
                     columns: [2, 2, 3, 3, 4, 4],
-                    gap: [24, 25, 24, 24, 24, 24],
+                    gap: [16, 16, 16, 16, 16, 16],
                     media: [576, 768, 992, 1200, 1400, 1600],
                 }}
                 items={files}
@@ -19,9 +19,9 @@ export function FileGrid({files}: { files: File[] }) {
                         switch (file.format) {
                             case "mp4":
                                 return (
-                                    <video className="w-full h-auto rounded hover:scale-105 transition-transform duration-300"
-                                           src={`https://uploader.axel.casa/${file.user_id}/${file.format}/${file.name}.${file.format}`}
-                                           key={file.name}
+                                    <video className="ring-0 outline-2 outline-dashed outline-theme-accent w-full h-auto rounded hover:scale-105 transition-transform duration-300"
+                                           src={`https://uploader.hnsy.dev/${file.user_id}/${file.filename}`}
+                                           key={file.filename}
                                            width={0} height={0}
                                            style={{width: "100%", height: "auto"}}
                                            autoPlay={true}
@@ -30,10 +30,10 @@ export function FileGrid({files}: { files: File[] }) {
                                 );
                             default:
                                 return (
-                                    <Image className="w-full h-auto rounded hover:scale-105 transition-transform duration-300"
-                                           src={`https://uploader.axel.casa/${file.user_id}/${file.format}/${file.name}.${file.format}`}
+                                    <Image className="ring-0 outline-2 outline-dashed outline-theme-accent w-full h-auto rounded hover:scale-105 transition-transform duration-300"
+                                           src={`https://uploader.hnsy.dev/${file.user_id}/${file.filename}`}
                                            alt="hi"
-                                           key={file.name}
+                                           key={file.filename}
                                            width={0}
                                            height={0}
                                            sizes={"100vw"}/>

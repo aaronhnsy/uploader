@@ -13,7 +13,7 @@ from src.routes.users.me.patch import edit_current_user
 from src.routes.users.me.uploads.delete import delete_upload_for_current_user
 from src.routes.users.me.uploads.get import get_upload_for_current_user, get_uploads_for_current_user
 from src.routes.users.me.uploads.patch import update_upload_for_current_user
-from src.routes.users.me.uploads.post import create_uploads_for_current_user
+from src.routes.users.me.uploads.post import create_upload_for_current_user
 
 
 __all__ = ["router"]
@@ -31,7 +31,7 @@ current_user_uploads_router = Router(
     path="", tags=["Uploads (/me)"],
     route_handlers=[
         get_uploads_for_current_user, get_upload_for_current_user,
-        create_uploads_for_current_user,
+        create_upload_for_current_user,
         update_upload_for_current_user,
         delete_upload_for_current_user,
     ]

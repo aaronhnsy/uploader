@@ -6,7 +6,7 @@ export async function useUser() {
         return null;
     }
     const response = await fetch(
-        "http://localhost:8000/api/users/@me",
+        "http://localhost:8000/api/users/me",
         {
             method: "GET",
             headers: {"Authorization": `${token.value}`},

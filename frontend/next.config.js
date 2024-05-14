@@ -5,7 +5,7 @@ module.exports = {
     },
     images: {
         remotePatterns: [
-            { protocol: "https", hostname: "uploader.axel.casa" },
+            { protocol: "https", hostname: "uploader.hnsy.dev" },
             { protocol: "https", hostname: "cdn.discordapp.com" },
         ],
     },
