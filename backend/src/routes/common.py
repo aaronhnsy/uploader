@@ -4,34 +4,34 @@ from litestar.openapi import ResponseSpec
 from litestar.params import Body
 
 from src.exceptions import Error
+from src.objects import Upload, User
 
 
 __all__ = [
-    "UserIDParameter",
-    "FilenameParameter",
-    "InvalidRequestResponse",
-    "MissingOrInvalidAuthorizationResponse",
-    "MissingPermissionsResponse",
-    "UserNotFoundResponse",
-    "FileNotFoundResponse",
-    "UserOrFileNotFoundResponse"
+    "UserIDParameter", "UploadIDParameter",
+    "InvalidRequestResponse", "MissingOrInvalidAuthorizationResponse", "MissingPermissionsResponse",
+    "UserOrUploadNotFoundResponse", "UserNotFoundResponse", "UploadNotFoundResponse",
+    "UserUpdatedResponse", "UploadUpdatedResponse",
+    "UserDeletedResponse", "UploadDeletedResponse"
 ]
+
 
 UserIDParameter = Annotated[
     str,
     Body(
         min_length=16, max_length=16,
-        description="The user's 16 character ID."
+        description="A 16-character user id."
     )
 ]
-FilenameParameter = Annotated[
+UploadIDParameter = Annotated[
     str,
     Body(
-        min_length=1, max_length=255,
-        description="The name of the file."
+        min_length=16, max_length=16,
+        description="A 16-character upload id."
     )
 ]
 
+# Error responses (400, 401, 403)
 InvalidRequestResponse: ResponseSpec = ResponseSpec(
     data_container=Error, generate_examples=False,
     description="Your request is invalid. Check the response `reason` for more information."
@@ -42,17 +42,39 @@ MissingOrInvalidAuthorizationResponse: ResponseSpec = ResponseSpec(
 )
 MissingPermissionsResponse: ResponseSpec = ResponseSpec(
     data_container=Error, generate_examples=False,
-    description="You do not have permission to perform this action."
+    description="The authenticated user does not have permission to perform this action."
+)
+
+# Not Found responses (404)
+UserOrUploadNotFoundResponse: ResponseSpec = ResponseSpec(
+    data_container=Error, generate_examples=False,
+    description="The specified user or upload was not found."
 )
 UserNotFoundResponse: ResponseSpec = ResponseSpec(
     data_container=Error, generate_examples=False,
     description="The specified user was not found."
 )
-FileNotFoundResponse: ResponseSpec = ResponseSpec(
+UploadNotFoundResponse: ResponseSpec = ResponseSpec(
     data_container=Error, generate_examples=False,
-    description="The specified file was not found."
+    description="The specified upload was not found."
 )
-UserOrFileNotFoundResponse: ResponseSpec = ResponseSpec(
-    data_container=Error, generate_examples=False,
-    description="The specified user or file was not found."
+
+# Update responses (200)
+UserUpdatedResponse: ResponseSpec = ResponseSpec(
+    data_container=User, generate_examples=False,
+    description="Response contains the updated user."
+)
+UploadUpdatedResponse: ResponseSpec = ResponseSpec(
+    data_container=Upload, generate_examples=False,
+    description="Response contains the updated upload."
+)
+
+# Deletion responses (204)
+UserDeletedResponse: ResponseSpec = ResponseSpec(
+    data_container=None, generate_examples=False,
+    description="The user was deleted successfully."
+)
+UploadDeletedResponse: ResponseSpec = ResponseSpec(
+    data_container=None, generate_examples=False,
+    description="The upload was deleted successfully."
 )

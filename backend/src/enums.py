@@ -13,4 +13,4 @@ class Environment(enum.Enum):
 
 
 class Permissions(enum.Flag):
-    CREATE_FILES = enum.auto()
+    CREATE_UPLOADS = enum.auto()

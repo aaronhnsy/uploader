@@ -10,15 +10,15 @@ __all__ = ["edit_current_user"]
 
 @patch(
     path="/users/me",
-    summary="Edit Current User",
+    summary="Edit User (/me)",
     responses={
         200: ResponseSpec(
             data_container=User, generate_examples=False,
-            description="The current user was updated successfully.",
+            description="Response contains the updated current user.",
         ),
         400: InvalidRequestResponse,
         401: MissingOrInvalidAuthorizationResponse,
     }
 )
 async def edit_current_user() -> User:
-    pass
+    raise NotImplementedError

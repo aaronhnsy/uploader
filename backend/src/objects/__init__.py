@@ -1,2 +1,2 @@
-from .file import *
+from .upload import *
 from .user import *

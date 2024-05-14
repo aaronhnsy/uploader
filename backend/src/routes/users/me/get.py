@@ -11,7 +11,7 @@ __all__ = ["get_current_user"]
 
 @get(
     path="/users/me",
-    summary="Get Current User",
+    summary="Get User (/me)",
     responses={
         200: ResponseSpec(
             data_container=User, generate_examples=False,

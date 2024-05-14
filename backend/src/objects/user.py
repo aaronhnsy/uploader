@@ -24,7 +24,7 @@ class User(pydantic.BaseModel):
             min_length=16, max_length=16
         )
     ]
-    name: Annotated[
+    username: Annotated[
         str,
         pydantic.Field(
             description="The user's name.",
@@ -50,35 +50,36 @@ class User(pydantic.BaseModel):
     @classmethod
     async def fetch_by_id(cls, database: PostgreSQL, _id: str, /) -> User:
         data: asyncpg.Record | None = await database.fetchrow(
-            "SELECT id, name, bot, permissions, profile_picture FROM users WHERE id = $1",
+            "SELECT id, username, bot, permissions, profile_picture FROM users WHERE id = $1",
             _id
         )
         if data is None:
             raise ReasonException(
                 HTTP_401_UNAUTHORIZED,
-                reason="User not found."
+                reason="A user with the specified id does not exist."
             )
         return User.model_validate({**data})
 
     @classmethod
-    async def fetch_by_username_and_password(
-        cls, database: PostgreSQL,
+    async def validate_username_and_password(
+        cls,
+        database: PostgreSQL,
         /, *,
-        name: str,
+        username: str,
         password: str
     ) -> User:
         data: asyncpg.Record | None = await database.fetchrow(
-            "SELECT id, name, password, bot, permissions, profile_picture FROM users WHERE name = $1",
-            name
+            "SELECT id, username, password, bot, permissions, profile_picture FROM users WHERE username = $1",
+            username
         )
         if data is None:
             raise ReasonException(
                 HTTP_401_UNAUTHORIZED,
-                reason="User not found."
+                reason="A user with the specified username does not exist."
             )
         if verify_password(password, data["password"]) is False:
             raise ReasonException(
                 HTTP_401_UNAUTHORIZED,
-                reason="Password is incorrect."
+                reason="The username and password do not match."
             )
         return User.model_validate({**data})

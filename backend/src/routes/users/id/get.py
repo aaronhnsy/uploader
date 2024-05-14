@@ -16,7 +16,7 @@ __all__ = ["get_user"]
     responses={
         200: ResponseSpec(
             data_container=User, generate_examples=False,
-            description="Response contains the user with the given ID."
+            description="Response contains the user with the specified id."
         ),
         400: InvalidRequestResponse,
         401: MissingOrInvalidAuthorizationResponse,

@@ -9,7 +9,7 @@ __all__ = ["delete_current_user"]
 
 @delete(
     path="/users/me",
-    summary="Delete Current User",
+    summary="Delete User (/me)",
     responses={
         204: ResponseSpec(
             data_container=None, generate_examples=False,
@@ -20,4 +20,4 @@ __all__ = ["delete_current_user"]
     }
 )
 async def delete_current_user() -> None:
-    pass
+    raise NotImplementedError

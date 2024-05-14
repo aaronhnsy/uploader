@@ -15,7 +15,7 @@ __all__ = ["edit_user"]
     responses={
         200: ResponseSpec(
             data_container=User, generate_examples=False,
-            description="The user was updated successfully.",
+            description="Response contains the updated user."
         ),
         400: InvalidRequestResponse,
         401: MissingOrInvalidAuthorizationResponse,
@@ -24,4 +24,4 @@ __all__ = ["edit_user"]
     }
 )
 async def edit_user(user_id: UserIDParameter) -> User:
-    pass
+    raise NotImplementedError

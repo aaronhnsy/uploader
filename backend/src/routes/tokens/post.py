@@ -67,9 +67,9 @@ async def create_token(
         Body(description="The token creation data.")
     ]
 ) -> CreateTokenResponse:
-    user = await User.fetch_by_username_and_password(
+    user = await User.validate_username_and_password(
         state.postgresql,
-        name=data.username, password=data.password
+        username=data.username, password=data.password
     )
     secret = secrets.token_hex(32)
     token = sign_token({"user_id": user.id, "secret": secret})

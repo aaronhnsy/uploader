@@ -31,7 +31,7 @@ type _ExceptionHandlerMapping = \
 class ReasonException(Exception):
 
     def __init__(self, status_code: int, /, *, reason: str) -> None:
-        super().__init__(self)
+        super().__init__(reason)
         self.status_code: int = status_code
         self.reason: str = reason
 

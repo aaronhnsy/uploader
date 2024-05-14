@@ -13,9 +13,9 @@ openapi_config: OpenAPIConfig = \
         path="/api/schema",
         tags=[
             Tag(name="Users", description="Operations related to users."),
-            Tag(name="Files", description="Operations related to files."),
-            Tag(name="Current User", description="Operations related to the current user."),
-            Tag(name="Current User Files", description="Operations related to the current user's files."),
+            Tag(name="Uploads", description="Operations related to uploads."),
+            Tag(name="User (/me)", description="Operations related to the current user."),
+            Tag(name="Uploads (/me)", description="Operations related to the current user's uploads."),
         ],
         components=Components(
             security_schemes={

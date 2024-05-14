@@ -23,4 +23,4 @@ __all__ = ["delete_user"]
     }
 )
 async def delete_user(user_id: UserIDParameter) -> None:
-    pass
+    raise NotImplementedError
