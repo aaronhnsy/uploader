@@ -16,7 +16,7 @@ export function FileGrid({files}: { files: File[] }) {
                 items={files}
                 render={
                     (file, _) => {
-                        switch (file.format) {
+                        switch (file.filename.split(".").pop()) {
                             case "mp4":
                                 return (
                                     <video className="ring-0 outline-2 outline-dashed outline-theme-accent w-full h-auto rounded hover:scale-105 transition-transform duration-300"
