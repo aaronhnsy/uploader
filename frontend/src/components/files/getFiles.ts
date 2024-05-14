@@ -7,7 +7,7 @@ export type File = {
 
 export async function getFiles(): Promise<File[]> {
     const response = await fetch(
-        "http://127.0.0.1:8000/api/users/me/uploads",
+        "http://127.0.0.1:10010/api/users/me/uploads",
         {
             method: "GET",
             headers: {"Authorization": `${cookies().get("__token")?.value}`},

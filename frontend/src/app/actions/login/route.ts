@@ -11,7 +11,7 @@ export async function POST(request: NextRequest) {
         detail: `Browser: ${browser.name} ${browser.version}, Device: ${device.type}, Engine: ${engine.name} ${engine.version}, OS: ${os.name} ${os.version}`,
     };
     const response = await fetch(
-        "http://localhost:8000/api/tokens",
+        "http://127.0.0.1:10010/api/tokens",
         {
             method: "POST",
             headers: {"Content-Type": "application/json"},
