@@ -19,7 +19,7 @@ export default async function Page() {
                 "p-3", "max-w-96",
                 "bg-theme-secondary", "rounded",
                 "cu-transition",
-            )} action="/api/login" method="post">
+            )} action="/_api/login" method="post">
                 <div className={clsx("flex", "flex-col", "space-y-2", "mb-3")}>
                     <label className={clsx("font-bold", "text-md", "text-theme-text", "cu-transition")}
                            htmlFor="username">
