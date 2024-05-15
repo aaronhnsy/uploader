@@ -23,5 +23,8 @@ __all__ = ["get_user"]
         404: UserNotFoundResponse
     }
 )
-async def get_user(state: State, user_id: UserIDParameter) -> User:
+async def get_user(
+    state: State,
+    user_id: UserIDParameter
+) -> User:
     return await User.fetch_by_id(state.postgresql, user_id)

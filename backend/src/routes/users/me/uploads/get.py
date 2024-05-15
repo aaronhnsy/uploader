@@ -27,7 +27,9 @@ __all__ = [
         401: MissingOrInvalidAuthorizationResponse,
     }
 )
-async def get_uploads_for_current_user(state: State, request: Request) -> list[Upload]:
+async def get_uploads_for_current_user(
+    request: Request, state: State
+) -> list[Upload]:
     return await Upload.get_all(state.postgresql, user_id=request.user.id)
 
 
@@ -44,7 +46,10 @@ async def get_uploads_for_current_user(state: State, request: Request) -> list[U
         404: UploadNotFoundResponse
     }
 )
-async def get_upload_for_current_user(state: State, request: Request, upload_id: UploadIDParameter) -> Upload:
+async def get_upload_for_current_user(
+    request: Request, state: State,
+    upload_id: UploadIDParameter
+) -> Upload:
     upload = await Upload.get(state.postgresql, user_id=request.user.id, upload_id=upload_id)
     if upload is None:
         raise ReasonException(

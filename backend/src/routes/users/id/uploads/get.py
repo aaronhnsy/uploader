@@ -27,7 +27,10 @@ __all__ = [
         401: MissingOrInvalidAuthorizationResponse,
     }
 )
-async def get_uploads(state: State, user_id: UserIDParameter) -> list[Upload]:
+async def get_uploads(
+    state: State,
+    user_id: UserIDParameter
+) -> list[Upload]:
     return await Upload.get_all(state.postgresql, user_id=user_id)
 
 
@@ -45,7 +48,7 @@ async def get_uploads(state: State, user_id: UserIDParameter) -> list[Upload]:
     }
 )
 async def get_upload(
-    state: State, request: Request,
+    state: State,
     user_id: UserIDParameter, upload_id: UploadIDParameter
 ) -> Upload:
     upload = await Upload.get(state.postgresql, user_id=user_id, upload_id=upload_id)

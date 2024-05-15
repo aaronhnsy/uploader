@@ -2,26 +2,23 @@ import os
 import pathlib
 from typing import Annotated
 
-import asyncpg
 import pydantic
 from litestar import post
 from litestar.datastructures import UploadFile
 from litestar.enums import RequestEncodingType
 from litestar.openapi import ResponseSpec
 from litestar.params import Body
-from litestar.status_codes import HTTP_409_CONFLICT
 
 from src.config import CONFIG
 from src.enums import Environment
-from src.exceptions import ReasonException
+from src.exceptions import Error
 from src.objects import Upload
 from src.routes.common import InvalidRequestResponse, MissingOrInvalidAuthorizationResponse
 from src.types import Request, State
+from src.utilities import generate_id
 
 
 __all__ = ["create_upload_for_current_user"]
-
-from src.utilities import generate_id
 
 
 MEDIA_DIRECTORY = pathlib.Path(
@@ -61,6 +58,10 @@ class CreateUploadRequest(pydantic.BaseModel):
         ),
         400: InvalidRequestResponse,
         401: MissingOrInvalidAuthorizationResponse,
+        409: ResponseSpec(
+            data_container=Error, generate_examples=False,
+            description="An upload with the specified name already exists."
+        )
         # 409 is returned when the user already has a file with the same name.
     }
 )
@@ -80,19 +81,13 @@ async def create_upload_for_current_user(
     else:
         filename = f"{generate_id()}{pathlib.Path(data.file.filename).suffix}"
     # create a new file record in the database
-    try:
-        upload = await Upload.create(
-            state.postgresql,
-            user_id=request.user.id,
-            filename=filename,
-            public=data.public,
-            tags=data.tags
-        )
-    except asyncpg.UniqueViolationError:
-        raise ReasonException(
-            HTTP_409_CONFLICT,
-            reason="You already have a file with that name."
-        )
+    upload = await Upload.create(
+        state.postgresql,
+        user_id=request.user.id,
+        filename=filename,
+        public=data.public,
+        tags=data.tags
+    )
     # save the file to disk
     path = MEDIA_DIRECTORY / f"{request.user.id}" / f"{filename}"
     path.parent.mkdir(parents=True, exist_ok=True)

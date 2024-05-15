@@ -5,7 +5,9 @@ from typing import Annotated
 
 import asyncpg
 import pydantic
+from litestar.status_codes import HTTP_409_CONFLICT
 
+from src.exceptions import ReasonException
 from src.types import PostgreSQL
 from src.utilities import generate_id
 
@@ -86,8 +88,14 @@ class Upload(pydantic.BaseModel):
         public: bool,
         tags: list[str]
     ) -> Upload:
-        data: asyncpg.Record = await database.fetchrow(  # pyright: ignore
-            "INSERT INTO uploads (user_id, id, filename, created_at, public, tags) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *",
-            user_id, generate_id(), filename, datetime.datetime.now(datetime.UTC), public, tags
-        )
+        try:
+            data: asyncpg.Record = await database.fetchrow(  # pyright: ignore
+                "INSERT INTO uploads (user_id, id, filename, created_at, public, tags) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *",
+                user_id, generate_id(), filename, datetime.datetime.now(datetime.UTC), public, tags
+            )
+        except asyncpg.UniqueViolationError:
+            raise ReasonException(
+                HTTP_409_CONFLICT,
+                reason="An upload with that name already exists."
+            )
         return Upload.model_validate({**data})
