@@ -7,7 +7,7 @@ from litestar.openapi import ResponseSpec
 from litestar.params import Body
 
 from src.exceptions import Error
-from src.objects import User
+from src.models import User
 from src.routes.common import InvalidRequestResponse
 from src.security import sign_token
 from src.types import State
@@ -44,9 +44,8 @@ class CreateTokenResponse(pydantic.BaseModel):
 
 
 @post(
-    path="/",
+    path="/tokens",
     summary="Create Token",
-    tags=["Tokens"],
     exclude_from_auth=True,
     responses={
         201: ResponseSpec(

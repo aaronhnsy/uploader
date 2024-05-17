@@ -1,4 +1,3 @@
-import os
 import pathlib
 from typing import Annotated
 
@@ -9,23 +8,14 @@ from litestar.enums import RequestEncodingType
 from litestar.openapi import ResponseSpec
 from litestar.params import Body
 
-from src.config import CONFIG
-from src.enums import Environment
 from src.exceptions import Error
-from src.objects import Upload
+from src.models import Upload
 from src.routes.common import InvalidRequestResponse, MissingOrInvalidAuthorizationResponse
 from src.types import Request, State
 from src.utilities import generate_id
 
 
 __all__ = ["create_upload_for_current_user"]
-
-
-MEDIA_DIRECTORY = pathlib.Path(
-    f"{os.environ["HOME"]}/media/"
-    if CONFIG.general.environment == Environment.PRODUCTION
-    else "media/"
-)
 
 
 class CreateUploadRequest(pydantic.BaseModel):
@@ -89,7 +79,7 @@ async def create_upload_for_current_user(
         tags=data.tags
     )
     # save the file to disk
-    path = MEDIA_DIRECTORY / f"{request.user.id}" / f"{filename}"
+    path = pathlib.Path("/srv/uploader/") / f"{request.user.id}" / f"{filename}"
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_bytes(await data.file.read())
     # return the upload information

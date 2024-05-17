@@ -1,7 +1,7 @@
 from litestar import get
 from litestar.openapi import ResponseSpec
 
-from src.objects import User
+from src.models import User
 from src.routes.common import InvalidRequestResponse, MissingOrInvalidAuthorizationResponse
 from src.types import Request
 

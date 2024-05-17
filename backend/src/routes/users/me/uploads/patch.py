@@ -1,6 +1,6 @@
 from litestar import patch
 
-from src.objects import Upload
+from src.models import Upload
 from src.routes.common import InvalidRequestResponse, MissingOrInvalidAuthorizationResponse, UploadIDParameter
 from src.routes.common import UploadNotFoundResponse, UploadUpdatedResponse
 

@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { Masonry } from "react-plock";
-import { File } from "./getFiles";
+import { File } from "@/actions/getFiles";
 
 export function FileGrid({files}: { files: File[] }) {
     return (

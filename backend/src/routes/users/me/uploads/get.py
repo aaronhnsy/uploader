@@ -3,7 +3,7 @@ from litestar.openapi import ResponseSpec
 from litestar.status_codes import HTTP_404_NOT_FOUND
 
 from src.exceptions import ReasonException
-from src.objects import Upload
+from src.models import Upload
 from src.routes.common import InvalidRequestResponse, MissingOrInvalidAuthorizationResponse, UploadIDParameter
 from src.routes.common import UploadNotFoundResponse
 from src.types import Request, State

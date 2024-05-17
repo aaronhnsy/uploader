@@ -47,7 +47,7 @@ current_user_router = Router(
 )
 
 tokens_router = Router(
-    path="/tokens", tags=["Tokens"],
+    path="/", tags=["Tokens"],
     route_handlers=[create_token]
 )
 
@@ -56,6 +56,6 @@ router = Router(
     route_handlers=[
         users_router, current_user_router,
         user_uploads_router, current_user_uploads_router,
-        tokens_router
+        tokens_router,
     ]
 )

@@ -4,7 +4,7 @@ from litestar.middleware import AbstractAuthenticationMiddleware, Authentication
 from litestar.status_codes import HTTP_401_UNAUTHORIZED
 
 from src.exceptions import ReasonException
-from src.objects import User
+from src.models import User
 from src.security import unsign_token
 from src.types import Connection, State
 

@@ -1,10 +1,10 @@
-import { useUser } from "@/hooks/useUser";
+import { getUser } from "@/actions/getUser";
 import { clsx } from "clsx";
 import Image from "next/image";
 import Link from "next/link";
 
 export async function HeaderAccountButton() {
-    let user = await useUser();
+    let user = await getUser();
     if (user !== null) {
         return (
             <Link href={"/account"}

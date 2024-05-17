@@ -4,7 +4,7 @@ from litestar.openapi import ResponseSpec
 from litestar.params import Body
 
 from src.exceptions import Error
-from src.objects import Upload, User
+from src.models import Upload, User
 
 
 __all__ = [

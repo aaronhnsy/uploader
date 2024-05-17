@@ -1,4 +1,5 @@
-import { FileGrid, getFiles } from "@/components/files";
+import { FileGrid } from "@/components/files";
+import { getFiles } from "@/actions/getFiles";
 
 export default async function Page() {
     const files = (await getFiles()).reverse();
