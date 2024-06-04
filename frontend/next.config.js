@@ -7,6 +7,7 @@ module.exports = {
         remotePatterns: [
             { protocol: "https", hostname: "uploader.hnsy.dev" },
             { protocol: "https", hostname: "cdn.discordapp.com" },
+            { protocol: "http", hostname: "localhost" },
         ],
     },
 };

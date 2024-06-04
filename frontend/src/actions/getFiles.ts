@@ -9,6 +9,7 @@ export type File = {
     created_at: string;
     public: boolean;
     tags: string[];
+    url: string
 }
 
 export async function getFiles(): Promise<File[]> {

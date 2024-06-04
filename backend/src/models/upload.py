@@ -7,12 +7,16 @@ import asyncpg
 import pydantic
 from litestar.status_codes import HTTP_409_CONFLICT
 
+from src.config import CONFIG
+from src.enums import Environment
 from src.exceptions import ReasonException
 from src.types import PostgreSQL
 from src.utilities import generate_id
 
 
 __all__ = ["Upload"]
+
+URL_BASE = "https://uploader.hnsy.dev/" if CONFIG.general.environment == Environment.PRODUCTION else "http://localhost/"
 
 
 class Upload(pydantic.BaseModel):
@@ -50,6 +54,10 @@ class Upload(pydantic.BaseModel):
         list[str],
         pydantic.Field(description="The tags associated with this upload.")
     ]
+
+    @pydantic.computed_field
+    def url(self) -> str:
+        return f"{URL_BASE}{self.user_id}/{self.filename}"
 
     @classmethod
     async def get(

@@ -15,9 +15,9 @@ asyncpg-stubs     = { version = "~0.29.0" }
 colorama          = { version = "~0.4.0"  }
 passlib           = { version = "~1.7.0"  }
 itsdangerous      = { version = "~2.2.0"  }
-litestar          = { version = "~2.8.0", extras = ["standard", "pydantic", "redis"] }
+litestar          = { version = "~2.9.0", extras = ["standard", "pydantic", "redis"] }
 orjson            = { version = "~3.10.0" }
-typing-extensions = { version = "~4.11.0" }
+typing-extensions = { version = "~4.12.0" }
 
 [tool.pyright]
 include                 = ["src"]

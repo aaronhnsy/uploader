@@ -20,7 +20,7 @@ export function FileGrid({files}: { files: File[] }) {
                             case "mp4":
                                 return (
                                     <video className="ring-0 outline-2 outline-dashed outline-theme-accent w-full h-auto rounded hover:scale-105 transition-transform duration-300"
-                                           src={`https://uploader.hnsy.dev/${file.user_id}/${file.filename}`}
+                                           src={file.url}
                                            key={file.filename}
                                            width={0} height={0}
                                            style={{width: "100%", height: "auto"}}
@@ -30,8 +30,8 @@ export function FileGrid({files}: { files: File[] }) {
                                 );
                             default:
                                 return (
-                                    <Image className="ring-0 outline-2 outline-dashed outline-theme-accent w-full h-auto rounded hover:scale-105 transition-transform duration-300"
-                                           src={`https://uploader.hnsy.dev/${file.user_id}/${file.filename}`}
+                                    <img className="ring-0 outline-2 outline-dashed outline-theme-accent w-full h-auto rounded hover:scale-105 transition-transform duration-300"
+                                           src={file.url}
                                            alt="hi"
                                            key={file.filename}
                                            width={0}
