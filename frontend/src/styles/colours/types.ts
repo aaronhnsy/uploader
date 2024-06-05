@@ -1,7 +1,7 @@
 export type Modes =
     `light` | `dark`;
 export type Accents =
-    `red` | `orange` | `yellow` | `green` | `blue` | `purple`;
+    `red` | `orange` | `yellow` | `green` | `blue` | `purple` | `pink`;
 type ModeVariants =
     `primary` | `primary-hover` | `secondary` | `secondary-hover` | `tertiary` | `tertiary-hover` |
     `text` | `text-hover`;

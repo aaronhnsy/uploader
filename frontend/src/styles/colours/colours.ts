@@ -52,6 +52,10 @@ export const accents: AccentsObject = {
         "light": { "accent": colors.purple[500], "accent-hover": colors.purple[600] },
         "dark": { "accent": colors.purple[500], "accent-hover": colors.purple[600] },
     },
+    "pink": {
+        "light": { "accent": colors.pink[500], "accent-hover": colors.pink[600] },
+        "dark": { "accent": colors.pink[500], "accent-hover": colors.pink[600] },
+    },
 } as const;
 
 function generateColours() {
@@ -101,6 +105,7 @@ export const accentOptions: AccentOptionsObject = {
         "green": "bg-theme-light-green-accent hover:bg-theme-light-green-accent-hover",
         "blue": "bg-theme-light-blue-accent hover:bg-theme-light-blue-accent-hover",
         "purple": "bg-theme-light-purple-accent hover:bg-theme-light-purple-accent-hover",
+        "pink": "bg-theme-light-pink-accent hover:bg-theme-light-pink-accent-hover",
     },
     "dark": {
         "red": "bg-theme-dark-red-accent hover:bg-theme-dark-red-accent-hover",
@@ -109,5 +114,6 @@ export const accentOptions: AccentOptionsObject = {
         "green": "bg-theme-dark-green-accent hover:bg-theme-dark-green-accent-hover",
         "blue": "bg-theme-dark-blue-accent hover:bg-theme-dark-blue-accent-hover",
         "purple": "bg-theme-dark-purple-accent hover:bg-theme-dark-purple-accent-hover",
+        "pink": "bg-theme-dark-pink-accent hover:bg-theme-dark-pink-accent-hover",
     },
 };
