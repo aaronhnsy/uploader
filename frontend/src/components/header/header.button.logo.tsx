@@ -11,7 +11,7 @@ export function HeaderLogoButton() {
                   "fill-theme-accent", "hover:fill-theme-accent-hover",
                   "text-theme-text", "hover:text-theme-text-hover",
                   "font-bold", "text-base",
-                  "cu-transition",
+                  "transitions",
               )}>
             <svg width="32px" height="32px" viewBox="0 0 640 512" xmlns="http://www.w3.org/2000/svg">
                 <path d="M144 480C64.5 480 0 415.5 0 336c0-62.8 40.2-116.2 96.2-135.9c-.1-2.7-.2-5.4-.2-8.1c0-88.4

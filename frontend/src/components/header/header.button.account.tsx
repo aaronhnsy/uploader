@@ -14,7 +14,7 @@ export async function HeaderAccountButton() {
                       "bg-transparent", "hover:bg-theme-primary-hover",
                       "text-theme-text", "hover:text-theme-text-hover",
                       "font-bold", "text-base",
-                      "cu-transition",
+                      "transitions",
                   )}>
                 <Image className={clsx("rounded")} width="32" height="32"
                        src={user.profile_picture} alt={"Profile picture for current user."}/>
@@ -30,7 +30,7 @@ export async function HeaderAccountButton() {
                   "bg-theme-accent", "hover:bg-theme-accent-hover",
                   "text-gray-800", "hover:text-gray-900",
                   "font-bold", "text-sm",
-                  "cu-transition",
+                  "transitions",
               )}>
             <p>Login</p>
         </Link>

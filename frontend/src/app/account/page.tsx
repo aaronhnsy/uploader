@@ -8,7 +8,7 @@ export default async function Page() {
             {user !== null
                 ? (
                     <div className={clsx("flex", "flex-col", "space-y-3")}>
-                        <h1 className={clsx("font-bold", "text-lg", "text-theme-text", "cu-transition")}>
+                        <h1 className={clsx("font-bold", "text-lg", "text-theme-text", "transitions")}>
                             Welcome, {user.username}
                         </h1>
                         <button className={clsx(
@@ -17,14 +17,14 @@ export default async function Page() {
                             "bg-theme-accent", "hover:bg-theme-accent-hover",
                             "text-gray-800", "hover:text-gray-900",
                             "font-bold", "text-sm",
-                            "cu-transition",
+                            "transitions",
                         )} type="button">
                             Logout
                         </button>
                     </div>
                 )
                 : (
-                    <h1 className={clsx("font-bold", "text-lg", "text-theme-text", "cu-transition")}>
+                    <h1 className={clsx("font-bold", "text-lg", "text-theme-text", "transitions")}>
                         You are not logged in.
                     </h1>
                 )

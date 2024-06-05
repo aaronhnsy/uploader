@@ -34,7 +34,7 @@ export function HeaderLinks() {
                         "w-10", "h-10", "ml-auto", "sm:hidden",
                         "bg-theme-secondary", "hover:bg-theme-secondary-hover",
                         "fill-theme-accent", "hover:fill-theme-accent-hover",
-                        "cu-transition",
+                        "transitions",
                     )}>
                 {isExpanded ? headerLinksCollapseIcon : headerLinksExpandIcon}
             </button>
@@ -52,7 +52,7 @@ export function HeaderLinks() {
                     "space-y-1", "sm:space-y-0",
                     "rounded", "sm:rounded-none",
                     "bg-theme-secondary", "sm:bg-transparent",
-                    "cu-transition", "sm:transition-none",
+                    "transitions", "sm:transition-none",
                 )}>
                     <HeaderLinkButton href={"/"} text="Home"></HeaderLinkButton>
                     <HeaderLinkButton href={"/files"} text="Files"></HeaderLinkButton>

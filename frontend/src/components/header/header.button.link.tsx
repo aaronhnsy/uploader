@@ -24,7 +24,7 @@ export function HeaderLinkButton({ href, text }: HeaderLinkProps) {
                           "text-theme-text", "hover:text-theme-text-hover",
                       ],
                   "font-bold", "text-sm",
-                  "cu-transition",
+                  "transitions",
               )}>
             <p>{text}</p>
         </Link>
