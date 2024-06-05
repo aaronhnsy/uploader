@@ -2,7 +2,7 @@
 
 import { cookies } from "next/headers";
 
-export type File = {
+export type Upload = {
     user_id: string;
     id: string;
     filename: string;
@@ -12,7 +12,7 @@ export type File = {
     url: string
 }
 
-export async function getFiles(): Promise<File[]> {
+export async function getUploads(): Promise<Upload[]> {
     const response = await fetch(
         "http://localhost/api/users/me/uploads",
         {

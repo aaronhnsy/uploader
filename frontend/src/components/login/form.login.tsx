@@ -13,7 +13,7 @@ export function LoginForm() {
                 "p-3", "max-w-96",
                 "bg-theme-secondary", "rounded",
                 "transitions",
-            )} action={login} method="POST">
+            )} action={login}>
                 <div className={clsx("flex", "flex-col", "space-y-2", "mb-3")}>
                     <label className={clsx("text-size-7", "text-theme-text", "transitions")}
                            htmlFor="username">

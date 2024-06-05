@@ -55,7 +55,7 @@ export function HeaderLinks() {
                     "transitions", "sm:transition-none",
                 )}>
                     <HeaderLinkButton href={"/"} text="Home"></HeaderLinkButton>
-                    <HeaderLinkButton href={"/files"} text="Files"></HeaderLinkButton>
+                    <HeaderLinkButton href={"/uploads"} text="Uploads"></HeaderLinkButton>
                 </ul>
             </div>
         </>
