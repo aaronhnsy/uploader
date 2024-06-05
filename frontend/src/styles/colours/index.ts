@@ -1,2 +1,2 @@
-export { modes, accents, modeOptions, accentOptions, coloursPlugin, customColours } from "./colours";
+export { modes, accents, modeOptions, accentOptions, tailwindColours, cssRules } from "./colours";
 export type { Modes } from "./types";
