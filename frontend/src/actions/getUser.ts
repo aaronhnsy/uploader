@@ -8,6 +8,7 @@ export interface User {
     bot: boolean,
     permissions: number,
     profile_picture: string,
+    upload_count: number,
 }
 
 export async function getUser(): Promise<User | null> {

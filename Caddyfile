@@ -1,0 +1,9 @@
+http://localhost {
+    reverse_proxy /api/* localhost:10010
+    file_server {
+        root /srv/uploader
+    }
+    handle_errors {
+        reverse_proxy * localhost:10011
+    }
+}

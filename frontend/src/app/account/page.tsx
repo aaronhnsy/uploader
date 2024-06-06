@@ -11,26 +11,28 @@ export default async function Page() {
                 "bg-theme-secondary", "rounded", "transitions",
             )}>
                 <div className={clsx(
-                    "col-span-4", "row-span-2", "flex", "items-center", "justify-center", "p-2",
-                    "bg-theme-secondary-hover", "rounded", "transitions",
+                    "col-span-4", "row-span-2", "flex", "flex-col", "items-center", "justify-center", "p-2",
+                    "bg-theme-secondary-hover", "rounded", "transitions", "text-theme-text",
                 )}>
-                    1
+                    <p className={clsx("text-size-4", "text-theme-text")}>{user.username}</p>
+                    <p className={clsx("text-size-4", "text-theme-text")}>{user.upload_count}</p>
+
                 </div>
                 <div className={clsx(
                     "col-span-2", "row-span-4", "col-start-5", "flex", "items-center", "justify-center", "p-2",
-                    "bg-theme-secondary-hover", "rounded", "transitions",
+                    "bg-theme-secondary-hover", "rounded", "transitions", "text-theme-text"
                 )}>
                     <Image src={user.profile_picture} alt={"user profile picture"} width={128} height={128}></Image>
                 </div>
                 <div className={clsx(
                     "col-span-2", "row-span-2", "row-start-3", "flex", "items-center", "justify-center", "p-2",
-                    "bg-theme-secondary-hover", "rounded", "transitions",
+                    "bg-theme-secondary-hover", "rounded", "transitions", "text-theme-text"
                 )}>
                     3
                 </div>
                 <div className={clsx(
                     "col-span-2", "row-span-2", "col-start-3", "row-start-3", "flex", "items-center", "justify-center", "p-2",
-                    "bg-theme-secondary-hover", "rounded", "transitions",
+                    "bg-theme-secondary-hover", "rounded", "transitions", "text-theme-text"
                 )}>
                     4
                 </div>

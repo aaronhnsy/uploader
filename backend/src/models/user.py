@@ -46,11 +46,17 @@ class User(pydantic.BaseModel):
         str,
         pydantic.Field(description="The user's profile picture.")
     ]
+    upload_count: Annotated[
+        int,
+        pydantic.Field(description="The number of uploads the user has.")
+    ]
 
     @classmethod
     async def fetch_by_id(cls, database: PostgreSQL, _id: str, /) -> User:
         data: asyncpg.Record | None = await database.fetchrow(
-            "SELECT id, username, bot, permissions, profile_picture FROM users WHERE id = $1",
+            "SELECT id, username, bot, permissions, profile_picture, "
+            "(SELECT count(*) FROM uploads WHERE uploads.user_id = $1) as upload_count "
+            "FROM users WHERE users.id = $1",
             _id
         )
         if data is None:
