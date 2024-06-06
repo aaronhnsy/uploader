@@ -11,7 +11,7 @@ export async function HeaderAccountButton() {
                   className={clsx(
                       "flex", "items-center", "justify-center", "rounded",
                       "h-10", "ps-1", "pe-2", "space-x-2", "sm:order-1",
-                      "bg-transparent", "hover:bg-theme-primary-hover",
+                      "bg-theme-secondary", "hover:bg-theme-secondary-hover",
                       "text-theme-text", "hover:text-theme-text-hover",
                       "font-bold", "text-base",
                       "transitions",

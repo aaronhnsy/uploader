@@ -7,7 +7,7 @@ export function HeaderLogoButton() {
               className={clsx(
                   "flex", "items-center", "justify-center", "rounded",
                   "h-10", "px-2", "mr-2", "space-x-2",
-                  "bg-transparent", "hover:bg-theme-primary-hover",
+                  "bg-theme-secondary", "hover:bg-theme-secondary-hover",
                   "fill-theme-accent", "hover:fill-theme-accent-hover",
                   "text-theme-text", "hover:text-theme-text-hover",
                   "font-bold", "text-base",
