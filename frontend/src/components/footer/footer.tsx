@@ -4,11 +4,11 @@ import { FooterThemeSwitcher } from "./footer.themeSwitcher";
 export function Footer() {
     return (
         <footer className={clsx(
-            "flex", "justify-between", "items-center", "rounded",
+            "flex", "items-center", "justify-between", "rounded",
             "p-2",
-            "bg-theme-secondary", "transitions",
+            "bg-colour-secondary", "transitions",
         )}>
-            <p className={clsx("font-semibold", "text-md", "text-theme-text", "transitions")}>aaronhnsy</p>
+            <p className={clsx("text-size-6", "text-colour-text", "transitions")}>aaronhnsy</p>
             <div className={clsx("space-y-2")}>
                 <FooterThemeSwitcher/>
             </div>

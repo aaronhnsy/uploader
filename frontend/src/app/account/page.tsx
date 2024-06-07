@@ -1,43 +1,59 @@
 import { getUser } from "@/actions/getUser";
+import { LoginForm } from "@/components/login";
 import { clsx } from "clsx";
 import Image from "next/image";
 
 export default async function Page() {
-    let user = await getUser();
+    const user = await getUser();
+    if (user === null || user === undefined) {
+        return <LoginForm/>;
+    }
     return (
-        <div className={clsx("flex-1", "flex")}>
+        <div className={clsx(
+            "flex", "flex-1", "rounded",
+            "p-2",
+            "bg-colour-secondary", "transitions",
+        )}>
             <div className={clsx(
-                "flex-1", "grid", "grid-cols-6", "grid-rows-4", "gap-2", "p-2",
-                "bg-theme-secondary", "rounded", "transitions",
+                "grid", "grid-cols-5", "gap-2", "flex-1",
             )}>
                 <div className={clsx(
-                    "col-span-4", "row-span-2", "flex", "flex-col", "items-center", "justify-center", "p-2",
-                    "bg-theme-secondary-hover", "rounded", "transitions", "text-theme-text",
+                    "flex", "flex-col", "items-center", "justify-center", "rounded",
+                    "col-span-3", "p-2", "text-size-4",
+                    "bg-colour-primary", "text-colour-text", "transitions",
                 )}>
-                    <p className={clsx("text-size-4", "text-theme-text")}>{user.username}</p>
-                    <p className={clsx("text-size-4", "text-theme-text")}>{user.upload_count}</p>
-
+                    <p className={clsx("text-size-3")}>Name</p>
+                    <p className={clsx("text-size-4")}>{user.username}</p>
                 </div>
                 <div className={clsx(
-                    "col-span-2", "row-span-4", "col-start-5", "flex", "items-center", "justify-center", "p-2",
-                    "bg-theme-secondary-hover", "rounded", "transitions", "text-theme-text"
+                    "flex", "flex-col", "items-center", "justify-center", "rounded",
+                    "col-span-3", "row-start-2", "p-2",
+                    "bg-colour-primary", "text-colour-text", "transitions",
                 )}>
-                    <Image src={user.profile_picture} alt={"user profile picture"} width={128} height={128}></Image>
+                    <p className={clsx("text-size-3")}>Upload Count</p>
+                    <p className={clsx("text-size-4")}>{user.upload_count}</p>
                 </div>
                 <div className={clsx(
-                    "col-span-2", "row-span-2", "row-start-3", "flex", "items-center", "justify-center", "p-2",
-                    "bg-theme-secondary-hover", "rounded", "transitions", "text-theme-text"
+                    "flex", "flex-wrap", "items-start", "md:items-center", "justify-center", "md:justify-evenly", "rounded",
+                    "col-span-2", "row-span-2", "p-2",
+                    "bg-colour-primary", "text-colour-text", "transitions",
                 )}>
-                    3
+                    <Image className={clsx("rounded", "md:m-4")} height="200" width="200"
+                           src={user.profile_picture} alt="user profile picture"/>
+                    <p>upload new</p>
                 </div>
-                <div className={clsx(
-                    "col-span-2", "row-span-2", "col-start-3", "row-start-3", "flex", "items-center", "justify-center", "p-2",
-                    "bg-theme-secondary-hover", "rounded", "transitions", "text-theme-text"
-                )}>
-                    4
-                </div>
+                {
+                    Array.from({ length: 25 }).map((_, index) => (
+                        <div key={index} className={clsx(
+                            "flex", "items-center", "justify-center", "rounded",
+                            "p-2",
+                            "bg-colour-primary", "text-colour-text", "transitions",
+                        )}>
+                            {index + 1}
+                        </div>
+                    ))
+                }
             </div>
         </div>
-
     );
 }

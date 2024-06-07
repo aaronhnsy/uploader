@@ -6,11 +6,11 @@ export function HeaderLogoButton() {
         <Link href={"/"}
               className={clsx(
                   "flex", "items-center", "justify-center", "rounded",
-                  "h-10", "px-2", "mr-2", "space-x-2",
-                  "bg-theme-secondary", "hover:bg-theme-secondary-hover",
-                  "fill-theme-accent", "hover:fill-theme-accent-hover",
-                  "text-theme-text", "hover:text-theme-text-hover",
-                  "font-bold", "text-base",
+                  "h-10", "mr-2", "px-2", "space-x-2",
+                  "bg-colour-secondary", "hover:bg-colour-secondary-hover",
+                  "fill-colour-accent", "hover:fill-colour-accent-hover",
+                  "text-colour-text", "hover:text-colour-text-hover",
+                  "text-size-7",
                   "transitions",
               )}>
             <svg width="32px" height="32px" viewBox="0 0 640 512" xmlns="http://www.w3.org/2000/svg">

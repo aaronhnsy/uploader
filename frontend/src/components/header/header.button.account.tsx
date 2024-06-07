@@ -11,9 +11,9 @@ export async function HeaderAccountButton() {
                   className={clsx(
                       "flex", "items-center", "justify-center", "rounded",
                       "h-10", "ps-1", "pe-2", "space-x-2", "sm:order-1",
-                      "bg-theme-secondary", "hover:bg-theme-secondary-hover",
-                      "text-theme-text", "hover:text-theme-text-hover",
-                      "font-bold", "text-base",
+                      "bg-colour-secondary", "hover:bg-colour-secondary-hover",
+                      "text-colour-text", "hover:text-colour-text-hover",
+                      "text-size-7",
                       "transitions",
                   )}>
                 <Image className={clsx("rounded")} width="32" height="32"
@@ -27,9 +27,9 @@ export async function HeaderAccountButton() {
               className={clsx(
                   "flex", "items-center", "justify-center", "rounded",
                   "h-10", "px-2", "sm:order-1",
-                  "bg-theme-accent", "hover:bg-theme-accent-hover",
+                  "bg-colour-accent", "hover:bg-colour-accent-hover",
                   "text-gray-800", "hover:text-gray-900",
-                  "font-bold", "text-sm",
+                  "text-size-8",
                   "transitions",
               )}>
             <p>Login</p>

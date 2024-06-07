@@ -22,11 +22,11 @@ export type AccentsObject = {
 }
 
 export type ModeOptionsObject = {
-    [M in Modes]: `bg-theme-${M}-primary hover:bg-theme-${M}-primary-hover`
+    [M in Modes]: `bg-colour-${M}-primary hover:bg-colour-${M}-primary-hover`
 };
 export type AccentOptionsObject = {
     [M in Modes]: {
-        [A in Accents]: `bg-theme-${M}-${A}-accent hover:bg-theme-${M}-${A}-accent-hover`
+        [A in Accents]: `bg-colour-${M}-${A}-accent hover:bg-colour-${M}-${A}-accent-hover`
     }
 };
 

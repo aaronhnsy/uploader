@@ -31,9 +31,9 @@ export function HeaderLinks() {
                     onClick={() => setIsExpanded(!isExpanded)}
                     className={clsx(
                         "flex", "items-center", "justify-center", "rounded",
-                        "w-10", "h-10", "ml-auto", "sm:hidden",
-                        "bg-theme-secondary", "hover:bg-theme-secondary-hover",
-                        "fill-theme-accent", "hover:fill-theme-accent-hover",
+                        "size-10", "ml-auto", "sm:hidden",
+                        "bg-colour-secondary", "hover:bg-colour-secondary-hover",
+                        "fill-colour-accent", "hover:fill-colour-accent-hover",
                         "transitions",
                     )}>
                 {isExpanded ? headerLinksCollapseIcon : headerLinksExpandIcon}
@@ -51,7 +51,7 @@ export function HeaderLinks() {
                     "space-x-0", "sm:space-x-2",
                     "space-y-1", "sm:space-y-0",
                     "rounded", "sm:rounded-none",
-                    "bg-theme-secondary", "sm:bg-transparent",
+                    "bg-colour-secondary", "sm:bg-transparent",
                     "transitions", "sm:transition-none",
                 )}>
                     <HeaderLinkButton href={"/"} text="Home"></HeaderLinkButton>

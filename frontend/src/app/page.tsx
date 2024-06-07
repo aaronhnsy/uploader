@@ -8,7 +8,7 @@ export const metadata: Metadata = {
 export default function Page() {
     return (
         <div className={clsx("flex-1", "flex", "items-center", "justify-center")}>
-            <h1 className={clsx("text-size-1", "text-theme-text", "transitions")}>
+            <h1 className={clsx("text-size-1", "text-colour-text", "transitions")}>
                 Home
             </h1>
         </div>

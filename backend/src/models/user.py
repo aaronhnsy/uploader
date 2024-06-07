@@ -55,7 +55,7 @@ class User(pydantic.BaseModel):
     async def fetch_by_id(cls, database: PostgreSQL, _id: str, /) -> User:
         data: asyncpg.Record | None = await database.fetchrow(
             "SELECT id, username, bot, permissions, profile_picture, "
-            "(SELECT count(*) FROM uploads WHERE uploads.user_id = $1) as upload_count "
+            "(SELECT count(*) FROM uploads WHERE uploads.user_id = users.id) as upload_count "
             "FROM users WHERE users.id = $1",
             _id
         )
@@ -75,7 +75,9 @@ class User(pydantic.BaseModel):
         password: str
     ) -> User:
         data: asyncpg.Record | None = await database.fetchrow(
-            "SELECT id, username, password, bot, permissions, profile_picture FROM users WHERE username = $1",
+            "SELECT id, username, password, bot, permissions, profile_picture, "
+            "(SELECT count(*) FROM uploads WHERE uploads.user_id = users.id) as upload_count "
+            "FROM users WHERE username = $1",
             username
         )
         if data is None:

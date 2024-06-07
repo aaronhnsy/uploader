@@ -33,14 +33,14 @@ export function FooterThemeSwitcherContainer({ options, mode, accent, state, set
         <div className={clsx(
             "flex", "flex-wrap", "items-center", "justify-end", "rounded",
             "p-2", "space-x-2",
-            "bg-theme-tertiary", "transitions",
+            "bg-colour-tertiary", "transitions",
         )}>
             {Object.entries(options).map(
                 ([option, value]) => (
                     <button type="button" aria-label="theme-switcher" key={option}
                             className={clsx(
                                 "flex", "items-center", "justify-center", "rounded",
-                                "w-5", "h-5", "hover:active:scale-105",
+                                "size-5", "hover:scale-105",
                                 value, "transitions",
                             )}
                             onClick={() => {

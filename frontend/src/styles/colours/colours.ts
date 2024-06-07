@@ -67,10 +67,10 @@ function generateColours() {
         const modeSelector = `html[data-theme*='${mode}']`;
         cssRules[modeSelector] = {};
         for (const [variant, value] of Object.entries(modeVariants)) {
-            const themeModeVariant = `theme-${mode}-${variant}`;
+            const themeModeVariant = `colour-${mode}-${variant}`;
             cssRules[":root"][`--${themeModeVariant}`] = rgb(value);
             tailwindColours[themeModeVariant] = `rgb(var(--${themeModeVariant}) / <alpha-value>)`;
-            const themeVariant = `theme-${variant}`;
+            const themeVariant = `colour-${variant}`;
             cssRules[modeSelector][`--${themeVariant}`] = `var(--${themeModeVariant})`;
             tailwindColours[themeVariant] = `rgb(var(--${themeVariant}) / <alpha-value>)`;
         }
@@ -79,10 +79,10 @@ function generateColours() {
             const modeAccentSelector = `html[data-theme='${mode}-${accent}']`;
             cssRules[modeAccentSelector] = {};
             for (const [variant, value] of Object.entries(accentVariants[mode as Modes])) {
-                const themeModeAccentVariant = `theme-${mode}-${accent}-${variant}`;
+                const themeModeAccentVariant = `colour-${mode}-${accent}-${variant}`;
                 cssRules[":root"][`--${themeModeAccentVariant}`] = rgb(value);
                 tailwindColours[themeModeAccentVariant] = `rgb(var(--${themeModeAccentVariant}) / <alpha-value>)`;
-                const themeVariant = `theme-${variant}`;
+                const themeVariant = `colour-${variant}`;
                 cssRules[modeAccentSelector][`--${themeVariant}`] = `var(--${themeModeAccentVariant})`;
                 tailwindColours[themeVariant] = `rgb(var(--${themeVariant}) / <alpha-value>)`;
             }
@@ -94,26 +94,26 @@ function generateColours() {
 export const [cssRules, tailwindColours] = generateColours();
 
 export const modeOptions: ModeOptionsObject = {
-    "light": "bg-theme-light-primary hover:bg-theme-light-primary-hover",
-    "dark": "bg-theme-dark-primary hover:bg-theme-dark-primary-hover",
+    "light": "bg-colour-light-primary hover:bg-colour-light-primary-hover",
+    "dark": "bg-colour-dark-primary hover:bg-colour-dark-primary-hover",
 };
 export const accentOptions: AccentOptionsObject = {
     "light": {
-        "red": "bg-theme-light-red-accent hover:bg-theme-light-red-accent-hover",
-        "orange": "bg-theme-light-orange-accent hover:bg-theme-light-orange-accent-hover",
-        "yellow": "bg-theme-light-yellow-accent hover:bg-theme-light-yellow-accent-hover",
-        "green": "bg-theme-light-green-accent hover:bg-theme-light-green-accent-hover",
-        "blue": "bg-theme-light-blue-accent hover:bg-theme-light-blue-accent-hover",
-        "purple": "bg-theme-light-purple-accent hover:bg-theme-light-purple-accent-hover",
-        "pink": "bg-theme-light-pink-accent hover:bg-theme-light-pink-accent-hover",
+        "red": "bg-colour-light-red-accent hover:bg-colour-light-red-accent-hover",
+        "orange": "bg-colour-light-orange-accent hover:bg-colour-light-orange-accent-hover",
+        "yellow": "bg-colour-light-yellow-accent hover:bg-colour-light-yellow-accent-hover",
+        "green": "bg-colour-light-green-accent hover:bg-colour-light-green-accent-hover",
+        "blue": "bg-colour-light-blue-accent hover:bg-colour-light-blue-accent-hover",
+        "purple": "bg-colour-light-purple-accent hover:bg-colour-light-purple-accent-hover",
+        "pink": "bg-colour-light-pink-accent hover:bg-colour-light-pink-accent-hover",
     },
     "dark": {
-        "red": "bg-theme-dark-red-accent hover:bg-theme-dark-red-accent-hover",
-        "orange": "bg-theme-dark-orange-accent hover:bg-theme-dark-orange-accent-hover",
-        "yellow": "bg-theme-dark-yellow-accent hover:bg-theme-dark-yellow-accent-hover",
-        "green": "bg-theme-dark-green-accent hover:bg-theme-dark-green-accent-hover",
-        "blue": "bg-theme-dark-blue-accent hover:bg-theme-dark-blue-accent-hover",
-        "purple": "bg-theme-dark-purple-accent hover:bg-theme-dark-purple-accent-hover",
-        "pink": "bg-theme-dark-pink-accent hover:bg-theme-dark-pink-accent-hover",
+        "red": "bg-colour-dark-red-accent hover:bg-colour-dark-red-accent-hover",
+        "orange": "bg-colour-dark-orange-accent hover:bg-colour-dark-orange-accent-hover",
+        "yellow": "bg-colour-dark-yellow-accent hover:bg-colour-dark-yellow-accent-hover",
+        "green": "bg-colour-dark-green-accent hover:bg-colour-dark-green-accent-hover",
+        "blue": "bg-colour-dark-blue-accent hover:bg-colour-dark-blue-accent-hover",
+        "purple": "bg-colour-dark-purple-accent hover:bg-colour-dark-purple-accent-hover",
+        "pink": "bg-colour-dark-pink-accent hover:bg-colour-dark-pink-accent-hover",
     },
 };
