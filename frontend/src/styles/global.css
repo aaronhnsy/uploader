@@ -12,12 +12,12 @@
     .text-size-7 { @apply font-bold text-base; }
     .text-size-8 { @apply font-bold text-sm; }
     .text-size-9 { @apply font-medium text-xs; }
-    .transitions { @apply transition-all ease-in-out duration-300; }
+    .transitions { @apply transition-colors ease-in-out duration-300; }
 }
 
 html {
-    --scrollbar-color-track: rgb(var(--theme-secondary));
-    --scrollbar-color-thumb: rgb(var(--theme-accent));
+    --scrollbar-color-track: rgb(var(--colour-secondary));
+    --scrollbar-color-thumb: rgb(var(--colour-accent));
 
     @supports (scrollbar-width: auto) {
         scrollbar-color: var(--scrollbar-color-thumb) var(--scrollbar-color-track);

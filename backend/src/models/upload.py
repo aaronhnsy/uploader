@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import datetime
+import pathlib
 from typing import Annotated
 
 import asyncpg
@@ -84,7 +85,8 @@ class Upload(pydantic.BaseModel):
             "SELECT user_id, id, filename, created_at, public, tags FROM uploads WHERE user_id = $1",
             user_id
         )
-        return [Upload.model_validate({**row}) for row in data]
+        files = [x.name for x in pathlib.Path(f"/srv/uploader/{user_id}/").iterdir()]
+        return [Upload.model_validate({**row}) for row in data if row["filename"] in files]
 
     @classmethod
     async def create(
