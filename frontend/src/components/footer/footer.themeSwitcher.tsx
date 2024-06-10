@@ -15,7 +15,7 @@ interface FooterThemeSwitcherContainerProps {
 }
 
 const icon = (
-    <svg className={clsx("w-3", "h-3")}
+    <svg className={clsx("size-3")}
          viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
         <path d="M47.6 300.4L228.3 469.1c7.5 7 17.4 10.9 27.7 10.9s20.2-3.9 27.7-10.9L464.4 300.4c30.4-28.3
                  47.6-68 47.6-109.5v-5.8c0-69.9-50.5-129.5-119.4-141C347 36.5 300.6 51.4 268 84L256 96 244
@@ -37,7 +37,7 @@ export function FooterThemeSwitcherContainer({ options, mode, accent, state, set
         )}>
             {Object.entries(options).map(
                 ([option, value]) => (
-                    <button type="button" aria-label="theme-switcher" key={option}
+                    <button type="button" aria-label="theme switcher" key={option}
                             className={clsx(
                                 "flex", "items-center", "justify-center", "rounded",
                                 "size-5", "hover:scale-110",

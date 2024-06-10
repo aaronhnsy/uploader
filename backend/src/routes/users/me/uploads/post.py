@@ -79,7 +79,7 @@ async def create_upload_for_current_user(
         tags=data.tags
     )
     # save the file to disk
-    path = pathlib.Path("/srv/uploader/") / f"{request.user.id}" / f"{filename}"
+    path = pathlib.Path("../uploads") / f"{request.user.id}" / f"{filename}"
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_bytes(await data.file.read())
     # return the upload information

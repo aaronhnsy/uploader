@@ -85,7 +85,9 @@ class Upload(pydantic.BaseModel):
             "SELECT user_id, id, filename, created_at, public, tags FROM uploads WHERE user_id = $1",
             user_id
         )
-        files = [x.name for x in pathlib.Path(f"/srv/uploader/{user_id}/").iterdir()]
+        path = pathlib.Path(f"../uploads/{user_id}")
+        path.mkdir(parents=True, exist_ok=True)
+        files = [x.name for x in path.iterdir()]
         return [Upload.model_validate({**row}) for row in data if row["filename"] in files]
 
     @classmethod
