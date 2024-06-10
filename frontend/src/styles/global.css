@@ -13,6 +13,7 @@
     .text-size-8 { @apply font-bold text-sm; }
     .text-size-9 { @apply font-medium text-xs; }
     .transitions { @apply transition-colors ease-in-out duration-300; }
+    .transitions-all { @apply transition-all ease-in-out duration-300; }
 }
 
 html {
