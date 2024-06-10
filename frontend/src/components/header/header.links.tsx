@@ -1,7 +1,7 @@
 "use client";
 
 import { clsx } from "clsx";
-import { HeaderLinkButton } from "components/header/header.button.link";
+import { HeaderLink } from "./header.link";
 import { useState } from "react";
 
 const headerLinksExpandIcon = (
@@ -54,8 +54,8 @@ export function HeaderLinks() {
                     "bg-colour-secondary", "sm:bg-transparent",
                     "transitions", "sm:transition-none",
                 )}>
-                    <HeaderLinkButton href={"/"} text="Home"></HeaderLinkButton>
-                    <HeaderLinkButton href={"/uploads"} text="Uploads"></HeaderLinkButton>
+                    <HeaderLink href={"/"} text="Home"/>
+                    <HeaderLink href={"/uploads"} text="Uploads"/>
                 </ul>
             </div>
         </>

@@ -1,7 +1,7 @@
 import { clsx } from "clsx";
 import Link from "next/link";
 
-export function HeaderLogoButton() {
+export function HeaderLogo() {
     return (
         <Link href={"/"}
               className={clsx(

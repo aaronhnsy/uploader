@@ -1,5 +1,5 @@
 import { getUser } from "@/actions/getUser";
-import { LoginForm } from "@/components/login";
+import { LoginForm } from "@/components/loginForm";
 import { clsx } from "clsx";
 import Image from "next/image";
 

@@ -3,7 +3,7 @@ import { clsx } from "clsx";
 import Image from "next/image";
 import Link from "next/link";
 
-export async function HeaderAccountButton() {
+export async function HeaderAccount() {
     let user = await getUser();
     if (user !== null) {
         return (
