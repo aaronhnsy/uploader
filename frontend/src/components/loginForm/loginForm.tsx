@@ -2,9 +2,15 @@
 
 import { login } from "@/actions/login";
 import { clsx } from "clsx";
-import { LoginFormSubmit } from "./loginForm.submit";
+import { useFormState } from "react-dom";
+import { LoginFormButton } from "./loginForm.button";
+
+const initialState = {
+    message: "",
+};
 
 export function LoginForm() {
+    const [state, formAction] = useFormState(login, initialState);
     return (
         <div className={clsx("flex-1", "flex", "items-center", "justify-center")}>
             <form className={clsx(
@@ -12,7 +18,7 @@ export function LoginForm() {
                 "p-3", "max-w-96",
                 "bg-colour-secondary", "rounded",
                 "transitions",
-            )} action={login}>
+            )} action={formAction}>
                 <div className={clsx("flex", "flex-col", "space-y-2", "mb-3")}>
                     <label className={clsx("text-size-7", "text-colour-text", "transitions")}
                            htmlFor="username">
@@ -37,7 +43,12 @@ export function LoginForm() {
                         "transitions",
                     )} id="password" type="password" name="password"/>
                 </div>
-                <LoginFormSubmit/>
+                <LoginFormButton/>
+                {state.message && (
+                    <div className={clsx("text-size-7", "text-colour-dark-red-accent", "mt-3")}>
+                        {state.message}
+                    </div>
+                )}
             </form>
         </div>
     );

@@ -3,7 +3,7 @@
 import { clsx } from "clsx";
 import { useFormStatus } from "react-dom";
 
-export function LoginFormSubmit() {
+export function LoginFormButton() {
     const { pending } = useFormStatus();
     return (
         <button className={clsx(
