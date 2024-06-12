@@ -1,5 +1,8 @@
+from typing import Annotated
+
 from litestar import get
 from litestar.openapi import ResponseSpec
+from litestar.params import Parameter
 from litestar.status_codes import HTTP_404_NOT_FOUND
 
 from src.exceptions import ReasonException
@@ -28,7 +31,31 @@ __all__ = [
     }
 )
 async def get_uploads_for_current_user(
-    request: Request, state: State
+    request: Request, state: State,
+    limit: Annotated[
+        int,
+        Parameter(
+            ge=1, le=50,
+            title="Limit",
+            description="The maximum number of uploads to return."
+        )
+    ] = 50,
+    offset: Annotated[
+        int,
+        Parameter(
+            ge=0,
+            title="Offset",
+            description="The number of uploads to skip before returning results."
+        )
+    ] = 0,
+    filter: Annotated[
+        str | None,
+        Parameter(
+            pattern=r"((?:(?:filename)|(?:tags)):\w+)+", default=None, required=False,
+            title="Filter",
+            description="A string to filter uploads by."
+        )
+    ] = None
 ) -> list[Upload]:
     return await Upload.get_all(state.postgresql, user_id=request.user.id)
 

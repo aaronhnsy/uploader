@@ -1,7 +1,7 @@
 from typing import Annotated
 
 from litestar.openapi import ResponseSpec
-from litestar.params import Body
+from litestar.params import Body, Parameter
 
 from src.exceptions import Error
 from src.models import Upload, User
@@ -18,15 +18,17 @@ __all__ = [
 
 UserIDParameter = Annotated[
     str,
-    Body(
+    Parameter(
         min_length=16, max_length=16,
+        title="User ID",
         description="A 16-character user id."
     )
 ]
 UploadIDParameter = Annotated[
     str,
-    Body(
+    Parameter(
         min_length=16, max_length=16,
+        title="Upload ID",
         description="A 16-character upload id."
     )
 ]

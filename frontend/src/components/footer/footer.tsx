@@ -1,6 +1,5 @@
-import { FooterButton } from "@/components/footer/footer.button";
+import { FooterLink } from "@/components/footer/footer.link";
 import { clsx } from "clsx";
-import { redirect } from "next/navigation";
 import { FooterThemeSwitcher } from "./footer.themeSwitcher";
 
 const githubIcon = (
@@ -16,13 +15,13 @@ const githubIcon = (
                  20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2
                  61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0
                  33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8
-                 8zM97.2 352.9c-1.3 1-1 3.3 .7 5.2 1.6 1.6 3.9 2.3 5.2 1
-                 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3 .3 2.9 2.3 3.9 1.6 1 3.6 .7 4.3-.7
+                 8zM97.2 352.9c-1.3 1-1 3.3 .7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1
+                 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3 .3 2.9 2.3 3.9 1.6 1 3.6 .7 4.3-.7
                  .7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3 .7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1
                  1.3-1.3 .7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6
                  2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/>
     </svg>
-)
+);
 
 const discordIcon = (
     <svg width="24px" height="24px" viewBox="0 0 640 512" xmlns="http://www.w3.org/2000/svg">
@@ -39,8 +38,7 @@ const discordIcon = (
                  59.2C275.3 311 251.9 337.6 222.5 337.6zm195.4 0c-29 0-52.8-26.6-52.8-59.2S388.4 219.1 417.9
                  219.1c29.7 0 53.3 26.8 52.8 59.2C470.7 311 447.5 337.6 417.9 337.6z"/>
     </svg>
-)
-
+);
 
 export function Footer() {
     return (
@@ -51,8 +49,8 @@ export function Footer() {
         )}>
             <div className={clsx("space-x-2")}>
                 <div className={clsx("space-y-2")}>
-                    <FooterButton icon={githubIcon} label="GitHub" location="https://github.com/aaronhnsy/uploader"/>
-                    <FooterButton icon={discordIcon} label="Discord" location="https://discord.com/"/>
+                    <FooterLink icon={githubIcon} label="GitHub" location="https://github.com/aaronhnsy/uploader"/>
+                    <FooterLink icon={discordIcon} label="Discord" location="https://discord.com/"/>
                 </div>
             </div>
             <div className={clsx("space-y-2")}>
