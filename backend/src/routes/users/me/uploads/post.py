@@ -52,7 +52,6 @@ class CreateUploadRequest(pydantic.BaseModel):
             data_container=Error, generate_examples=False,
             description="An upload with the specified name already exists."
         )
-        # 409 is returned when the user already has a file with the same name.
     }
 )
 async def create_upload_for_current_user(

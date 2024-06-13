@@ -20,7 +20,7 @@ export function UploadsGrid({ uploads }: { uploads: Upload[] }) {
                             case "mp4":
                                 return (
                                     <video
-                                        className="ring-0 outline-2 outline-dashed outline-colour-accent w-full h-auto rounded hover:scale-[102%] transition-transform duration-300"
+                                        className="w-full h-auto rounded hover:scale-[102%] transition-transform duration-300"
                                         src={upload.url}
                                         key={upload.filename}
                                         width={0} height={0}
@@ -32,7 +32,7 @@ export function UploadsGrid({ uploads }: { uploads: Upload[] }) {
                             default:
                                 return (
                                     <Image
-                                        className="ring-0 outline-2 outline-dashed outline-colour-accent w-full h-auto rounded hover:scale-[102%] transition-transform duration-300"
+                                        className="w-full h-auto rounded hover:scale-[102%] transition-transform duration-300"
                                         src={upload.url}
                                         key={upload.filename}
                                         width={0} height={0}

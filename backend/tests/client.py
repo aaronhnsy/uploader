@@ -8,7 +8,7 @@ import aiohttp
 
 
 CONFIG = tomllib.loads(pathlib.Path("client.config.toml").read_text())
-API = "http://127.0.0.1:8000/api"
+API = "http://localhost/api"
 HEADERS = {"Authorization": f"{CONFIG["token"]}"}
 
 
@@ -71,15 +71,15 @@ async def test_get_current_users_files(session: aiohttp.ClientSession) -> None:
 
 
 async def test_upload(session: aiohttp.ClientSession) -> None:
-    data = aiohttp.FormData()
-    data.add_field(
-        "file",
-        pathlib.Path(
-            "/mnt/c/users/aaronhnsy/pictures/profile pictures/a9c4380e55ebb1c9f2f2c4b179545689.png"
-        ).read_bytes(),
-    )
-    async with session.post(f"{API}/files", headers=HEADERS, data=data) as response:
-        print(json.dumps(await response.json(), indent=4))
+    for file in pathlib.Path("/Users/aaronhnsy/Downloads/unsamples (5)").iterdir():
+        data = aiohttp.FormData()
+        data.add_field(
+            "file",
+            file.read_bytes(),
+            filename=file.name,
+        )
+        async with session.post(f"{API}/users/me/uploads", headers=HEADERS, data=data) as response:
+            print(json.dumps(await response.json(), indent=4))
 
 
-asyncio.run(wrapper(test_get_current_users_files))
+asyncio.run(wrapper(test_upload))
