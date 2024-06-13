@@ -4,8 +4,8 @@ from litestar.status_codes import HTTP_404_NOT_FOUND
 
 from src.exceptions import ReasonException
 from src.models import Upload
-from src.routes.common import InvalidRequestResponse, MissingOrInvalidAuthorizationResponse, UploadIDParameter
-from src.routes.common import UserIDParameter, UserOrUploadNotFoundResponse
+from src.routes.common import InvalidRequestResponse, LimitParameter, MissingOrInvalidAuthorizationResponse, OffsetParameter
+from src.routes.common import UploadIDParameter, UserIDParameter, UserOrUploadNotFoundResponse
 from src.types import State
 
 
@@ -29,9 +29,14 @@ __all__ = [
 )
 async def get_uploads(
     state: State,
-    user_id: UserIDParameter
+    user_id: UserIDParameter,
+    limit: LimitParameter = 100,
+    offset: OffsetParameter = 0,
 ) -> list[Upload]:
-    return await Upload.get_all(state.postgresql, user_id=user_id)
+    return await Upload.get_all(
+        state.postgresql, user_id=user_id,
+        limit=limit, offset=offset
+    )
 
 
 @get(

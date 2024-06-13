@@ -1,7 +1,7 @@
 from typing import Annotated
 
 from litestar.openapi import ResponseSpec
-from litestar.params import Body, Parameter
+from litestar.params import Parameter
 
 from src.exceptions import Error
 from src.models import Upload, User
@@ -9,6 +9,7 @@ from src.models import Upload, User
 
 __all__ = [
     "UserIDParameter", "UploadIDParameter",
+    "LimitParameter", "OffsetParameter",
     "InvalidRequestResponse", "MissingOrInvalidAuthorizationResponse", "MissingPermissionsResponse",
     "UserOrUploadNotFoundResponse", "UserNotFoundResponse", "UploadNotFoundResponse",
     "UserUpdatedResponse", "UploadUpdatedResponse",
@@ -30,6 +31,23 @@ UploadIDParameter = Annotated[
         min_length=16, max_length=16,
         title="Upload ID",
         description="A 16-character upload id."
+    )
+]
+
+LimitParameter = Annotated[
+    int,
+    Parameter(
+        ge=1, le=100,
+        title="Limit", required=False, default=100,
+        description="The number of uploads to return, used with `offset` to paginate."
+    )
+]
+OffsetParameter = Annotated[
+    int,
+    Parameter(
+        ge=0,
+        title="Offset", required=False, default=0,
+        description="The number of uploads to skip, used with `limit` to paginate."
     )
 ]
 

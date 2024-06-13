@@ -10,7 +10,7 @@ export function UploadsGrid({ uploads }: { uploads: Upload[] }) {
             <Masonry
                 config={{
                     columns: [2, 2, 3, 3, 4, 4],
-                    gap: [16, 16, 16, 16, 16, 16],
+                    gap: [8, 8, 8, 8, 8, 8],
                     media: [576, 768, 992, 1200, 1400, 1600],
                 }}
                 items={uploads}
@@ -20,7 +20,7 @@ export function UploadsGrid({ uploads }: { uploads: Upload[] }) {
                             case "mp4":
                                 return (
                                     <video
-                                        className="ring-0 outline-2 outline-dashed outline-colour-accent w-full h-auto rounded hover:scale-105 transition-transform duration-300"
+                                        className="ring-0 outline-2 outline-dashed outline-colour-accent w-full h-auto rounded hover:scale-[102%] transition-transform duration-300"
                                         src={upload.url}
                                         key={upload.filename}
                                         width={0} height={0}
@@ -32,7 +32,7 @@ export function UploadsGrid({ uploads }: { uploads: Upload[] }) {
                             default:
                                 return (
                                     <Image
-                                        className="ring-0 outline-2 outline-dashed outline-colour-accent w-full h-auto rounded hover:scale-105 transition-transform duration-300"
+                                        className="ring-0 outline-2 outline-dashed outline-colour-accent w-full h-auto rounded hover:scale-[102%] transition-transform duration-300"
                                         src={upload.url}
                                         key={upload.filename}
                                         width={0} height={0}

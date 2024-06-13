@@ -69,7 +69,8 @@ class Upload(pydantic.BaseModel):
         upload_id: str
     ) -> Upload | None:
         data: asyncpg.Record | None = await database.fetchrow(
-            "SELECT user_id, id, filename, created_at, public, tags FROM uploads WHERE user_id = $1 and filename = $2",
+            "SELECT user_id, id, filename, created_at, public, tags FROM uploads "
+            "WHERE user_id = $1 and filename = $2",
             user_id, upload_id
         )
         return Upload.model_validate({**data}) if data else None
@@ -79,11 +80,14 @@ class Upload(pydantic.BaseModel):
         cls,
         database: PostgreSQL,
         /, *,
-        user_id: str
+        user_id: str,
+        limit: int,
+        offset: int
     ) -> list[Upload]:
         data: list[asyncpg.Record] = await database.fetch(
-            "SELECT user_id, id, filename, created_at, public, tags FROM uploads WHERE user_id = $1",
-            user_id
+            "SELECT user_id, id, filename, created_at, public, tags FROM uploads "
+            "WHERE user_id = $1 ORDER BY created_at DESC LIMIT $2 OFFSET $3",
+            user_id, limit, offset
         )
         path = pathlib.Path(f"../uploads/{user_id}")
         path.mkdir(parents=True, exist_ok=True)
