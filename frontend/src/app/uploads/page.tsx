@@ -11,7 +11,7 @@ export default async function Page() {
             "bg-colour-secondary", "transitions"
         )}>
             <CreateUploadButton/>
-            <UploadsGrid uploads={uploads}></UploadsGrid>
+            <UploadsGrid uploads={uploads}/>
         </div>
     );
 }

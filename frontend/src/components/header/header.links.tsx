@@ -27,7 +27,7 @@ export function HeaderLinks() {
     const [isExpanded, setIsExpanded] = useState(false);
     return (
         <>
-            <button type="button" aria-label="Expand Header" aria-pressed={isExpanded}
+            <button type="button" aria-label="show header links" aria-pressed={isExpanded}
                     onClick={() => setIsExpanded(!isExpanded)}
                     className={clsx(
                         "flex", "items-center", "justify-center", "rounded",
