@@ -29,7 +29,7 @@ __all__ = [
 )
 async def get_uploads_for_current_user(
     request: Request, state: State,
-    limit: LimitParameter = 500,
+    limit: LimitParameter = 5,
     offset: OffsetParameter = 0,
     # filter: Annotated[
     #     str | None,
