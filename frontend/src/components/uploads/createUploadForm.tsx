@@ -1,34 +1,33 @@
+"use client";
+
 import { clsx } from "clsx";
+import { useRef } from "react";
 
 export function CreateUploadForm() {
+    const fileList = useRef(null);
     return (
         <div className={clsx(
             "rounded",
-            "p-2", "space-y-2",
+            "p-2",
             "bg-colour-tertiary", "text-colour-text", "transitions",
         )}>
-            <h1 className={clsx("text-size-4")}>Create Upload</h1>
             <form>
-                <div className={clsx(
-                    "flex",
-                    "space-x-2"
+                <label onChange={
+                    (event) => {
+                        fileList.current.innerHTML = <h1>File List</h1>;
+                    }
+                } className={clsx(
+                    "flex", "items-center", "rounded",
+                    "p-1",
+                    "bg-colour-secondary", "transitions",
                 )}>
-                    <div className={clsx(
-                        "flex-1", "flex", "items-center",
-                        "p-2", "space-x-2", "rounded",
-                        "bg-colour-secondary", "transitions"
-                    )}>
-                        <label htmlFor="file">File</label>
-                        <input id="file" type="file" name="File"/>
-                    </div>
-                    <div className={clsx(
-                        "flex", "items-center", "justify-center",
-                        "p-2", "space-x-2", "rounded",
-                        "bg-colour-secondary", "transitions"
-                    )}>
-                        <label htmlFor="use-original-filename">Use Original Filename</label>
-                        <input id="use-original-filename" type="checkbox" name="Use Original Filename"/>
-                    </div>
+                    <p className={"sr-only"}>File</p>
+                    <input type="file" id="file" name="file" multiple={true} className={clsx(
+                        "file:me-2", "file:rounded", "file:border-0", "w-full",
+                        "file:bg-colour-accent", "hover:file:bg-colour-accent-hover", "file:transitions",
+                    )}/>
+                </label>
+                <div ref={fileList}>
                 </div>
             </form>
         </div>

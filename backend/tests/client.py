@@ -71,7 +71,7 @@ async def test_get_current_users_files(session: aiohttp.ClientSession) -> None:
 
 
 async def test_upload(session: aiohttp.ClientSession) -> None:
-    for file in pathlib.Path("/Users/aaronhnsy/Downloads/unsamples (5)").iterdir():
+    for file in pathlib.Path("/mnt/c/users/aaronhnsy/downloads/unsamples (5)").iterdir():
         data = aiohttp.FormData()
         data.add_field(
             "file",

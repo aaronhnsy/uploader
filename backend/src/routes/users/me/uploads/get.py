@@ -31,14 +31,6 @@ async def get_uploads_for_current_user(
     request: Request, state: State,
     limit: LimitParameter = 5,
     offset: OffsetParameter = 0,
-    # filter: Annotated[
-    #     str | None,
-    #     Parameter(
-    #         pattern=r"((?:(?:filename)|(?:tags)):\w+)+",
-    #         title="Filter", required=False, default=None,
-    #         description="A string to filter uploads by."
-    #     )
-    # ] = None
 ) -> list[Upload]:
     return await Upload.get_all(
         state.postgresql, user_id=request.user.id,

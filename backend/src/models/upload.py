@@ -86,7 +86,7 @@ class Upload(pydantic.BaseModel):
     ) -> list[Upload]:
         data: list[asyncpg.Record] = await database.fetch(
             "SELECT user_id, id, filename, created_at, public, tags FROM uploads "
-            "WHERE user_id = $1 ORDER BY created_at DESC LIMIT $2 OFFSET $3",
+            "WHERE user_id = $1 ORDER BY random() LIMIT $2 OFFSET $3",
             user_id, limit, offset
         )
         path = pathlib.Path(f"../uploads/{user_id}")
