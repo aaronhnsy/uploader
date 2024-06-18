@@ -1,2 +1,2 @@
-export { UploadsGrid } from "./uploads";
-export { CreateUploadButton } from "./createUploadButton";
+export { UploadGrid } from "./uploadGrid";
+export { CreateUploadForm } from "./createUploadForm";

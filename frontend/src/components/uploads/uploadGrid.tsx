@@ -1,12 +1,20 @@
 "use client";
 
-import { Upload } from "@/actions/getUploads";
+import { type Upload } from "@/actions/getUploads";
+import { clsx } from "clsx";
 import Image from "next/image";
 import { Masonry } from "react-plock";
 
-export function UploadsGrid({ uploads }: { uploads: Upload[] }) {
+interface UploadGridProps {
+    uploads: Upload[];
+}
+
+export function UploadGrid({ uploads }: UploadGridProps) {
     return (
-        <div>
+        <div className={clsx(
+            "p-2", "rounded",
+            "bg-colour-secondary", "transitions",
+        )}>
             <Masonry
                 config={{
                     columns: [2, 2, 3, 3, 4, 4],
