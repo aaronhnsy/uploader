@@ -12,7 +12,8 @@ interface UploadGridProps {
 export function UploadGrid({ uploads }: UploadGridProps) {
     return (
         <div className={clsx(
-            "p-2", "rounded",
+            "flex-1", "flex", "rounded",
+            "p-2",
             "bg-colour-secondary", "transitions",
         )}>
             <Masonry

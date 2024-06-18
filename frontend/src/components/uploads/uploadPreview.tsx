@@ -20,18 +20,6 @@ export function UploadPreview({ file }: UploadPreviewProps) {
     }, [file]);
     return (
         <>
-            <label className={clsx(
-                "flex", "rounded",
-                "ps-2", "pe-1", "py-1",
-                "bg-colour-tertiary", "transitions"
-            )}>
-                Custom Filename:
-                <input className={clsx(
-                    "flex-1", "rounded",
-                    "ms-2", "px-2",
-                    "bg-colour-tertiary-hover",
-                )}/>
-            </label>
             <img src={preview as string} alt={"uploaded file preview"} className={clsx(
                 "max-h-64", "max-w-sm", "rounded",
             )}/>

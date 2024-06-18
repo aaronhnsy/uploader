@@ -4,7 +4,7 @@ import { clsx } from "clsx";
 
 export default async function Page() {
     return (
-        <div className={clsx("space-y-2")}>
+        <div className={clsx("flex-1", "flex", "flex-col", "space-y-2")}>
             <CreateUploadForm/>
             <UploadGrid uploads={await getUploads()}/>
         </div>

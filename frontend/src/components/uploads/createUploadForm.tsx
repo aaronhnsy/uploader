@@ -11,20 +11,31 @@ export function CreateUploadForm() {
             "p-2", "space-y-2", "rounded",
             "bg-colour-secondary", "transitions",
         )}>
-            <label className={clsx(
-                "flex", "items-center", "rounded",
-            )} onChange={event => {
+            <label onChange={event => {
                 setFile((event.target as HTMLInputElement).files?.item(0) ?? null);
             }}>
-                <p className={"sr-only"}>File</p>
-                <input type="file" id="file" name="file" className={clsx(
-                    "w-full", "file:me-2", "file:px-2", "file:py-1", "file:rounded", "file:border-0",
-                    "text-size-8", "file:text-size-7", "file:capitalize",
-                    "file:bg-colour-accent", "hover:file:bg-colour-accent-hover",
-                    "file:transitions", "bg-colour-tertiary", "rounded",
-                )}/>
+                <input type="file" id="file" name="file" className={clsx("hidden")}/>
+                <div className={clsx("flex", "items-center", "space-x-2")}>
+                    <div className={clsx(
+                        "flex", "flex-none", "items-center", "justify-center", "rounded",
+                        "px-2", "py-1",
+                        "bg-colour-accent", "hover:bg-colour-accent-hover",
+                        "text-colour-light-text", "text-size-7",
+                        "transitions",
+                    )}>
+                        {file ? "Change File" : "Select File"}
+                    </div>
+                    <div className={clsx(
+                        "flex-initial", "rounded",
+                        "px-2", "py-1", "overflow-x-auto",
+                        "bg-colour-tertiary", "text-colour-text",
+                        "transitions"
+                    )}>
+                        {file?.name ?? "No file selected"}
+                    </div>
+                </div>
             </label>
-            {(file !== null) && (<UploadPreview file={file}/>)}
+            {(file !== null) && <UploadPreview file={file}/>}
         </form>
     );
 }
