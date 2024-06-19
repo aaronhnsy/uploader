@@ -17,8 +17,8 @@ export function CreateUploadForm() {
                 <input type="file" id="file" name="file" className={clsx("hidden")}/>
                 <div className={clsx("flex", "items-center", "space-x-2")}>
                     <div className={clsx(
-                        "flex", "flex-none", "items-center", "justify-center", "rounded",
-                        "px-2", "py-1",
+                        "flex-none", "flex", "items-center", "justify-center", "rounded",
+                        "px-2", "h-8",
                         "bg-colour-accent", "hover:bg-colour-accent-hover",
                         "text-colour-light-text", "text-size-7",
                         "transitions",
@@ -26,9 +26,9 @@ export function CreateUploadForm() {
                         {file ? "Change File" : "Select File"}
                     </div>
                     <div className={clsx(
-                        "flex-initial", "rounded",
-                        "px-2", "py-1", "overflow-x-auto",
-                        "bg-colour-tertiary", "text-colour-text",
+                        "flex-initial", "flex", "items-center", "justify-end", "rounded",
+                        "px-2", "h-8",
+                        "bg-colour-tertiary", "text-colour-text", "text-size-8", "truncate",
                         "transitions"
                     )}>
                         {file?.name ?? "No file selected"}

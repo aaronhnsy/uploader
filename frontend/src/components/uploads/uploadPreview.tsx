@@ -21,7 +21,7 @@ export function UploadPreview({ file }: UploadPreviewProps) {
     return (
         <>
             <img src={preview as string} alt={"uploaded file preview"} className={clsx(
-                "max-h-64", "max-w-sm", "rounded",
+                "max-h-64", "max-w-md", "rounded",
             )}/>
         </>
     );
