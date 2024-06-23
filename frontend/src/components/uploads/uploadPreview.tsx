@@ -2,12 +2,14 @@
 
 import { clsx } from "clsx";
 import { useEffect, useState } from "react";
+import { useFormStatus } from "react-dom";
 
 interface UploadPreviewProps {
     file: File;
 }
 
 export function UploadPreview({ file }: UploadPreviewProps) {
+    const { pending } = useFormStatus();
     const [preview, setPreview] = useState<string | null>(null);
     useEffect(() => {
         if (file === null) {
@@ -19,10 +21,20 @@ export function UploadPreview({ file }: UploadPreviewProps) {
         return () => URL.revokeObjectURL(url);
     }, [file]);
     return (
-        <>
-            <img src={preview as string} alt={"uploaded file preview"} className={clsx(
+        <div className={clsx("flex", "flex-col", "max-w-md", "mx-auto", "space-y-2")}>
+            <img src={preview as string} alt="uploaded file preview" className={clsx(
                 "max-h-64", "max-w-md", "rounded",
             )}/>
-        </>
+            <button type="submit" aria-label="submit file upload" aria-disabled={pending}
+                    className={clsx(
+                        "flex", "items-center", "justify-center", "rounded",
+                        "h-10",
+                        "bg-colour-accent", "hover:bg-colour-accent-hover",
+                        "text-size-7", "text-gray-800", "hover:text-gray-900",
+                        "transitions",
+                    )}>
+                {pending ? "Upload.." : "Upload"}
+            </button>
+        </div>
     );
 }
