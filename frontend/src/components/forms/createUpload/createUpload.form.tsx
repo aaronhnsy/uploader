@@ -4,7 +4,7 @@ import { uploadFile } from "@/actions/uploadFile";
 import { clsx } from "clsx";
 import { useState } from "react";
 import { useFormState } from "react-dom";
-import { UploadPreview } from "./uploadPreview";
+import { CreateUploadFilePreview } from "./createUpload.filePreview";
 
 const initialState = {
     message: "",
@@ -15,7 +15,8 @@ export function CreateUploadForm() {
     const [state, formAction] = useFormState(uploadFile, initialState);
     return (
         <form className={clsx(
-            "flex", "flex-col", "p-2", "space-y-2", "rounded",
+            "flex", "flex-col", "rounded",
+            "p-2",
             "bg-colour-secondary", "transitions",
         )} action={formAction}>
             <label onChange={event => {
@@ -42,7 +43,7 @@ export function CreateUploadForm() {
                     </div>
                 </div>
             </label>
-            {(file !== null) && <UploadPreview file={file}/>}
+            {(file !== null) && <CreateUploadFilePreview file={file}/>}
             {state.message && (
                 <div className={clsx("text-size-7", "text-colour-dark-red-accent")}>
                     {state.message}

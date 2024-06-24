@@ -8,7 +8,7 @@ interface UploadPreviewProps {
     file: File;
 }
 
-export function UploadPreview({ file }: UploadPreviewProps) {
+export function CreateUploadFilePreview({ file }: UploadPreviewProps) {
     const { pending } = useFormStatus();
     const [preview, setPreview] = useState<string | null>(null);
     useEffect(() => {
@@ -21,7 +21,7 @@ export function UploadPreview({ file }: UploadPreviewProps) {
         return () => URL.revokeObjectURL(url);
     }, [file]);
     return (
-        <div className={clsx("flex", "flex-col", "max-w-md", "mx-auto", "space-y-2")}>
+        <div className={clsx("flex", "flex-col", "max-w-md", "mx-auto", "mt-2", "space-y-2")}>
             <img src={preview as string} alt="uploaded file preview" className={clsx(
                 "max-h-64", "max-w-md", "rounded",
             )}/>

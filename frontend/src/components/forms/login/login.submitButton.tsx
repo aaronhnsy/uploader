@@ -3,7 +3,7 @@
 import { clsx } from "clsx";
 import { useFormStatus } from "react-dom";
 
-export function LoginFormButton() {
+export function LoginSubmitButton() {
     const { pending } = useFormStatus();
     return (
         <button type="submit" aria-label="submit login details" aria-disabled={pending}

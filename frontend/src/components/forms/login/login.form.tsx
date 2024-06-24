@@ -3,7 +3,7 @@
 import { login } from "@/actions/login";
 import { clsx } from "clsx";
 import { useFormState } from "react-dom";
-import { LoginFormButton } from "./loginForm.button";
+import { LoginSubmitButton } from "./login.submitButton";
 
 const initialState = {
     message: "",
@@ -43,7 +43,7 @@ export function LoginForm() {
                         "transitions",
                     )} id="password" type="password" name="password"/>
                 </div>
-                <LoginFormButton/>
+                <LoginSubmitButton/>
                 {state.message && (
                     <div className={clsx("text-size-7", "text-colour-dark-red-accent", "mt-3")}>
                         {state.message}

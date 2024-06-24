@@ -37,7 +37,7 @@ UploadIDParameter = Annotated[
 LimitParameter = Annotated[
     int,
     Parameter(
-        ge=1, le=5,
+        ge=1, le=500,
         title="Limit", required=False, default=5,
         description="The number of uploads to return, used with `offset` to paginate."
     )

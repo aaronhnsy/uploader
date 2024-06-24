@@ -1,5 +1,6 @@
 import { getUploads } from "@/actions/getUploads";
-import { CreateUploadForm, UploadGrid } from "@/components/uploads";
+import { CreateUploadForm } from "@/components/forms/createUpload";
+import { UploadGrid } from "@/components/uploads";
 import { clsx } from "clsx";
 
 export default async function Page() {

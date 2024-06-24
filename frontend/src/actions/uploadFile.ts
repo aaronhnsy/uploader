@@ -12,7 +12,6 @@ export async function uploadFile(previousState: any, formData: FormData): Promis
             method: "POST",
             headers: {
                 "Authorization": `${cookies().get("__token")?.value}`,
-                "Content-Type": "multipart/form-data",
             },
             body: form,
         },
