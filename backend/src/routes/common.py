@@ -39,7 +39,7 @@ LimitParameter = Annotated[
     Parameter(
         ge=1, le=500,
         title="Limit", required=False, default=5,
-        description="The number of uploads to return, used with `offset` to paginate."
+        description="The number of uploads to return, used with `offset` to paginate the response."
     )
 ]
 OffsetParameter = Annotated[
@@ -47,7 +47,7 @@ OffsetParameter = Annotated[
     Parameter(
         ge=0,
         title="Offset", required=False, default=0,
-        description="The number of uploads to skip, used with `limit` to paginate."
+        description="The number of uploads to skip, used with `limit` to paginate the response."
     )
 ]
 

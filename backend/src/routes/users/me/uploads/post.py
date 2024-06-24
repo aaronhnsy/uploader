@@ -24,10 +24,13 @@ class CreateUploadRequest(pydantic.BaseModel):
         UploadFile,
         Body(description="The file to upload.")
     ]
-    use_original_filename: Annotated[
-        bool,
-        Body(description="Whether the file should be saved with its original filename. Defaults to `False`.")
-    ] = False
+    filename: Annotated[
+        str | None,
+        Body(
+            min_length=1, max_length=255,
+            description="The filename to use when saving this upload. If not provided, a new filename will be generated."
+        )
+    ] = None
     public: Annotated[
         bool,
         Body(description="Whether the upload should be public. Defaults to `False`.")
@@ -65,10 +68,7 @@ async def create_upload_for_current_user(
     ]
 ) -> Upload:
     # use the provided filename, or generate a new one.
-    if data.use_original_filename is True:
-        filename = data.file.filename
-    else:
-        filename = f"{generate_id()}{pathlib.Path(data.file.filename).suffix}"
+    filename = data.filename or f"{generate_id()}{pathlib.Path(data.file.filename).suffix}"
     # create a new file record in the database
     upload = await Upload.create(
         state.postgresql,

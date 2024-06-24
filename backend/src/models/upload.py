@@ -39,13 +39,13 @@ class Upload(pydantic.BaseModel):
     filename: Annotated[
         str,
         pydantic.Field(
-            description="The name of the file that was uploaded, including the file extension.",
+            description="The filename of this upload, including the file extension.",
             min_length=1, max_length=255,
         )
     ]
     created_at: Annotated[
         datetime.datetime,
-        pydantic.Field(description="The date and time that the upload was created.")
+        pydantic.Field(description="The date and time that this upload was created.")
     ]
     public: Annotated[
         bool,
