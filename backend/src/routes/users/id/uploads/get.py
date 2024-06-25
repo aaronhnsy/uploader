@@ -30,7 +30,7 @@ __all__ = [
 async def get_uploads(
     state: State,
     user_id: UserIDParameter,
-    limit: LimitParameter = 5,
+    limit: LimitParameter = 500,
     offset: OffsetParameter = 0,
 ) -> list[Upload]:
     return await Upload.get_all(
