@@ -21,9 +21,9 @@ export function CreateUploadFilePreview({ file }: UploadPreviewProps) {
         return () => URL.revokeObjectURL(url);
     }, [file]);
     return (
-        <div className={clsx("flex", "flex-col", "max-w-md", "mx-auto", "mt-2", "space-y-2")}>
+        <div className={clsx("flex", "flex-col", "mx-auto", "mt-2", "space-y-2")}>
             <img src={preview as string} alt="uploaded file preview" className={clsx(
-                "max-h-64", "max-w-md", "rounded",
+                "max-h-48", "rounded",
             )}/>
             <button type="submit" aria-label="submit file upload" aria-disabled={pending}
                     className={clsx(
