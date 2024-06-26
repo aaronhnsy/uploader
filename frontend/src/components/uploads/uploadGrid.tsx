@@ -18,7 +18,7 @@ export function UploadGrid({ uploads }: UploadGridProps) {
         )}>
             <Masonry
                 config={{
-                    columns: [2, 2, 3, 3, 4, 4],
+                    columns: [2, 3, 3, 4, 5, 6],
                     gap: [8, 8, 8, 8, 8, 8],
                     media: [576, 768, 992, 1200, 1400, 1600],
                 }}
