@@ -14,6 +14,8 @@ export const modes: ModesObject = {
         "tertiary-hover": colors.neutral[400],
         "text": colors.neutral[800],
         "text-hover": colors.neutral[900],
+        "subtext": colors.neutral[600],
+        "subtext-hover": colors.neutral[700],
     },
     "dark": {
         "primary": colors.gray[600],
@@ -24,6 +26,8 @@ export const modes: ModesObject = {
         "tertiary-hover": colors.gray[900],
         "text": colors.neutral[200],
         "text-hover": colors.neutral[300],
+        "subtext": colors.neutral[400],
+        "subtext-hover": colors.neutral[500],
     },
 } as const;
 

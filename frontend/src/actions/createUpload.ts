@@ -2,7 +2,7 @@
 
 import { cookies } from "next/headers";
 
-export async function uploadFile(previousState: any, formData: FormData): Promise<any> {
+export async function createUpload(previousState: any, formData: FormData): Promise<any> {
     const form = new FormData();
     form.append("file", formData.get("file") as Blob);
     console.log(form)

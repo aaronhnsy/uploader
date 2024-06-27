@@ -1,6 +1,6 @@
 import { getUser } from "@/actions/getUser";
 import { UploadProfilePictureButton } from "@/components/account";
-import { LoginForm } from "@/components/loginForm";
+import { LoginForm } from "@/components/forms/login";
 import { clsx } from "clsx";
 import Image from "next/image";
 

@@ -4,7 +4,7 @@ export type Accents =
     `red` | `orange` | `yellow` | `green` | `blue` | `purple` | `pink`;
 type ModeVariants =
     `primary` | `primary-hover` | `secondary` | `secondary-hover` | `tertiary` | `tertiary-hover` |
-    `text` | `text-hover`;
+    `text` | `text-hover` | `subtext` | `subtext-hover`;
 type AccentVariants =
     `accent` | `accent-hover`;
 
