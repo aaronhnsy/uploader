@@ -3,7 +3,7 @@ export type Modes =
 export type Accents =
     `red` | `orange` | `yellow` | `green` | `blue` | `purple` | `pink`;
 type ModeVariants =
-    `primary` | `primary-hover` | `secondary` | `secondary-hover` | `tertiary` | `tertiary-hover` |
+    `main-100` | `main-200` | `main-300` | `main-400` | `main-500` |
     `text` | `text-hover` | `subtext` | `subtext-hover`;
 type AccentVariants =
     `accent` | `accent-hover`;
@@ -22,7 +22,7 @@ export type AccentsObject = {
 }
 
 export type ModeOptionsObject = {
-    [M in Modes]: `bg-colour-${M}-primary hover:bg-colour-${M}-primary-hover`
+    [M in Modes]: `bg-colour-${M}-main-100 hover:bg-colour-${M}-main-200`
 };
 export type AccentOptionsObject = {
     [M in Modes]: {

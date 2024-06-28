@@ -19,7 +19,7 @@ export const metadata: Metadata = {
 export default function Layout({ children }: { children: React.ReactNode }) {
     return (
         <html suppressHydrationWarning className={inter.className} lang="en">
-        <body className={clsx("bg-colour-primary", "text-colour-text", "text-size-7", "transitions")}>
+        <body className={clsx("bg-colour-main-100", "text-colour-text", "text-size-7", "transitions")}>
         <ThemeProvider defaultTheme="dark-yellow">
             <div className={clsx(
                 "container",

@@ -17,16 +17,17 @@ export function CreateUploadForm() {
         <form action={formAction} className={clsx(
             "flex", "rounded",
             "p-2",
-            "bg-colour-secondary", "transitions",
+            "bg-colour-main-200", "transitions",
         )}>
             {(file === null) ? (
                 <label className={clsx(
                     "flex-1", "flex", "flex-col", "items-stretch", "justify-center", "rounded",
                     "p-2", "h-48", "lg:max-w-sm",
-                    "border-2", "border-dashed",
-                    "bg-colour-tertiary", "hover:brightness-95",
+                    "border-4", "border-dashed",
+                    "bg-colour-main-300", "hover:bg-colour-main-400",
                     "border-colour-accent", "hover:border-colour-accent-hover",
                     "fill-colour-accent", "hover:fill-colour-accent-hover",
+                    onHover ? ["bg-colour-main-500", "border-colour-accent-hover", "fill-colour-accent-hover"] : "",
                     "transitions-all",
                 )} onChange={
                     event => {

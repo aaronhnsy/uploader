@@ -17,7 +17,7 @@
 }
 
 html {
-    --scrollbar-color-track: rgb(var(--colour-secondary));
+    --scrollbar-color-track: rgb(var(--colour-main-200));
     --scrollbar-color-thumb: rgb(var(--colour-accent));
 
     @supports (scrollbar-width: auto) {

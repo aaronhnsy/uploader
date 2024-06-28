@@ -15,7 +15,7 @@ export function FooterLink({ icon, label, location }: FooterLinkProps) {
            className={clsx(
                "flex", "items-center", "justify-between", "rounded",
                "px-2", "py-1", "space-x-2",
-               "bg-colour-tertiary", "hover:bg-colour-tertiary-hover",
+               "bg-colour-main-300", "hover:bg-colour-main-400",
                "fill-colour-text", "hover:fill-colour-text-hover",
                "text-colour-text", "hover:text-colour-text-hover",
                "transitions",

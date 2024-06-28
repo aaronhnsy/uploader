@@ -31,7 +31,7 @@ export function CreateUploadFileSelector({ file, fileChangeHandler }: CreateUplo
             <p className={clsx(
                 "flex-initial", "flex", "items-center", "justify-end", "rounded",
                 "px-2", "h-8", "text-size-8", "truncate",
-                "bg-colour-tertiary", "text-colour-text",
+                "bg-colour-main-300", "text-colour-text",
                 "transitions",
             )}>
                 {file?.name ?? "No file selected"}

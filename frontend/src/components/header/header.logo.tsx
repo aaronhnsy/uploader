@@ -7,7 +7,7 @@ export function HeaderLogo() {
               className={clsx(
                   "flex", "items-center", "justify-center", "rounded",
                   "h-10", "mr-2", "px-2", "space-x-2",
-                  "bg-colour-secondary", "hover:bg-colour-secondary-hover",
+                  "bg-colour-main-200", "hover:bg-colour-main-300",
                   "fill-colour-accent", "hover:fill-colour-accent-hover",
                   "text-colour-text", "hover:text-colour-text-hover",
                   "text-size-7",

@@ -16,7 +16,7 @@ export function LoginForm() {
             <form className={clsx(
                 "flex", "flex-col", "grow",
                 "p-3", "max-w-96",
-                "bg-colour-secondary", "rounded",
+                "bg-colour-main-200", "rounded",
                 "transitions",
             )} action={formAction}>
                 <div className={clsx("flex", "flex-col", "space-y-2", "mb-3")}>
@@ -26,7 +26,7 @@ export function LoginForm() {
                     </label>
                     <input className={clsx(
                         "p-2", "rounded",
-                        "bg-colour-tertiary",
+                        "bg-colour-main-300",
                         "text-size-8", "text-colour-text",
                         "transitions",
                     )} id="username" type="text" name="username"/>
@@ -38,7 +38,7 @@ export function LoginForm() {
                     </label>
                     <input className={clsx(
                         "p-2", "rounded",
-                        "bg-colour-tertiary",
+                        "bg-colour-main-300",
                         "text-size-8", "text-colour-text",
                         "transitions",
                     )} id="password" type="password" name="password"/>

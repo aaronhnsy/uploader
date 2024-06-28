@@ -33,7 +33,7 @@ export function FooterThemeSwitcherContainer({ options, mode, accent, state, set
         <div className={clsx(
             "flex", "flex-wrap", "items-center", "justify-end", "rounded",
             "p-1.5", "space-x-2",
-            "bg-colour-tertiary", "transitions",
+            "bg-colour-main-300", "transitions",
         )}>
             {Object.entries(options).map(
                 ([option, value]) => (

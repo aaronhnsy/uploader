@@ -32,7 +32,7 @@ export function HeaderLinks() {
                     className={clsx(
                         "flex", "items-center", "justify-center", "rounded",
                         "size-10", "ml-auto", "sm:hidden",
-                        "bg-colour-secondary", "hover:bg-colour-secondary-hover",
+                        "bg-colour-main-200", "hover:bg-colour-main-300",
                         "fill-colour-accent", "hover:fill-colour-accent-hover",
                         "transitions",
                     )}>
@@ -51,7 +51,7 @@ export function HeaderLinks() {
                     "space-x-0", "sm:space-x-2",
                     "space-y-1", "sm:space-y-0",
                     "rounded", "sm:rounded-none",
-                    "bg-colour-secondary", "sm:bg-transparent",
+                    "bg-colour-main-200", "sm:bg-transparent",
                     "transitions", "sm:transition-none",
                 )}>
                     <HeaderLink href={"/"} text="Home"/>

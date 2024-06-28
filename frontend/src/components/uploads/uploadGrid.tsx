@@ -14,7 +14,7 @@ export function UploadGrid({ uploads }: UploadGridProps) {
         <div className={clsx(
             "flex-1", "flex", "rounded",
             "p-2",
-            "bg-colour-secondary", "transitions",
+            "bg-colour-main-200", "transitions",
         )}>
             <Masonry
                 config={{

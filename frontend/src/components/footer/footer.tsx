@@ -45,7 +45,7 @@ export function Footer() {
         <footer className={clsx(
             "flex", "items-center", "justify-between", "rounded",
             "p-1.5",
-            "bg-colour-secondary", "transitions",
+            "bg-colour-main-200", "transitions",
         )}>
             <div className={clsx("space-x-2")}>
                 <div className={clsx("space-y-2")}>

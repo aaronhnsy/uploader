@@ -11,7 +11,7 @@ export async function HeaderAccount() {
                   className={clsx(
                       "flex", "items-center", "justify-center", "rounded",
                       "h-10", "ps-2", "pe-1", "space-x-2", "sm:order-1",
-                      "bg-colour-secondary", "hover:bg-colour-secondary-hover",
+                      "bg-colour-main-200", "hover:bg-colour-main-300",
                       "text-colour-text", "hover:text-colour-text-hover",
                       "text-size-7",
                       "transitions",

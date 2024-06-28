@@ -1,29 +1,29 @@
+import Color from "color";
 import colors from "tailwindcss/colors";
 import { parseColor } from "tailwindcss/lib/util/color";
 import type { AccentOptionsObject, AccentsObject, ModeOptionsObject, Modes, ModesObject, StringIndexObject } from "./types";
 
 const rgb = (colour: string): string => parseColor(colour).color.join(" ");
+const darken = (color: string, amount: number) => Color(color).darken(amount).hex();
 
 export const modes: ModesObject = {
     "light": {
-        "primary": colors.neutral[100],
-        "primary-hover": colors.neutral[200],
-        "secondary": colors.neutral[200],
-        "secondary-hover": colors.neutral[300],
-        "tertiary": colors.neutral[300],
-        "tertiary-hover": colors.neutral[400],
+        "main-100": colors.neutral[100],
+        "main-200": darken(colors.neutral[100], 0.1),
+        "main-300": darken(colors.neutral[100], 0.2),
+        "main-400": darken(colors.neutral[100], 0.3),
+        "main-500": darken(colors.neutral[100], 0.4),
         "text": colors.neutral[800],
         "text-hover": colors.neutral[900],
         "subtext": colors.neutral[600],
         "subtext-hover": colors.neutral[700],
     },
     "dark": {
-        "primary": colors.gray[600],
-        "primary-hover": colors.gray[700],
-        "secondary": colors.gray[700],
-        "secondary-hover": colors.gray[800],
-        "tertiary": colors.gray[800],
-        "tertiary-hover": colors.gray[900],
+        "main-100": colors.gray[600],
+        "main-200": darken(colors.gray[600], 0.1),
+        "main-300": darken(colors.gray[600], 0.2),
+        "main-400": darken(colors.gray[600], 0.3),
+        "main-500": darken(colors.gray[600], 0.4),
         "text": colors.neutral[200],
         "text-hover": colors.neutral[300],
         "subtext": colors.neutral[400],
@@ -98,8 +98,8 @@ function generateColours() {
 export const [cssRules, tailwindColours] = generateColours();
 
 export const modeOptions: ModeOptionsObject = {
-    "light": "bg-colour-light-primary hover:bg-colour-light-primary-hover",
-    "dark": "bg-colour-dark-primary hover:bg-colour-dark-primary-hover",
+    "light": "bg-colour-light-main-100 hover:bg-colour-light-main-200",
+    "dark": "bg-colour-dark-main-100 hover:bg-colour-dark-main-200",
 };
 export const accentOptions: AccentOptionsObject = {
     "light": {

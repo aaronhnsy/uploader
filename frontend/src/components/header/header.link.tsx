@@ -13,7 +13,7 @@ export function HeaderLink({ href, text }: HeaderLinkProps) {
               className={clsx(
                   "flex", "items-center", "justify-center", "rounded",
                   "h-10", "px-2",
-                  "bg-colour-secondary", "hover:bg-colour-secondary-hover",
+                  "bg-colour-main-200", "hover:bg-colour-main-300",
                   (usePathname() === href) ? [
                       "text-colour-accent", "hover:text-colour-accent-hover",
                       "decoration-2", "underline", "underline-offset-2",

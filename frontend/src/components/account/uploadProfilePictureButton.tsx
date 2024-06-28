@@ -6,8 +6,8 @@ export function UploadProfilePictureButton() {
                 className={clsx(
                     "flex", "items-center", "justify-center", "rounded",
                     "px-2", "py-1", "space-x-2",
-                    "bg-colour-secondary", "fill-colour-accent", "text-colour-text",
-                    "hover:bg-colour-secondary-hover", "hover:fill-colour-accent-hover", "hover:text-colour-text-hover",
+                    "bg-colour-main-200", "fill-colour-accent", "text-colour-text",
+                    "hover:bg-colour-main-300", "hover:fill-colour-accent-hover", "hover:text-colour-text-hover",
                     "transitions",
                 )}>
             <svg width="20" height="20" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">

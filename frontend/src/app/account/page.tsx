@@ -13,7 +13,7 @@ export default async function Page() {
         <div className={clsx(
             "flex", "flex-1", "rounded",
             "p-2",
-            "bg-colour-secondary", "transitions",
+            "bg-colour-main-200", "transitions",
         )}>
             <div className={clsx(
                 "grid", "grid-cols-5", "gap-2", "flex-1",
@@ -21,7 +21,7 @@ export default async function Page() {
                 <div className={clsx(
                     "flex", "flex-col", "items-center", "justify-center", "rounded",
                     "col-span-3", "p-2",
-                    "bg-colour-primary", "text-colour-text", "transitions",
+                    "bg-colour-main-100", "text-colour-text", "transitions",
                 )}>
                     <p className={clsx("text-size-3")}>Name</p>
                     <p className={clsx("text-size-4")}>{user.username}</p>
@@ -29,7 +29,7 @@ export default async function Page() {
                 <div className={clsx(
                     "flex", "flex-col", "items-center", "justify-center", "rounded",
                     "col-span-3", "row-start-2", "p-2",
-                    "bg-colour-primary", "text-colour-text", "transitions",
+                    "bg-colour-main-100", "text-colour-text", "transitions",
                 )}>
                     <p className={clsx("text-size-3")}>Upload Count</p>
                     <p className={clsx("text-size-4")}>{user.upload_count}</p>
@@ -37,7 +37,7 @@ export default async function Page() {
                 <div className={clsx(
                     "flex", "flex-wrap", "items-center", "justify-center", "md:justify-evenly", "rounded",
                     "col-span-2", "row-span-2", "p-2",
-                    "bg-colour-primary", "text-colour-text", "transitions",
+                    "bg-colour-main-100", "text-colour-text", "transitions",
                 )}>
                     <Image className={clsx("rounded")} height="200" width="200"
                            src={user.profile_picture} alt="current user profile picture"/>
@@ -48,7 +48,7 @@ export default async function Page() {
                         <div key={index} className={clsx(
                             "flex", "items-center", "justify-center", "rounded",
                             "p-2",
-                            "bg-colour-primary", "text-colour-text", "transitions",
+                            "bg-colour-main-100", "text-colour-text", "transitions",
                         )}>
                             {index + 1}
                         </div>
