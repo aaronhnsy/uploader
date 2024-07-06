@@ -27,21 +27,23 @@ export function UploadGrid({ uploads }: UploadGridProps) {
                     (upload, _) => {
                         switch (upload.filename.split(".").pop()) {
                             case "mp4":
+                            case "webm":
                                 return (
                                     <video
-                                        className="w-full h-auto rounded hover:scale-[102%] transition-transform duration-300"
-                                        src={upload.url}
-                                        key={upload.filename}
-                                        width={0} height={0}
-                                        style={{ width: "100%", height: "auto" }}
-                                        autoPlay={true}
-                                        controls={false}
-                                        muted={true}/>
+                                        className="w-full h-auto rounded hover:scale-[102%] transitions-all"
+                                        src={upload.url} key={upload.filename} controls={true}
+                                        style={{ width: "100%", height: "auto" }}/>
+                                );
+                            case "mp3":
+                                return (
+                                    <audio
+                                        className="w-full h-10 appearance-none bg-colour-main-300 rounded p-1"
+                                        src={upload.url} key={upload.filename} controls={true}/>
                                 );
                             default:
                                 return (
                                     <Image
-                                        className="w-full h-auto rounded hover:scale-[102%] transition-transform duration-300"
+                                        className="w-full h-auto rounded hover:scale-[102%] transitions-all"
                                         src={upload.url}
                                         key={upload.filename}
                                         width={0} height={0}

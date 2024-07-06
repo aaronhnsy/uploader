@@ -2,10 +2,7 @@
 
 import { cookies } from "next/headers";
 
-export async function createUpload(previousState: any, formData: FormData): Promise<any> {
-    const form = new FormData();
-    form.append("file", formData.get("file") as Blob);
-    console.log(form)
+export async function createUpload(formData: FormData): Promise<any> {
     const response = await fetch(
         "http://localhost/api/users/me/uploads",
         {
@@ -13,7 +10,7 @@ export async function createUpload(previousState: any, formData: FormData): Prom
             headers: {
                 "Authorization": `${cookies().get("__token")?.value}`,
             },
-            body: form,
+            body: formData,
         },
     );
     if (!response.ok) {
