@@ -1,32 +1,24 @@
 "use client";
 
 import { clsx } from "clsx";
-import { type Dispatch, DragEvent, type FormEvent, type SetStateAction, useRef, useState } from "react";
+import { type Dispatch, DragEvent, type FormEvent, type SetStateAction, useEffect, useRef, useState } from "react";
 
 const imageMimeTypes = ["image/apng", "image/avif", "image/gif", "image/jpeg", "image/png", "image/webp", "image/svg+xml"];
 const videoMimeTypes = ["video/mp4", "video/webm"];
 const audioMimeTypes = ["audio/mpeg", "audio/ogg", "audio/wav", "audio/webm"];
 
-function preview(file: File) {
+function getFilePreview(file: File, previewURL: string) {
     if (imageMimeTypes.includes(file.type)) {
-        return <img src={URL.createObjectURL(file)} alt="uploaded file preview" className={clsx(
-            "rounded", "max-h-full",
-        )}/>;
+        return <img src={previewURL} alt="uploaded file preview" className={clsx("rounded", "max-h-full")}/>;
     }
     else if (videoMimeTypes.includes(file.type)) {
-        return <video src={URL.createObjectURL(file)} className={clsx(
-            "rounded", "max-h-full",
-        )} controls={true} autoPlay={true} muted={false}/>;
+        return <video src={previewURL} controls={true} className={clsx("rounded", "max-h-full")}/>;
     }
     else if (audioMimeTypes.includes(file.type)) {
-        return <audio src={URL.createObjectURL(file)} className={clsx(
-            "rounded", "max-h-full",
-        )} controls={true} autoPlay={true} muted={false}/>;
+        return <audio src={previewURL} controls={true} className={clsx("rounded", "max-h-full")}/>;
     }
     else {
-        return <p className={clsx("text-size-6", "text-colour-text", "transitions")}>
-            {file.name}
-        </p>;
+        return <p className={clsx("text-size-6", "text-colour-text", "transitions")}>{file.name}</p>;
     }
 }
 
@@ -36,8 +28,19 @@ interface CreateUploadFileSelectorProps {
 }
 
 export function CreateUploadFileSelector({ file, setFile }: CreateUploadFileSelectorProps) {
+    // file preview
+    const [previewURL, setPreviewURL] = useState<string | null>(null);
+    useEffect(() => {
+        if (file === null) {
+            setPreviewURL(null)
+            return
+        }
+        const url = URL.createObjectURL(file);
+        setPreviewURL(url);
+        return () => URL.revokeObjectURL(url);
+    }, [file]);
+    // drag and drop
     const [onDragoverHover, setOnDragoverHover] = useState<boolean>(false);
-    const fileInput = useRef<HTMLInputElement>(null);
     const handleDragOver = (event: DragEvent<HTMLDivElement>) => {
         event.preventDefault();
         setOnDragoverHover(true);
@@ -46,12 +49,14 @@ export function CreateUploadFileSelector({ file, setFile }: CreateUploadFileSele
         event.preventDefault();
         setOnDragoverHover(false);
     };
+    const fileInput = useRef<HTMLInputElement>(null);
     const handleDrop = (event: DragEvent<HTMLDivElement>) => {
         event.preventDefault();
         setOnDragoverHover(false);
         setFile(event.dataTransfer.files.item(0) ?? null);
         (fileInput.current as HTMLInputElement).files = event.dataTransfer.files;
     };
+    // form file input
     const handleFileChange = (event: FormEvent<HTMLLabelElement>) => {
         setFile((event.target as HTMLInputElement).files?.item(0) ?? null);
     };
@@ -93,7 +98,7 @@ export function CreateUploadFileSelector({ file, setFile }: CreateUploadFileSele
                             </p>
                         </div>
                     </>
-                ) : (preview(file))}
+                ) : (getFilePreview(file, previewURL as string))}
             </div>
         </label>
     );
