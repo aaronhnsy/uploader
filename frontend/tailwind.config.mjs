@@ -2,7 +2,7 @@ import plugin from "tailwindcss/plugin";
 import { cssRules, tailwindColours } from "./src/styles/colours";
 
 /** @type {import("tailwindcss").Config} **/
-module.exports = {
+const tailwindConfig = {
     content: ["./src/**/*.{ts,tsx}"],
     theme: {
         fontFamily: { sans: ["var(--font-inter)"] },
@@ -14,3 +14,4 @@ module.exports = {
         }),
     ],
 };
+export default tailwindConfig;

@@ -8,16 +8,18 @@ package-mode = false
 
 [tool.poetry.dependencies]
 python            = "~3.12.0"
-aiohttp           = { version = "~3.9.0"  }
 argon2-cffi       = { version = "~23.1.0" }
 asyncpg           = { version = "~0.29.0" }
 asyncpg-stubs     = { version = "~0.29.0" }
-colorama          = { version = "~0.4.0"  }
 passlib           = { version = "~1.7.0"  }
 itsdangerous      = { version = "~2.2.0"  }
 litestar          = { version = "~2.9.0", extras = ["standard", "pydantic", "redis"] }
 orjson            = { version = "~3.10.0" }
 typing-extensions = { version = "~4.12.0" }
+
+[tool.poetry.group.dev.dependencies]
+aiohttp = { version = "~3.9.0"  }
+isort   = { version = "~5.13.0" }
 
 [tool.pyright]
 include                 = ["src"]
